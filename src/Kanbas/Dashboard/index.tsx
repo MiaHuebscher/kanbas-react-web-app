@@ -51,7 +51,7 @@ export default function Dashboard() {
                         ARTD4660 Advanced Photography
                         </a>
                         <p className="wd-dashboard-course-title">
-                        Web Development
+                        Advanced Photography
                         </p>
                         <a href="#/Kanbas/Courses/Home"> Go </a>
                     </div>
