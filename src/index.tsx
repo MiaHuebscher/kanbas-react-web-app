@@ -4,6 +4,9 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// grabs a reference to the 'root' id in public/index.html
+// uses JavaScript and HTML to manipulate the DOM and 
+// add content to the page
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
