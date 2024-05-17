@@ -1,3 +1,4 @@
+import ReactIconsSampler from "./ReactIconsSampler";
 import "./index.css";
 
 export default function Lab2() {
@@ -288,6 +289,7 @@ export default function Lab2() {
             <div className="wd-bg-color-red wd-flex-grow-1">Column 3</div>
           </div>
         </div>
+        <ReactIconsSampler />
 
 
       </div>
