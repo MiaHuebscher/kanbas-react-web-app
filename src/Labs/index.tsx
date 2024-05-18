@@ -6,7 +6,7 @@ import Lab3 from "./Lab3";
 
 export default function Labs() {
     return (
-        <div id="wd-labs">
+        <div className="container" id="wd-labs">
             <h1>Mia Huebscher, Section 1</h1>
             <h1>Labs</h1>
             <TOC />

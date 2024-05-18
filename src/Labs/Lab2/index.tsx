@@ -1,4 +1,5 @@
 import ReactIconsSampler from "./ReactIconsSampler";
+import ScreenSizeLabel from "./ScreenSizeLabel";
 import "./index.css";
 
 export default function Lab2() {
@@ -395,6 +396,7 @@ export default function Lab2() {
             </div>
           </div>
         </div>
+        <ScreenSizeLabel />
         <div id="wd-css-styling-tables">
           <h2>Tables</h2>
           <table className="table">
@@ -431,11 +433,7 @@ export default function Lab2() {
             </table>
           </div>
         </div>
-
-
-
-
-
+        
 
       </div>
     );
