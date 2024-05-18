@@ -658,18 +658,7 @@ export default function Lab2() {
               </a>
             </div>
           </div>
-        </div>
-
-
-
-
-
-
-
-
-
-        
-
+        </div>    
       </div>
     );
   }
