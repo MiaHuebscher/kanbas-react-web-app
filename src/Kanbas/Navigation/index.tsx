@@ -3,7 +3,6 @@ export default function KanbasNavigation() {
         <ul id="wd-kanbas-navigation">
             <a id="wd-northeastern-link" rel="noreferrer" target="_blank" href="https://www.northeastern.edu/">
                 <img src="/images/NEU.png" alt="" width="75px" /></a>
-            <li><a id="wd-neu-link" rel="noreferrer" target="_blank" href="https://www.northeastern.edu/">Northeastern</a></li>
             <li><a id="wd-account-link" href="#/Kanbas/Account">Account</a></li>
             <li><a id="wd-dashboard-link" href="#/Kanbas/Dashboard">Dashboard</a></li>
             <li><a id="wd-courses-link" href="#/Kanbas/Courses">Courses</a></li>
