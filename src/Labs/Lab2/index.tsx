@@ -3,7 +3,7 @@ import "./index.css";
 
 export default function Lab2() {
     return (
-      <div>
+      <div className="container">
         <h2>Lab 2 - Cascading Style Sheets</h2>
         <h3>Styling with the STYLE attribute</h3>
         <p>
@@ -237,7 +237,7 @@ export default function Lab2() {
               Blue </div>
             <div className="wd-float-left wd-dimension-portrait wd-bg-color-red">
               Red </div>
-            <img className="wd-float-right"
+            <img className="wd-float-right" alt=""
               src="https://www.staradvertiser.com/wp-content/uploads/2021/08/web1_Starship-gap2.jpg"/>
             <div className="wd-float-done"></div>
           </div>
@@ -290,6 +290,115 @@ export default function Lab2() {
           </div>
         </div>
         <ReactIconsSampler />
+        <h2>Bootstrap</h2>
+        <div id="wd-bs-grid-system">
+          <h2>Grid system</h2>
+          <div className="row">
+            <div className="col bg-danger text-white">
+              <h3>Left half</h3>
+            </div>
+            <div className="col bg-primary text-white">
+              <h3>Right half</h3>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-4 bg-warning">
+              <h3>One thirds</h3>
+            </div>
+            <div className="col-8 bg-success text-white">
+              <h3>Two thirds</h3>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-2 bg-dark text-white">
+              <h3>Sidebar</h3>
+            </div>
+            <div className="col-8 bg-secondary text-white">
+              <h3>Main content</h3>
+            </div>
+            <div className="col-2 bg-info">
+              <h3>Sidebar</h3>
+            </div>
+          </div>
+        </div>
+        <div id="wd-bs-responsive-grids">
+          <h2>Responsive grid system</h2>
+          <div className="row">
+            <div className="col-12 col-md-6 col-xl-3 
+                            bg-warning">
+              <h3>Column A</h3>
+            </div>
+            <div className="col-12 col-md-6 col-xl-3 
+                            bg-primary text-white">
+              <h3>Column B</h3>
+            </div>
+            <div className="col-12 col-md-6 col-xl-3 
+                            bg-danger text-white">
+              <h3>Column C</h3>
+            </div>
+            <div className="col-12 col-md-6 col-xl-3 
+                    bg-success text-white">
+              <h3>Column D</h3>
+            </div>
+          </div>
+        </div>
+        <div id="wd-bs-responsive-dramatic">
+          <h2>Responsive grid system</h2>
+          <div className="row">
+            <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-1 
+                            bg-warning">
+              <h4>1</h4>
+            </div>
+            <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-1 
+                            bg-primary text-white">
+              <h4>2</h4>
+            </div>
+            <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-1 
+                            bg-danger text-white">
+              <h4>3</h4>
+            </div>
+            <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-1 
+                            bg-success text-white">
+              <h4>4</h4>
+            </div>
+            <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-1 
+                            bg-warning">
+              <h4>5</h4>
+            </div>
+            <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-1
+                            bg-primary text-white">
+              <h4>6</h4>
+            </div>
+            <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-1 
+                            bg-danger text-white">
+              <h4>7</h4>
+            </div>
+            <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-1 
+                            bg-success text-white">
+              <h4>8</h4>
+            </div>
+            <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-1 
+                            bg-warning">
+              <h4>9</h4>
+            </div>
+            <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-1 
+                            bg-primary text-white">
+              <h4>10</h4>
+            </div>
+            <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-1 
+                            bg-danger text-white">
+              <h4>11</h4>
+            </div>
+            <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-1 
+                            bg-success text-white">
+              <h4>12</h4>
+            </div>
+          </div>
+        </div>
+
+
+
+
 
 
       </div>
