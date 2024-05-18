@@ -1,3 +1,5 @@
+import { useLocation } from "react-router";
+
 { /* Lab 1 TOC
 export default function TOC() {
   return (
@@ -13,7 +15,6 @@ export default function TOC() {
 }
 */}
 
-import { useLocation } from "react-router";
 export default function TOC() {
   const { pathname } = useLocation();
   return (
