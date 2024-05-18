@@ -639,6 +639,27 @@ export default function Lab2() {
             </li>
           </ul>
         </div>
+        <div id="wd-css-navigating-with-cards">
+          <h2>Cards</h2>
+          <div className="card"
+              style={{ width: "18rem" }}>
+            <img src="images/stacked.jpg"
+                 alt=""
+                className="card-img-top" />
+            <div className="card-body">
+              <h5 className="card-title">
+                  Kowalski
+              </h5>
+              <p className="card-text">
+                A very cute pup and a nice sunset!
+              </p>
+              <a href="#" className="btn btn-primary">
+                Boldly Go
+              </a>
+            </div>
+          </div>
+        </div>
+
 
 
 
