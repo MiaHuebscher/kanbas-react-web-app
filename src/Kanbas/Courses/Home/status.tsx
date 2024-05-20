@@ -1,8 +1,11 @@
-import { RxCircleBackslash } from "react-icons/rx";
-import { FaCheckCircle } from "react-icons/fa";
+import { RxCircleBackslash} from "react-icons/rx";
+import { FaCheckCircle, FaRegBell } from "react-icons/fa";
 import { BiImport } from "react-icons/bi";
 import { LiaFileImportSolid } from "react-icons/lia";
-import { ImTarget } from "react-icons/im";
+import { ImTarget, ImStatsBars } from "react-icons/im";
+import { TfiAnnouncement } from "react-icons/tfi";
+
+
 
 {/* Find more icons */}
 export default function CourseStatus() {
@@ -37,10 +40,21 @@ export default function CourseStatus() {
         <ImTarget className="me-2 fs-5" />
         Choose Home Page
       </button>
-      <button>View Course Stream</button> <br />
-      <button>New Announcement</button> <br />
-      <button>New Analytics</button> <br />
-      <button>View Course Notifications</button>
+      <button className="btn btn-lg btn-secondary w-100 mt-1 text-start">
+        <ImStatsBars className="me-2 fs-5" />
+        View Course Stream
+      </button>
+      <button className="btn btn-lg btn-secondary w-100 mt-1 text-start">
+        <TfiAnnouncement className="me-2 fs-5" />
+        New Announcement</button>
+      <button className="btn btn-lg btn-secondary w-100 mt-1 text-start">
+        <ImStatsBars className="me-2 fs-5" />
+        New Analytics
+      </button>
+      <button className="btn btn-lg btn-secondary w-100 mt-1 text-start">
+        <FaRegBell className="me-2 fs-5" />
+        View Course Notifications
+      </button>
     </div>
   );
 }
