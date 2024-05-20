@@ -23,14 +23,15 @@ export default function Assignments() {
               <li className="wd-lesson list-group-item p-3 ps-1">
                 <div className="wd-flex-row-container">
                   <BsGripVertical className="me-2 fs-3" />
-                  <LiaEdit className="me-2 fs-3" />
+                  <LiaEdit className="me-2 fs-3 text-success" />
                   <div className="wd-flex-grow-1">
                     <a className="wd-assignment-link"
                       href="#/Kanbas/Courses/1234/Assignments/123">
                       A1
                     </a>
                     <br/>
-                    Mutliple Modules | <strong>Not available until</strong> May 6 at 12:00 am |
+                    <span className="text-danger">Mutliple Modules
+                    </span> | <strong>Not available until</strong> May 6 at 12:00 am |
                     <strong> Due</strong> May 13 at 11:59pm | 100 pts
                   </div>
                   <AssignmentControlButtons/>
@@ -39,14 +40,15 @@ export default function Assignments() {
               <li className="wd-lesson list-group-item p-3 ps-1">
                 <div className="wd-flex-row-container">
                   <BsGripVertical className="me-2 fs-3" />
-                  <LiaEdit className="me-2 fs-3" />
+                  <LiaEdit className="me-2 fs-3 text-success" />
                   <div className="wd-flex-grow-1">
                     <a className="wd-assignment-link" 
                       href="#/Kanbas/Courses/1234/Assignments/1234">
                       A2
                     </a>
                     <br/>
-                    Mutliple Modules | <strong>Not available until</strong> May 13 at 12:00 am |
+                    <span className="text-danger">Mutliple Modules
+                    </span> | <strong>Not available until</strong> May 13 at 12:00 am |
                     <strong> Due</strong> May 20 at 11:59pm | 100 pts
                   </div>
                   <AssignmentControlButtons />

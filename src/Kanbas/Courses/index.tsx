@@ -8,7 +8,7 @@ import AssignmentEditor from "./Assignments/Editor";
 export default function Courses() {
     return (
         <div id="wd-courses">
-            <h2>Course 1234</h2>
+            <h2 className="text-danger">CS5610 Web Development</h2>
             <hr />
             <div className="d-flex">
                 <div className="d-none d-md-block">
