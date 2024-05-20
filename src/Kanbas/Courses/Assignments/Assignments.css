@@ -1,0 +1,39 @@
+.wd-rounded-corners-all-around {
+    border-radius: 5px;
+    height: 45px;
+    border-color: black;
+    border-width: 1px;
+  }
+
+.padding {
+    padding-top: 30px;
+}
+
+.padded-left {
+    position: fixed;
+    padding-left: 8px;
+    padding-top: 8px;
+}
+
+.padding-search {
+    padding-left: 30px;
+    box-sizing: border-box;
+}
+
+.wrapper {
+    position: relative;
+}
+
+.wd-flex-row-container {
+    display: flex;
+    flex-direction: row;
+  }
+
+.wd-flex-grow-1 {
+    flex-grow: 1;
+}
+
+.vertical-center {
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
