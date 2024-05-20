@@ -1,3 +1,5 @@
+import "./index.css"
+
 export default function Dashboard() {
     return (
         <div id="wd-dashboard">
@@ -7,7 +9,7 @@ export default function Dashboard() {
                 <div className="row row-cols-1 row-cols-md-5 g-4">
                     <div className="wd-dashboard-course col" style={{ width: "300px" }}>
                         <div className="card">
-                            <img src="/images/webdev.jpg" alt="web development icon" />
+                            <img src="/images/webdev.jpg" alt="web development icon"/>
                             <div className="card-body">
                                 <a className="wd-dashboard-course-link"
                                     href="#/Kanbas/Courses/1234/Home"
@@ -60,7 +62,7 @@ export default function Dashboard() {
                                 <a className="wd-dashboard-course-link"
                                     href="#/Kanbas/Courses/1234/Home"
                                     style={{ textDecoration: "none", color: "navy", fontWeight: "bold" }}>
-                                    ARTD4660 Advanced Photography SEC 01 Summer 1 2024
+                                    ARTD4660 Adv. Photography SEC 01 Summer 1 2024
                                 </a>
                                 <p className="wd-dashboard-course-title card-text">
                                     Advanced Photography
@@ -92,10 +94,10 @@ export default function Dashboard() {
                                 <a className="wd-dashboard-course-link"
                                     href="#/Kanbas/Courses/1234/Home"
                                     style={{ textDecoration: "none", color: "navy", fontWeight: "bold" }}>
-                                    DS4400 Machine Learning and Data Mining 1 SEC 01 Summer 1 2024
+                                    DS4400 Machine Learning SEC 01 Summer 1 2024
                                 </a>
                                 <p className="wd-dashboard-course-title card-text">
-                                    Machine Learning and Data Mining 1
+                                    Machine Learning + Data Mining
                                 </p>
                                 <a href="#/Kanbas/Courses/1234/Home" className="btn btn-primary"> Go </a>
                             </div>
@@ -156,10 +158,10 @@ export default function Dashboard() {
                                 <a className="wd-dashboard-course-link"
                                     href="#/Kanbas/Courses/1234/Home"
                                     style={{ textDecoration: "none", color: "navy", fontWeight: "bold" }}>
-                                    DS4300 Large-Scale Information Storage and Retrieval SEC 01 Summer 1 2024
+                                    CS3200 Database Design SEC 01 Summer 1 2024
                                 </a>
                                 <p className="wd-dashboard-course-title card-text">
-                                    Large-Scale Information Storage and Retrieval
+                                    Database Design
                                 </p>
                                 <a href="#/Kanbas/Courses/1234/Home" className="btn btn-primary"> Go </a>
                             </div>
