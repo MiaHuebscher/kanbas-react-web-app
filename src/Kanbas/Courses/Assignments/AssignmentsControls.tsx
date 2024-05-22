@@ -5,13 +5,13 @@ import "./Assignments.css";
 export default function AssignmentsControls() {
     return (
         <div id="wd-modules-controls" className="text-nowrap padding">
-            <button id="wd-add-module-btn" 
+            <button id="wd-add-assignment-btn" 
                 className="btn wd-rounded-corners-all-around 
                 btn-lg btn-danger me-1 float-end">
                 <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
                 Assignment
             </button>
-            <button id="wd-collapse-all" className="btn wd-rounded-corners-all-around 
+            <button id="wd-add-group-btn" className="btn wd-rounded-corners-all-around 
                 btn-lg btn-secondary me-1 float-end">
                 <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
                 Group
