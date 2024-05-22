@@ -20,7 +20,7 @@ export default function AssignmentsControls() {
                 <span className="padded-left"><PiMagnifyingGlassThin /></span>
                 <input className="wd-rounded-corners-all-around padding-search" 
                         id="wd-search" type="text" placeholder="Search..." />
-            </div>   
+            </div>
         </div>
     )
 };

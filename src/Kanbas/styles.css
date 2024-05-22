@@ -16,4 +16,9 @@ body * {
   .border-gray {
     border: 1px solid gray;
   }
+
+  .border-left-success {
+    border-left-width: 5px;
+    border-left-color: rgb(49, 137, 49);
+}
   

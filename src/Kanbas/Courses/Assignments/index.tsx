@@ -20,10 +20,10 @@ export default function Assignments() {
               <AssignmentsControlButtons />
             </div>
             <ul className="wd-lessons list-group rounded-0">
-              <li className="wd-lesson list-group-item p-3 ps-1">
+              <li className="wd-lesson list-group-item p-3 ps-1 border-left-success">
                 <div className="wd-flex-row-container">
-                  <BsGripVertical className="me-2 fs-3" />
-                  <LiaEdit className="me-2 fs-3 text-success" />
+                  <BsGripVertical className="m-3 fs-2" />
+                  <LiaEdit className="mt-3 me-3 fs-2 text-success" />
                   <div className="wd-flex-grow-1">
                     <a className="wd-assignment-link"
                       href="#/Kanbas/Courses/1234/Assignments/123">
@@ -37,10 +37,10 @@ export default function Assignments() {
                   <AssignmentControlButtons/>
                 </div>
               </li>
-              <li className="wd-lesson list-group-item p-3 ps-1">
+              <li className="wd-lesson list-group-item p-3 ps-1 border-left-success">
                 <div className="wd-flex-row-container">
-                  <BsGripVertical className="me-2 fs-3" />
-                  <LiaEdit className="me-2 fs-3 text-success" />
+                  <BsGripVertical className="m-3 fs-2" />
+                  <LiaEdit className="mt-3 me-3 fs-2 text-success" />
                   <div className="wd-flex-grow-1">
                     <a className="wd-assignment-link" 
                       href="#/Kanbas/Courses/1234/Assignments/1234">

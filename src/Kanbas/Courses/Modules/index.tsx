@@ -16,27 +16,27 @@ export default function Modules() {
               <ModuleControlButtons />
             </div>
             <ul className="wd-lessons list-group rounded-0">
-              <li className="wd-lesson list-group-item p-3 ps-1">
+              <li className="wd-lesson list-group-item p-3 ps-1 border-left-success">
                 <BsGripVertical className="me-2 fs-3" />
                 LEARNING OBJECTIVES
                 <LessonControlButtons />
               </li>
-              <li className="wd-lesson list-group-item p-3 ps-1">
+              <li className="wd-lesson list-group-item p-3 ps-1 border-left-success">
                 <BsGripVertical className="me-2 fs-3" />
                 Introduction to the course
                 <LessonControlButtons />
               </li>
-              <li className="wd-lesson list-group-item p-3 ps-1">
+              <li className="wd-lesson list-group-item p-3 ps-1 border-left-success">
                 <BsGripVertical className="me-2 fs-3" /> 
                 Learn what is Web Development
                 <LessonControlButtons />
               </li>
-              <li className="wd-lesson list-group-item p-3 ps-1">
+              <li className="wd-lesson list-group-item p-3 ps-1 border-left-success">
                 <BsGripVertical className="me-2 fs-3" />
                 LESSON 1
                 <LessonControlButtons />
               </li>
-              <li className="wd-lesson list-group-item p-3 ps-1">
+              <li className="wd-lesson list-group-item p-3 ps-1 border-left-success">
                 <BsGripVertical className="me-2 fs-3" />
                 LESSON 2
                 <LessonControlButtons />
@@ -50,17 +50,17 @@ export default function Modules() {
               <ModuleControlButtons />
             </div>
             <ul className="wd-lessons list-group rounded-0">
-              <li className="wd-lesson list-group-item p-3 ps-1">
+              <li className="wd-lesson list-group-item p-3 ps-1 border-left-success">
                 <BsGripVertical className="me-2 fs-3" />
                 LEARNING OBJECTIVES
                 <LessonControlButtons />
               </li>
-              <li className="wd-lesson list-group-item p-3 ps-1">
+              <li className="wd-lesson list-group-item p-3 ps-1 border-left-success">
                 <BsGripVertical className="me-2 fs-3" />
                 LESSON 1
                 <LessonControlButtons />
               </li>
-              <li className="wd-lesson list-group-item p-3 ps-1">
+              <li className="wd-lesson list-group-item p-3 ps-1 border-left-success">
                 <BsGripVertical className="me-2 fs-3" />
                 LESSON 2
                 <LessonControlButtons />
