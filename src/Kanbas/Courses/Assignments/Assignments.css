@@ -10,7 +10,7 @@
 }
 
 .padded-left {
-    position: fixed;
+    position: absolute;
     padding-left: 8px;
     padding-top: 8px;
 }
