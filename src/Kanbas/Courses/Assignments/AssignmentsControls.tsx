@@ -4,7 +4,7 @@ import "./Assignments.css";
 
 export default function AssignmentsControls() {
     return (
-        <div id="wd-modules-controls" className="text-nowrap padding">
+        <div className="wd-assignments-controls text-nowrap padding">
             <button id="wd-add-assignment-btn" 
                 className="btn wd-rounded-corners-all-around 
                 btn-lg btn-danger me-1 float-end">
