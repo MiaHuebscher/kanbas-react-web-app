@@ -5,10 +5,10 @@ export default function Grades() {
         <div id="wd-grades">
             <GradesToolbar />
             <div className="table-responsive p-5">
-                <table className="table">
+                <table className="table table-lg">
                 <thead className="table-light">
                     <tr>
-                        <th className="w-50">Student Name</th><th>A1 SETUP Out of 100</th>
+                        <th className="w-25">Student Name</th><th>A1 SETUP<br />Out of 100</th>
                         <th>A2 HTML<br />Out of 100</th><th>A3 CSS<br />Out of 100</th>
                         <th>A4 BOOTSTRAP<br />Out of 100</th>
                     </tr>

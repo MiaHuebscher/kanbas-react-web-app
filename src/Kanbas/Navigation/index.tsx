@@ -6,6 +6,7 @@ import { GoClock } from "react-icons/go";
 import { SlPeople } from "react-icons/sl";
 import { LiaBookSolid, LiaCogSolid } from "react-icons/lia";
 import { FaInbox, FaRegCircleUser, FaArrowRightFromBracket, FaNetworkWired } from "react-icons/fa6";
+import { useLocation } from "react-router";
 
 export default function KanbasNavigation() {
     return (
