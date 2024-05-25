@@ -25,10 +25,9 @@ import WorkingWithArrays from "./WorkingWithArrays";
 import TodoItem from "./todo/TodoItem";
 import TodoList from "./todo/TodoList";
 import PathParameters from "./PathParameters";
-import AddPathParameters from "./AddPathParameters";
-
 
 export default function Lab3() {
+  console.log('Hello World!');
   return(
     <div id="wd-lab3" className="container-fluid">
       <h3>Lab 3</h3>
