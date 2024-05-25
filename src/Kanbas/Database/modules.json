@@ -1,0 +1,394 @@
+[
+    {
+      "_id": "M0101",
+      "name": "Front-End Web Development",
+      "description": "Basic introduction to front-end web development.",
+      "course": "CS101",
+      "lessons": [
+        {
+          "_id": "L101",
+          "name": "HTML",
+          "description": "Formatting User Interfaces with HTML.",
+          "module": "M0101"
+        },
+        {
+          "_id": "L102",
+          "name": "CSS",
+          "description": "Styling User Interfaces with CSS.",
+          "module": "M0101"
+        },
+        {
+          "_id": "L103",
+          "name": "JavaScript and React.js",
+          "description": "Implementing responsive user interfaces and react.js user interfaces.",
+          "module": "M0101"
+        }
+      ]
+    },
+    {
+        "_id": "M0102",
+        "name": "Back-End Web Development",
+        "description": "Basic introduction to back-end web development.",
+        "course": "CS101",
+        "lessons": [
+          {
+            "_id": "L101",
+            "name": "Configuring Servers and Security",
+            "description": "Implementing Node Web Server APIs, Server Sessions, and User Authentication.",
+            "module": "M0102"
+          },
+          {
+            "_id": "L102",
+            "name": "Mongo Databases",
+            "description": "Implementing Mongo Databases.",
+            "module": "M0102"
+          },
+          {
+            "_id": "L103",
+            "name": "Database Relations",
+            "description": "Implementing Database Relations.",
+            "module": "M0102"
+          }
+        ]
+      },
+      {
+        "_id": "M0103",
+        "name": "Integration",
+        "description": "Introduction to Integrating Websites to Other Technologies.",
+        "course": "CS101",
+        "lessons": [
+          {
+            "_id": "L101",
+            "name": "Introduction to Integration",
+            "description": "Introduction to Integration fundamentals, capabilities, and best practices.",
+            "module": "M0103"
+          },
+          {
+            "_id": "L102",
+            "name": "Integration with public APIs",
+            "description": "Learning how to integrate sites with public APIs.",
+            "module": "M0103"
+          },
+          {
+            "_id": "L103",
+            "name": "Integration with ChatGPT",
+            "description": "Learning how to intergrate sites with ChatGPT.",
+            "module": "M0103"
+          }
+        ]
+      },
+      {
+        "_id": "M0201",
+        "name": "German Cuisine",
+        "description": "Exploring German Flavor and Infamous Dishes.",
+        "course": "CK101",
+        "lessons": [
+          {
+            "_id": "L101",
+            "name": "Wursts",
+            "description": "Exploring varieties of wursts and how to prepare them.",
+            "module": "M0201"
+          },
+          {
+            "_id": "L102",
+            "name": "Schnitzel",
+            "description": "Preparing Schnitzel with appropriate side dishes.",
+            "module": "M0201"
+          },
+          {
+            "_id": "L103",
+            "name": "Maultaschen",
+            "description": "Preparing maultaschen with appropriate side dishes.",
+            "module": "M0201"
+          }
+        ]
+      },
+      {
+          "_id": "M0202",
+          "name": "Mediterranean Cuisine",
+          "description": "Exploring Mediterranean Flavor and Infamous Dishes.",
+          "course": "CK101",
+          "lessons": [
+            {
+              "_id": "L101",
+              "name": "Kebab",
+              "description": "Exploring varieties of kebabs and how to prepare them.",
+              "module": "M0202"
+            },
+            {
+              "_id": "L102",
+              "name": "Salad",
+              "description": "Crafting the Mediterranean salad.",
+              "module": "M0202"
+            },
+            {
+              "_id": "L103",
+              "name": "Gyro",
+              "description": "Making Gyros from Scratch.",
+              "module": "M0202"
+            }
+          ]
+        },
+        {
+          "_id": "M0203",
+          "name": "Japanese Cuisine",
+          "description": "Exploring Japanese Flavor and Infamous Dishes.",
+          "course": "CK101",
+          "lessons": [
+            {
+              "_id": "L101",
+              "name": "Ramen",
+              "description": "Expirementing with Traditional Ramen.",
+              "module": "M0203"
+            },
+            {
+              "_id": "L102",
+              "name": "Sushi",
+              "description": "Crafting beautiful and delectable sushi.",
+              "module": "M0203"
+            },
+            {
+              "_id": "L103",
+              "name": "Soba",
+              "description": "Making dishes with Soba from scratch.",
+              "module": "M0203"
+            }
+          ]
+        },
+        {
+            "_id": "M0301",
+            "name": "California",
+            "description": "Exploring some of California's Most Infamous Surf Spots.",
+            "course": "SU101",
+            "lessons": [
+              {
+                "_id": "L101",
+                "name": "The Wedge",
+                "description": "Tackling the Dangers at the Wedge.",
+                "module": "M0301"
+              },
+              {
+                "_id": "L102",
+                "name": "Maverick",
+                "description": "Tackling the Dangers at Maverick.",
+                "module": "M0301"
+              },
+              {
+                "_id": "L103",
+                "name": "Rincon",
+                "description": "Tackling the Dangers at Rincon.",
+                "module": "M0301"
+              }
+            ]
+          },
+          {
+              "_id": "M0302",
+              "name": "Hawaii",
+              "description": "Exploring some of Hawaii's Most Infamous Surf Spots.",
+              "course": "SU101",
+              "lessons": [
+                {
+                  "_id": "L101",
+                  "name": "Sunset Beach",
+                  "description": "Tackling the Dangers at Sunset Beach.",
+                  "module": "M0302"
+                },
+                {
+                  "_id": "L102",
+                  "name": "Backyards",
+                  "description": "Tackling the Dangers at Backyards.",
+                  "module": "M0302"
+                },
+                {
+                  "_id": "L103",
+                  "name": "Pipeline",
+                  "description": "Tackling the Dangers at pipeline.",
+                  "module": "M0302"
+                }
+              ]
+            },
+            {
+              "_id": "M0303",
+              "name": "Nazare",
+              "description": "Exploring Japanese Flavor and Infamous Dishes.",
+              "course": "SU101",
+              "lessons": [
+                {
+                  "_id": "L101",
+                  "name": "Analyzing the Surf at Nazare",
+                  "description": "Understanding what makes Nazare a beast.",
+                  "module": "M0303"
+                },
+                {
+                  "_id": "L102",
+                  "name": "Exploring Techniques to Surf Nazare",
+                  "description": "Learning techniques used to dominate Nazare.",
+                  "module": "M0303"
+                },
+                {
+                  "_id": "L103",
+                  "name": "Justine Dupont",
+                  "description": "Speaking with Justine about her experiences at Nazare.",
+                  "module": "M0303"
+                }
+              ]
+            },
+            {
+                "_id": "M0401",
+                "name": "Sports Photography",
+                "description": "Photographing Sports.",
+                "course": "ARTD101",
+                "lessons": [
+                  {
+                    "_id": "L101",
+                    "name": "Configuring our Camera",
+                    "description": "Adjusting Settings (Shutter Speed, ISO, etc.) to photograph sports.",
+                    "module": "M0401"
+                  },
+                  {
+                    "_id": "L102",
+                    "name": "Photographing Soccer",
+                    "description": "Understanding the techniques required to photograph soccer.",
+                    "module": "M0401"
+                  },
+                  {
+                    "_id": "L103",
+                    "name": "Photographing Swim",
+                    "description": "Understanding the techniques required to photograph swim.",
+                    "module": "M0401"
+                  }
+                ]
+              },
+              {
+                  "_id": "M0402",
+                  "name": "Abstract Photography",
+                  "description": "Exploring Abstract Photography.",
+                  "course": "ARTD101",
+                  "lessons": [
+                    {
+                      "_id": "L101",
+                      "name": "Introduction to Abstract Photography",
+                      "description": "Introduction to the history and techniques of abstract photography.",
+                      "module": "M0402"
+                    },
+                    {
+                      "_id": "L102",
+                      "name": "Taking Abstract Photos",
+                      "description": "Working individually to create abstract photos of our surroundings.",
+                      "module": "M0402"
+                    },
+                    {
+                      "_id": "L103",
+                      "name": "Aaron Siskind",
+                      "description": "Exploring the abstract work of Aaron Siskind.",
+                      "module": "M0402"
+                    }
+                  ]
+                },
+                {
+                  "_id": "M0403",
+                  "name": "Photography Techniques",
+                  "description": "Learning to Achieve Various Photography Styles.",
+                  "course": "ARTD101",
+                  "lessons": [
+                    {
+                      "_id": "L101",
+                      "name": "Playing with Light",
+                      "description": "Understanding the effect of light on a photo.",
+                      "module": "M0403"
+                    },
+                    {
+                      "_id": "L102",
+                      "name": "Playing with Shutter Speed",
+                      "description": "Adjusting shutter speed to create captivating photos.",
+                      "module": "M0403"
+                    },
+                    {
+                      "_id": "L103",
+                      "name": "Composition",
+                      "description": "Understanding composition in photography.",
+                      "module": "M0403"
+                    }
+                  ]
+                },
+                {
+                    "_id": "M0501",
+                    "name": "Cells",
+                    "description": "Learning all about cells (structure, function, replication, etc.).",
+                    "course": "BIOL101",
+                    "lessons": [
+                      {
+                        "_id": "L101",
+                        "name": "Exploring the Cell Structure",
+                        "description": "Learning about Cellular components, their functions, and how they interact.",
+                        "module": "M0501"
+                      },
+                      {
+                        "_id": "L102",
+                        "name": "Cell Replication",
+                        "description": "Learning about the cell cycle and its impacts.",
+                        "module": "M0501"
+                      },
+                      {
+                        "_id": "L103",
+                        "name": "Gene Expression and Regulation",
+                        "description": "Understanding how hereditary information passes from parents to offspring.",
+                        "module": "M0501"
+                      }
+                    ]
+                  },
+                  {
+                      "_id": "M0502",
+                      "name": "Evolution and Epigentics",
+                      "description": "Exploring Evolution and Epigenetics.",
+                      "course": "BIOL101",
+                      "lessons": [
+                        {
+                          "_id": "L101",
+                          "name": "Introduction to Evolution",
+                          "description": "Introduction to the history and basis of evolution.",
+                          "module": "M0502"
+                        },
+                        {
+                          "_id": "L102",
+                          "name": "Natural Selection",
+                          "description": "Exploring the concept and implications of natural selection.",
+                          "module": "M0502"
+                        },
+                        {
+                          "_id": "L103",
+                          "name": "Epigenetics",
+                          "description": "Exploring the concept of epigenetics, its history, and its implications.",
+                          "module": "M0502"
+                        }
+                      ]
+                    },
+                    {
+                      "_id": "M0503",
+                      "name": "Ecology and Climate Change",
+                      "description": "Learning to Achieve Various Photography Styles.",
+                      "course": "BIOL101",
+                      "lessons": [
+                        {
+                          "_id": "L101",
+                          "name": "Energy",
+                          "description": "Understanding how energy flows across the environment.",
+                          "module": "M0503"
+                        },
+                        {
+                          "_id": "L102",
+                          "name": "Biodiversity",
+                          "description": "Understanding the importance of biodiversity.",
+                          "module": "M0503"
+                        },
+                        {
+                          "_id": "L103",
+                          "name": "Climate Change",
+                          "description": "Understanding the current state of climate change.",
+                          "module": "M0503"
+                        }
+                      ]
+                    },
+
+                    {"need 5 more": "need 5 more"}
+]
