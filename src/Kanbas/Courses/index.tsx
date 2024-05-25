@@ -6,16 +6,17 @@ import { FaAlignJustify } from "react-icons/fa";
 import Grades from "./Grades";
 import Home from "./Home";
 import Modules from "./Modules";
-import { Navigate, Route, Routes, useParams } from "react-router";
+import { Navigate, Route, Routes, useLocation, useParams } from "react-router";
 
 export default function Courses() {
-    const {cid} = useParams();
+    const { cid } = useParams();
     const course = courses.find((course) => course._id === cid);
+    const { pathname } = useLocation();
     return (
         <div id="wd-courses">
             <h2 className="text-danger">
                 <FaAlignJustify className="me-4 fs-4 mb-1" />
-                {course && course.name}
+                {course && course.name} &gt; {pathname.split("/")[4]}
             </h2>
             <hr />
             <div className="d-flex">
