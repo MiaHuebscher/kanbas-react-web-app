@@ -1,5 +1,6 @@
 [
-    { "_id": "A101", "title": "Formatting User Interfaces with HTML", "course": "CS101" },
+    { "_id": "A101", "title": "Formatting User Interfaces with HTML", "course": "CS101",
+      "description":"Follow the provided instructions and submit a link to your web application running on Netlify"},
     { "_id": "A102", "title": "Styling User Interfaces with CSS", "course": "CS101" },
     { "_id": "A103", "title": "Programming User Interfaces with JavaScript", "course": "CS101" },
     { "_id": "A201", "title": "Wursts, Schnitzel, and Maultaschen", "course": "CK101" },
