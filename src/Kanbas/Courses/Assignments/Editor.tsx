@@ -138,7 +138,7 @@ export default function AssignmentEditor() {
       </div>
       <hr />
       <div className="float-end">
-        <button className="btn btn-dark">Cancel</button> <button className="btn btn-success">Save</button>
+        <button className="btn btn-light">Cancel</button> <button className="btn btn-danger">Save</button>
       </div>
       <br /><br />
 
