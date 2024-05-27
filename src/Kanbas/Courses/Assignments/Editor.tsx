@@ -111,19 +111,21 @@ export default function AssignmentEditor() {
                             <div>
                                 <div className="float-end mt-4 me-4">
                                     <label htmlFor="wd-available-until" className="fw-bold">Until</label><br />
-                                    <input type="datetime-local" id="wd-available-until" className="form-control mt-2 mb-4" />
+                                    <input type="datetime-local" id="wd-available-until" className="form-control mt-2 mb-4" 
+                                    defaultValue={assignment.availableUntil}/>
                                 </div>
                                 <div className="float-end mt-4">
                                     <label htmlFor="wd-available-from" className="fw-bold">Available From</label><br />
-                                    <input type="datetime-local" id="wd-available-from" className="form-control mt-2 mb-4" />
+                                    <input type="datetime-local" id="wd-available-from" className="form-control mt-2 mb-4"
+                                    defaultValue={assignment.availableFrom} />
                                 </div>
                             </div>
                         </section>
                     </div>
                     <hr />
                     <div className="float-end">
-                        <Link to={`/Kanbas/Courses/${assignment.course}/Assignments`} className="btn btn-light">Cancel</Link> 
-                        <Link to={`/Kanbas/Courses/${assignment.course}/Assignments`} className="btn btn-danger">Save</Link>
+                        <Link to={`/Kanbas/Courses/${assignment.course}/Assignments`} className="btn btn-light">Cancel</Link> <Link 
+                        to={`/Kanbas/Courses/${assignment.course}/Assignments`} className="btn btn-danger">Save</Link>
                     </div>
                     <br /><br />
                 </form>
