@@ -65,27 +65,32 @@ export default function AssignmentEditor() {
                                 <label className="fw-bold ms-4 me-4">Online Entry Options</label><br />
                                 <div className="pb-2">
                                     <input type="checkbox" name="check-entry" id="wd-text-entry"
-                                    className="m-2"/>
+                                    className="m-2"
+                                    defaultChecked={assignment.onlineEntryOption === "Text Entry" ? true : false} />
                                     <label htmlFor="wd-text-entry">Text Entry</label><br />
                                 </div>
                                 <div className="pb-2">
                                     <input type="checkbox" name="check-entry" id="wd-website-url"
-                                    className="m-2"/>
+                                    className="m-2"
+                                    defaultChecked={assignment.onlineEntryOption === "Website URL" ? true : false} />
                                     <label htmlFor="wd-website-url">Website URL</label>
                                 </div>
                                 <div className="pb-2">
                                     <input type="checkbox" name="check-entry" id="wd-media-recordings"
-                                    className="m-2"/>
+                                    className="m-2"
+                                    defaultChecked={assignment.onlineEntryOption === "Media Recordings" ? true : false} />
                                     <label htmlFor="wd-media-recordings">Media Recordings</label>
                                 </div>
                                 <div className="pb-2">
                                     <input type="checkbox" name="check-entry" id="wd-student-annotation"
-                                    className="m-2"/>
+                                    className="m-2"
+                                    defaultChecked={assignment.onlineEntryOption === "Student Annotation" ? true : false} />
                                     <label htmlFor="wd-student-annotation">Student Annotation</label>
                                 </div>
                                 <div className="pb-2">
                                     <input type="checkbox" name="check-entry" id="wd-file-upload"
-                                    className="m-2"/>
+                                    className="m-2" 
+                                    defaultChecked={assignment.onlineEntryOption === "File Upload" ? true : false} />
                                     <label htmlFor="wd-file-upload">File Upload</label>
                                 </div>
                             </div>
