@@ -1,20 +1,21 @@
-export default function TodoForm({ todo, setTodo, addTodo, updateTodo }: {
-    todo: { id: string; title: string };
-    setTodo: (todo: { id: string; title: string }) => void;
-    addTodo: (todo: { id: string; title: string }) => void;
-    updateTodo: (todo: { id: string; title: string }) => void;
-  }) {
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { addTodo, updateTodo, setTodo } from "./todosReducer";
+
+export default function TodoForm() {
+    const { todo } = useSelector((state: any) => state.todosReducer);
+    const dispatch = useDispatch();
     return (
       <li className="list-group-item d-inline-flex">
         <input className="form-control w-27 me-5"
           value={todo.title}
-          onChange={ (e) => setTodo({ ...todo, title: e.target.value }) }/>
+          onChange={ (e) => dispatch(setTodo({ ...todo, title: e.target.value }))}/>
         &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
         <button className="btn btn-warning"
-                onClick={() => updateTodo(todo)}
+                onClick={() => dispatch(updateTodo(todo))}
                 id="wd-update-todo-click"> Update </button>&nbsp;
         <button className="btn btn-success"
-                onClick={() => addTodo(todo)}
+                onClick={() => dispatch(addTodo(todo))}
                 id="wd-add-todo-click"> Add </button>
       </li>
     );
