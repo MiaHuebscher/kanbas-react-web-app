@@ -24,14 +24,14 @@ export default function AssignmentEditor() {
                     </div>
                     <div className="form-group mt-4">
                         <textarea id="wd-description" className="form-control" rows={10} defaultValue={assignment.description} 
-                                  onChange={(e) => ({...assignment, description: e.target.value})} />    
+                                  onChange={(e) => dispatch(setAssignment({...assignment, description: e.target.value}))} />    
                     </div>
 
                     <div className="form-group mt-4 float-end row">
                         <label htmlFor="wd-points" className="col-sm-5 col-form-label">Points</label>
                         <div className="col-sm-7">
                             <input type="number" className="form-control" id="wd-name" defaultValue={assignment.points} 
-                                   onChange={(e) => ({...assignment, points: e.target.value})}/>
+                                   onChange={(e) => dispatch(setAssignment({...assignment, points: e.target.value}))}/>
                         </div>
                     </div>
                     <br /><br /><br /><br />
@@ -39,7 +39,8 @@ export default function AssignmentEditor() {
                     <div className="form-group mt-4 float-end row">
                         <label htmlFor="wd-group" className="col-sm-5 col-form-label text-nowrap">Assignment Group</label>
                         <div className="col-sm-7">
-                            <select className="form-select" id="wd-group" onChange={(e) => ({...assignment, assignmentGroup: e.target.value})}>
+                            <select className="form-select" id="wd-group" 
+                                    onChange={(e) => dispatch(setAssignment({...assignment, assignmentGroup: e.target.value}))}>
                                 <option selected value="ASSIGNMENTS">ASSIGNMENTS</option>
                                 <option value="QUIZZES">QUIZZES</option>
                                 <option value="EXAMS">EXAMS</option>
@@ -51,7 +52,8 @@ export default function AssignmentEditor() {
                     <div className="form-group mt-4 float-end row">
                         <label htmlFor="wd-display-grade-as" className="col-sm-5 col-form-label text-nowrap text-left">Display Grade as</label>
                         <div className="col-sm-7">
-                            <select className="form-select" id="wd-display-grade-as" onChange={(e) => ({...assignment, displayGradeAs: e.target.value})}>
+                            <select className="form-select" id="wd-display-grade-as" 
+                                    onChange={(e) => dispatch(setAssignment({...assignment, displayGradeAs: e.target.value}))}>
                                 <option selected value="Percentage">Percentage</option>
                                 <option value="Letter">Letter</option>
                             </select>
@@ -65,7 +67,8 @@ export default function AssignmentEditor() {
                             </label>
                         </div>
                         <section className="border border-dark rounded col-sm-8 p-4">
-                            <select className="form-select" id="wd-submission-type" onChange={(e) => ({...assignment, submissionType: e.target.value})} >
+                            <select className="form-select" id="wd-submission-type" 
+                                    onChange={(e) => dispatch(setAssignment({...assignment, submissionType: e.target.value}))} >
                                 <option selected value="Online">Online</option>
                                 <option value="In Class">In Class</option>
                             </select>
@@ -74,31 +77,51 @@ export default function AssignmentEditor() {
                                 <div className="pb-2 ms-4">
                                     <input type="checkbox" name="check-entry" id="wd-text-entry"
                                     className="m-2"
-                                    defaultChecked={assignment.onlineEntryOption === "Text Entry" ? true : false} />
+                                    onChange={() => assignment.onlineEntryOption.includes("Text Entry") ? 
+                                        dispatch(setAssignment({...assignment, onlineEntryOption: assignment.onlineEntryOption.replace("Text Entry", "")})) :
+                                        dispatch(setAssignment({...assignment, onlineEntryOption: assignment.onlineEntryOption + " Text Entry"}))
+                                    }
+                                    defaultChecked={assignment.onlineEntryOption.includes("Text Entry") ? true : false} />
                                     <label htmlFor="wd-text-entry">Text Entry</label><br />
                                 </div>
                                 <div className="pb-2 ms-4">
                                     <input type="checkbox" name="check-entry" id="wd-website-url"
-                                    className="m-2"
-                                    defaultChecked={assignment.onlineEntryOption === "Website URL" ? true : false} />
+                                    className="m-2" 
+                                    onChange={() => assignment.onlineEntryOption.includes("Website URL") ? 
+                                        dispatch(setAssignment({...assignment, onlineEntryOption: assignment.onlineEntryOption.replace("Website URL", "")})) :
+                                        dispatch(setAssignment({...assignment, onlineEntryOption: assignment.onlineEntryOption + " Website URL"}))
+                                    }
+                                    defaultChecked={assignment.onlineEntryOption.includes("Website URL") ? true : false} />
                                     <label htmlFor="wd-website-url">Website URL</label>
                                 </div>
                                 <div className="pb-2 ms-4">
                                     <input type="checkbox" name="check-entry" id="wd-media-recordings"
                                     className="m-2"
-                                    defaultChecked={assignment.onlineEntryOption === "Media Recordings" ? true : false} />
+                                    onChange={() => assignment.onlineEntryOption.includes("Media Recordings") ? 
+                                        dispatch(setAssignment({...assignment, onlineEntryOption: assignment.onlineEntryOption.replace("Media Recordings", "")})) :
+                                        dispatch(setAssignment({...assignment, onlineEntryOption: assignment.onlineEntryOption + " Media Recordings"}))
+                                    }
+                                    defaultChecked={assignment.onlineEntryOption.includes("Media Recordings") ? true : false} />
                                     <label htmlFor="wd-media-recordings">Media Recordings</label>
                                 </div>
                                 <div className="pb-2 ms-4">
                                     <input type="checkbox" name="check-entry" id="wd-student-annotation"
                                     className="m-2"
-                                    defaultChecked={assignment.onlineEntryOption === "Student Annotation" ? true : false} />
+                                    onChange={() => assignment.onlineEntryOption.includes("Student Annotation") ? 
+                                        dispatch(setAssignment({...assignment, onlineEntryOption: assignment.onlineEntryOption.replace("Student Annotation", "")})) :
+                                        dispatch(setAssignment({...assignment, onlineEntryOption: assignment.onlineEntryOption + " Student Annotation"}))
+                                    }
+                                    defaultChecked={assignment.onlineEntryOption.includes("Student Annotation") ? true : false} />
                                     <label htmlFor="wd-student-annotation">Student Annotation</label>
                                 </div>
                                 <div className="pb-2 ms-4">
                                     <input type="checkbox" name="check-entry" id="wd-file-upload"
                                     className="m-2" 
-                                    defaultChecked={assignment.onlineEntryOption === "File Upload" ? true : false} />
+                                    onChange={() => assignment.onlineEntryOption.includes("File Upload") ? 
+                                        dispatch(setAssignment({...assignment, onlineEntryOption: assignment.onlineEntryOption.replace("File Upload", "")})) :
+                                        dispatch(setAssignment({...assignment, onlineEntryOption: assignment.onlineEntryOption + " File Upload"}))
+                                    }
+                                    defaultChecked={assignment.onlineEntryOption.includes("File Upload") ? true : false} />
                                     <label htmlFor="wd-file-upload">File Upload</label>
                                 </div>
                             </div>
