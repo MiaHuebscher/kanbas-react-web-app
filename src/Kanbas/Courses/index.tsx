@@ -9,6 +9,7 @@ import { Navigate, Route, Routes, useLocation, useParams } from "react-router";
 import { useDispatch } from "react-redux";
 import { updateAssignment, addAssignment } from "./Assignments/assignmentsReducer";
 import Quizzes from "./Quizzes";
+import QuizEditor from "./Quizzes/QuizEditor";
 
 export default function Courses({ courses }: {courses: any[]; }) {
     const { cid } = useParams();
@@ -38,6 +39,7 @@ export default function Courses({ courses }: {courses: any[]; }) {
                             dispatch(updateAssignment({...{}}))}}
                             addAssignment={() => {dispatch(addAssignment({}))}}/>} />
                         <Route path="Quizzes" element={<Quizzes />} />
+                        <Route path="Quizzes/:qid" element={<QuizEditor />} />
                         <Route path="Grades" element={<Grades />} />
                     </Routes>
                 </div>
