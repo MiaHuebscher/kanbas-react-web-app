@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
-import * as db from "../../Database";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router";
+{/* { assignment, assignmentName, addAssignment } :
+    {assignment: any, assignmentName: string, addAssignment: () => void; } */}
 
-export default function AssignmentEditor() {
+export default function AssignmentEditor({updateAssignment, addAssignment} : {updateAssignment: () => any; addAssignment: (assignment: object) => any}) {
     const { cid } = useParams();
     const { aid } = useParams();
-    const assignments = db.assignments;
+    const { assignments } = useSelector((state: any) => state.assignmentsReducer);
     return (
         <div>
             {assignments
@@ -130,7 +132,7 @@ export default function AssignmentEditor() {
                     <hr />
                     <div className="float-end">
                         <Link to={`/Kanbas/Courses/${assignment.course}/Assignments`} className="btn btn-light">Cancel</Link> <Link 
-                        to={`/Kanbas/Courses/${assignment.course}/Assignments`} className="btn btn-danger">Save</Link>
+                        to={`/Kanbas/Courses/${assignment.course}/Assignments`} className="btn btn-danger" onClick={addAssignment({...assignment, _id: new Date().getTime().toString() })}>Save</Link>
                     </div>
                     <br /><br />
                 </form>

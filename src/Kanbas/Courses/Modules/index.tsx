@@ -4,7 +4,6 @@ import ModuleControlButtons from "./ModuleControlButtons";
 import LessonControlButtons from "./LessonControlButtons";
 import { BsGripVertical } from "react-icons/bs";
 import { useParams } from "react-router";
-import * as db from "../../Database";
 import { addModule, editModule, updateModule, deleteModule } from "./modulesReducer";
 import { useSelector, useDispatch } from "react-redux";
 

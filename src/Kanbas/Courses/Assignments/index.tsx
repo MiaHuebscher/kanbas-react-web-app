@@ -6,15 +6,22 @@ import AssignmentsControlButtons from "./AssignmentsControlButtons";
 import AssignmentControlButtons from "./AssignmentControlButtons";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router";
-import * as db from "../../Database";
 import "./Assignments.css";
+import { useSelector } from "react-redux";
+import { addAssignment, editAssignment, updateAssignment, deleteAssignment } from "./assignmentsReducer";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+
 
 export default function Assignments() {
     const { cid } = useParams();
-    const assignments = db.assignments;
+    const { assignments } = useSelector((state: any) => state.assignmentsReducer);
+    const assignment = assignments.filter((assignment: any) => (assignment._id === "1234"));
+    const dispatch = useDispatch();
     return (
         <div>
-            <AssignmentsControls /><br /><br />
+            <AssignmentsControls aid={assignment[0]._id} cid={cid} updateAssignment={() => {
+                dispatch(updateAssignment({...assignment[0], course: cid })); }}/><br /><br />
             <ul id="wd-assignments" className="list-group rounded-0">
                 <li className="wd-assignment list-group-item p-0 mb-5 fs-5 border-gray">
                     <div className="wd-title p-3 ps-2 bg-secondary">

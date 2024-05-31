@@ -6,11 +6,15 @@ import Grades from "./Grades";
 import Home from "./Home";
 import Modules from "./Modules";
 import { Navigate, Route, Routes, useLocation, useParams } from "react-router";
+import { useDispatch } from "react-redux";
+import { updateAssignment, addAssignment } from "./Assignments/assignmentsReducer";
+import Quizzes from "./Quizzes";
 
 export default function Courses({ courses }: {courses: any[]; }) {
     const { cid } = useParams();
     const course = courses.find((course) => course._id === cid);
     const { pathname } = useLocation();
+    const dispatch = useDispatch();
     return (
         <div id="wd-courses">
             <h2 className="text-danger">
@@ -30,8 +34,10 @@ export default function Courses({ courses }: {courses: any[]; }) {
                         <Route path="Piazza" element={<h2>Piazza</h2>} />
                         <Route path="Zoom" element={<h2>Zoom</h2>} />
                         <Route path="Assignments" element={<Assignments />} />
-                        <Route path="Assignments/:aid" element={<AssignmentEditor />} />
-                        <Route path="Quizzes" element={<h2>Quizzes</h2>} />
+                        <Route path="Assignments/:aid" element={<AssignmentEditor updateAssignment={() => {
+                            dispatch(updateAssignment({...{}}))}}
+                            addAssignment={() => {dispatch(addAssignment({}))}}/>} />
+                        <Route path="Quizzes" element={<Quizzes />} />
                         <Route path="Grades" element={<Grades />} />
                     </Routes>
                 </div>
