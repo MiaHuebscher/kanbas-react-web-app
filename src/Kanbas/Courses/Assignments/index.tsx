@@ -8,19 +8,19 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router";
 import "./Assignments.css";
 import { useSelector } from "react-redux";
-import { addAssignment, editAssignment, updateAssignment, deleteAssignment } from "./assignmentsReducer";
+import { addAssignment, updateAssignment, deleteAssignment } from "./assignmentsReducer";
 import { useDispatch } from "react-redux";
 
 
 export default function Assignments() {
     const { cid } = useParams();
     const { assignments } = useSelector((state: any) => state.assignmentsReducer);
-    const newAssignment = assignments.filter((assignment: any) => (assignment._id === "new"));
+    const { newAssignment } = useSelector((state: any) => state.assignmentsReducer);
     const dispatch = useDispatch();
     return (
         <div>
-            <AssignmentsControls aid={newAssignment[0]._id} cid={cid} updateAssignment={() => {
-                dispatch(updateAssignment({...newAssignment[0], course: cid })); }}/><br /><br />
+            <AssignmentsControls aid={newAssignment._id} cid={cid} updateAssignment={() => {
+                dispatch(updateAssignment({...newAssignment, course: cid })); }}/><br /><br />
             <ul id="wd-assignments" className="list-group rounded-0">
                 <li className="wd-assignment list-group-item p-0 mb-5 fs-5 border-gray">
                     <div className="wd-title p-3 ps-2 bg-secondary">
@@ -31,7 +31,7 @@ export default function Assignments() {
                     </div>
                     <ul className="wd-lessons list-group rounded-0">
                         {assignments
-                          .filter((assignment: any) => assignment.course === cid)
+                          .filter((assignment: any) => (assignment.course === cid && assignment._id !== "new"))
                           .map((assignment: any) => (
                             <li className="wd-lesson list-group-item p-3 ps-1 border-left-success">
                                 <div className="wd-flex-row-container">
@@ -47,7 +47,7 @@ export default function Assignments() {
                                         <strong> Due</strong> {assignment.due} | {assignment.points} pts
                                     </div>
                                     <AssignmentControlButtons assignmentId={assignment._id} deleteAssignment={(assignmentId) => {
-                                                              dispatch(deleteAssignment(assignmentId)); }} />
+                                                              dispatch(deleteAssignment(assignmentId)) }} />
                                 </div>
                             </li>
                           ))

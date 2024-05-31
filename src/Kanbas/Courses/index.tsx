@@ -7,7 +7,6 @@ import Home from "./Home";
 import Modules from "./Modules";
 import { Navigate, Route, Routes, useLocation, useParams } from "react-router";
 import { useDispatch } from "react-redux";
-import { updateAssignment, addAssignment } from "./Assignments/assignmentsReducer";
 import Quizzes from "./Quizzes";
 import QuizEditor from "./Quizzes/QuizEditor";
 
@@ -35,9 +34,7 @@ export default function Courses({ courses }: {courses: any[]; }) {
                         <Route path="Piazza" element={<h2>Piazza</h2>} />
                         <Route path="Zoom" element={<h2>Zoom</h2>} />
                         <Route path="Assignments" element={<Assignments />} />
-                        <Route path="Assignments/:aid" element={<AssignmentEditor updateAssignment={() => {
-                            dispatch(updateAssignment({...{}}))}}
-                            addAssignment={() => {dispatch(addAssignment({}))}}/>} />
+                        <Route path="Assignments/:aid" element={<AssignmentEditor />} />
                         <Route path="Quizzes" element={<Quizzes />} />
                         <Route path="Quizzes/:qid" element={<QuizEditor />} />
                         <Route path="Grades" element={<Grades />} />

@@ -1,13 +1,16 @@
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-{/* { assignment, assignmentName, addAssignment } :
-    {assignment: any, assignmentName: string, addAssignment: () => void; } */}
+import { setAssignment, updateAssignment, addAssignment } from "./assignmentsReducer";
 
-export default function AssignmentEditor({updateAssignment, addAssignment} : {updateAssignment: () => any; addAssignment: (assignment: object) => any}) {
+{/* copy line 23 for every other input/select part*/}
+
+export default function AssignmentEditor() {
     const { cid } = useParams();
     const { aid } = useParams();
     const { assignments } = useSelector((state: any) => state.assignmentsReducer);
+    const { newAssignment } = useSelector((state: any) => state.assignmentsReducer);
+    const dispatch = useDispatch();
     return (
         <div>
             {assignments
@@ -16,16 +19,19 @@ export default function AssignmentEditor({updateAssignment, addAssignment} : {up
                 <form className="p-5 ms-5 me-5">
                     <div className="form-group">
                         <label htmlFor="wd-name" className="col-form-label">Assignment Name</label>
-                        <input type="text" className="form-control" id="wd-name" defaultValue={assignment.title} />
+                        <input type="text" className="form-control" id="wd-name" defaultValue={assignment.title} 
+                               onChange={(e) => dispatch(setAssignment({...assignment, title: e.target.value}))} />
                     </div>
                     <div className="form-group mt-4">
-                        <textarea id="wd-description" className="form-control" rows={10} defaultValue={assignment.description} />    
+                        <textarea id="wd-description" className="form-control" rows={10} defaultValue={assignment.description} 
+                                  onChange={(e) => ({...assignment, description: e.target.value})} />    
                     </div>
 
                     <div className="form-group mt-4 float-end row">
                         <label htmlFor="wd-points" className="col-sm-5 col-form-label">Points</label>
                         <div className="col-sm-7">
-                            <input type="number" className="form-control" id="wd-name" defaultValue={assignment.points} />
+                            <input type="number" className="form-control" id="wd-name" defaultValue={assignment.points} 
+                                   onChange={(e) => ({...assignment, points: e.target.value})}/>
                         </div>
                     </div>
                     <br /><br /><br /><br />
@@ -33,7 +39,7 @@ export default function AssignmentEditor({updateAssignment, addAssignment} : {up
                     <div className="form-group mt-4 float-end row">
                         <label htmlFor="wd-group" className="col-sm-5 col-form-label text-nowrap">Assignment Group</label>
                         <div className="col-sm-7">
-                            <select className="form-select" id="wd-group">
+                            <select className="form-select" id="wd-group" onChange={(e) => ({...assignment, assignmentGroup: e.target.value})}>
                                 <option selected value="ASSIGNMENTS">ASSIGNMENTS</option>
                                 <option value="QUIZZES">QUIZZES</option>
                                 <option value="EXAMS">EXAMS</option>
@@ -45,7 +51,7 @@ export default function AssignmentEditor({updateAssignment, addAssignment} : {up
                     <div className="form-group mt-4 float-end row">
                         <label htmlFor="wd-display-grade-as" className="col-sm-5 col-form-label text-nowrap text-left">Display Grade as</label>
                         <div className="col-sm-7">
-                            <select className="form-select" id="wd-display-grade-as">
+                            <select className="form-select" id="wd-display-grade-as" onChange={(e) => ({...assignment, displayGradeAs: e.target.value})}>
                                 <option selected value="Percentage">Percentage</option>
                                 <option value="Letter">Letter</option>
                             </select>
@@ -59,7 +65,7 @@ export default function AssignmentEditor({updateAssignment, addAssignment} : {up
                             </label>
                         </div>
                         <section className="border border-dark rounded col-sm-8 p-4">
-                            <select className="form-select" id="wd-submission-type">
+                            <select className="form-select" id="wd-submission-type" onChange={(e) => ({...assignment, submissionType: e.target.value})} >
                                 <option selected value="Online">Online</option>
                                 <option value="In Class">In Class</option>
                             </select>
@@ -108,31 +114,34 @@ export default function AssignmentEditor({updateAssignment, addAssignment} : {up
                             <div className="form-group m-4">
                                 <label htmlFor="wd-assign-to" className="fw-bold">Assign to</label><br />
                                 <input type="text" id="wd-assign-to" className="form-control mt-2"
-                                    defaultValue={assignment.assignTo} />
+                                    defaultValue={assignment.assignTo} onChange={(e) => ({...assignment, assignTo: e.target.value})}/>
                             </div>
                             <div className="form-group ms-4 me-4">
                                 <label htmlFor="wd-due-date" className="fw-bold">Due</label><br />
                                 <input type="datetime-local" id="wd-due-date" className="form-control mt-2" 
-                                    defaultValue={assignment.due}/>
+                                    defaultValue={assignment.due} onChange={(e) => ({...assignment, due: e.target.value})}/>
                             </div>
                             <div>
                                 <div className="float-end mt-4 me-4">
                                     <label htmlFor="wd-available-until" className="fw-bold">Until</label><br />
                                     <input type="datetime-local" id="wd-available-until" className="form-control mt-2 mb-4" 
-                                    defaultValue={assignment.availableUntil}/>
+                                    defaultValue={assignment.availableUntil} onChange={(e) => ({...assignment, availableUntil: e.target.value})} />
                                 </div>
                                 <div className="float-end mt-4">
                                     <label htmlFor="wd-available-from" className="fw-bold">Available From</label><br />
                                     <input type="datetime-local" id="wd-available-from" className="form-control mt-2 mb-4"
-                                    defaultValue={assignment.availableFrom} />
+                                    defaultValue={assignment.availableFrom} onChange={(e) => ({...assignment, availableFrom: e.target.value})} />
                                 </div>
                             </div>
                         </section>
                     </div>
                     <hr />
                     <div className="float-end">
-                        <Link to={`/Kanbas/Courses/${assignment.course}/Assignments`} className="btn btn-light">Cancel</Link> <Link 
-                        to={`/Kanbas/Courses/${assignment.course}/Assignments`} className="btn btn-danger" onClick={addAssignment({...assignment, _id: new Date().getTime().toString() })}>Save</Link>
+                        <Link to={`/Kanbas/Courses/${assignment.course}/Assignments`} className="btn btn-light">Cancel</Link> {assignment._id === "new" ? 
+                            (<Link to={`/Kanbas/Courses/${assignment.course}/Assignments`} className="btn btn-danger" onClick={() => dispatch(addAssignment(newAssignment))}>
+                            Save1</Link>) : (<Link to={`/Kanbas/Courses/${assignment.course}/Assignments`} className="btn btn-danger" 
+                            onClick={() => dispatch(updateAssignment(newAssignment))} >Save2</Link>)
+                        }
                     </div>
                     <br /><br />
                 </form>
