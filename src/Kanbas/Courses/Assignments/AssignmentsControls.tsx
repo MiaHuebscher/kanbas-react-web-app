@@ -9,7 +9,7 @@ export default function AssignmentsControls({ aid, cid, updateAssignment } : { a
         <div className="wd-assignments-controls text-nowrap padding">
             <Link id="wd-add-assignment-btn" to={`/Kanbas/Courses/${cid}/Assignments/${aid}`}
                 className="btn wd-rounded-corners-all-around 
-                btn-lg btn-danger me-1 float-end" onClick={updateAssignment} >
+                btn-lg btn-danger me-1 float-end" /* onClick={updateAssignment} */ >
                 <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
                 Assignment
             </Link>

@@ -1,7 +1,7 @@
 import { deleteAssignment } from "./assignmentsReducer";
 
-export default function assignmentDialog({ dialogTitle } : 
-    { dialogTitle: string; }) {
+export default function AssignmentDialog({ dialogTitle, assignmentId, deleteAssignment } : 
+    { dialogTitle: string; assignmentId: string; deleteAssignment: (assignmentId: string) => void; }) {
     return (
         <div id="wd-delete-assignment-dialog" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false">
           <div className="modal-dialog">
@@ -14,7 +14,7 @@ export default function assignmentDialog({ dialogTitle } :
               <div className="modal-footer">
                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">
                   No </button>
-                <button onClick={deleteAssignment} type="button" data-bs-dismiss="modal" className="btn btn-danger">
+                <button onClick={() => deleteAssignment(assignmentId)} type="button" data-bs-dismiss="modal" className="btn btn-danger">
                   Yes </button>
               </div>
             </div>

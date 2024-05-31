@@ -9,19 +9,18 @@ import { useParams } from "react-router";
 import "./Assignments.css";
 import { useSelector } from "react-redux";
 import { addAssignment, editAssignment, updateAssignment, deleteAssignment } from "./assignmentsReducer";
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 
 
 export default function Assignments() {
     const { cid } = useParams();
     const { assignments } = useSelector((state: any) => state.assignmentsReducer);
-    const assignment = assignments.filter((assignment: any) => (assignment._id === "1234"));
+    const newAssignment = assignments.filter((assignment: any) => (assignment._id === "new"));
     const dispatch = useDispatch();
     return (
         <div>
-            <AssignmentsControls aid={assignment[0]._id} cid={cid} updateAssignment={() => {
-                dispatch(updateAssignment({...assignment[0], course: cid })); }}/><br /><br />
+            <AssignmentsControls aid={newAssignment[0]._id} cid={cid} updateAssignment={() => {
+                dispatch(updateAssignment({...newAssignment[0], course: cid })); }}/><br /><br />
             <ul id="wd-assignments" className="list-group rounded-0">
                 <li className="wd-assignment list-group-item p-0 mb-5 fs-5 border-gray">
                     <div className="wd-title p-3 ps-2 bg-secondary">
@@ -47,7 +46,8 @@ export default function Assignments() {
                                         </span> | <strong>Not available until</strong> {assignment.availableFrom} |
                                         <strong> Due</strong> {assignment.due} | {assignment.points} pts
                                     </div>
-                                    <AssignmentControlButtons/>
+                                    <AssignmentControlButtons assignmentId={assignment._id} deleteAssignment={(assignmentId) => {
+                                                              dispatch(deleteAssignment(assignmentId)); }} />
                                 </div>
                             </li>
                           ))
