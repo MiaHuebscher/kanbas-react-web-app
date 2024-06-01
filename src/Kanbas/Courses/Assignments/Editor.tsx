@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { setAssignment, updateAssignment, addAssignment } from "./assignmentsReducer";
 
-{/* copy line 23 for every other input/select part*/}
-
 export default function AssignmentEditor() {
     const { cid } = useParams();
     const { aid } = useParams();
@@ -137,23 +135,23 @@ export default function AssignmentEditor() {
                             <div className="form-group m-4">
                                 <label htmlFor="wd-assign-to" className="fw-bold">Assign to</label><br />
                                 <input type="text" id="wd-assign-to" className="form-control mt-2"
-                                    defaultValue={assignment.assignTo} onChange={(e) => ({...assignment, assignTo: e.target.value})}/>
+                                    defaultValue={assignment.assignTo} onChange={(e) => dispatch(setAssignment({...assignment, assignTo: e.target.value}))}/>
                             </div>
                             <div className="form-group ms-4 me-4">
                                 <label htmlFor="wd-due-date" className="fw-bold">Due</label><br />
                                 <input type="datetime-local" id="wd-due-date" className="form-control mt-2" 
-                                    defaultValue={assignment.due} onChange={(e) => ({...assignment, due: e.target.value})}/>
+                                    defaultValue={assignment.due} onChange={(e) => dispatch(setAssignment({...assignment, due: e.target.value}))}/>
                             </div>
                             <div>
                                 <div className="float-end mt-4 me-4">
                                     <label htmlFor="wd-available-until" className="fw-bold">Until</label><br />
                                     <input type="datetime-local" id="wd-available-until" className="form-control mt-2 mb-4" 
-                                    defaultValue={assignment.availableUntil} onChange={(e) => ({...assignment, availableUntil: e.target.value})} />
+                                    defaultValue={assignment.availableUntil} onChange={(e) => dispatch(setAssignment({...assignment, availableUntil: e.target.value}))} />
                                 </div>
                                 <div className="float-end mt-4">
                                     <label htmlFor="wd-available-from" className="fw-bold">Available From</label><br />
                                     <input type="datetime-local" id="wd-available-from" className="form-control mt-2 mb-4"
-                                    defaultValue={assignment.availableFrom} onChange={(e) => ({...assignment, availableFrom: e.target.value})} />
+                                    defaultValue={assignment.availableFrom} onChange={(e) => dispatch(setAssignment({...assignment, availableFrom: e.target.value}))} />
                                 </div>
                             </div>
                         </section>

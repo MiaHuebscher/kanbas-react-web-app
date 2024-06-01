@@ -4,12 +4,15 @@ import { LiaEdit } from "react-icons/lia";
 import AssignmentsControls from "./AssignmentsControls";
 import AssignmentsControlButtons from "./AssignmentsControlButtons";
 import AssignmentControlButtons from "./AssignmentControlButtons";
+import AssignmentDialog from "./AssignmentDialog";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router";
 import "./Assignments.css";
 import { useSelector } from "react-redux";
-import { addAssignment, updateAssignment, deleteAssignment } from "./assignmentsReducer";
+import { updateAssignment, deleteAssignment } from "./assignmentsReducer";
 import { useDispatch } from "react-redux";
+import React from "react";
+
 
 
 export default function Assignments() {
@@ -46,9 +49,8 @@ export default function Assignments() {
                                         </span> | <strong>Not available until</strong> {assignment.availableFrom} |
                                         <strong> Due</strong> {assignment.due} | {assignment.points} pts
                                     </div>
-                                    <AssignmentControlButtons assignmentId={assignment._id} deleteAssignment={(assignmentId) => {
-                                                              dispatch(deleteAssignment(assignmentId)) }} />
-                                </div>
+                                    <AssignmentControlButtons assignmentId={assignment._id}/>
+                               </div>
                             </li>
                           ))
                         }

@@ -19,17 +19,18 @@ const assignmentsSlice = createSlice({
                 points: assignment.points,
                 due: assignment.due,
                 availableFrom: assignment.availableFrom,
+                availableUntil: assignment.availableUntil,
             };
             state.assignments = [...state.assignments, newAssignment];
             state.newAssignment = {_id: "new", title: "New Assignment", course: "", description: "New Description", points: "100",
-            onlineEntryOption: "File Upload", assignTo: "Everyone" }
+            onlineEntryOption: "File Upload", assignTo: "Everyone" };
         },
         deleteAssignment: (state, { payload: assignmentId }) => {
             state.assignments = state.assignments.filter((a) => a._id !== assignmentId);
         },
         updateAssignment: (state, { payload: assignment }) => {
             state.assignments = state.assignments.map((a) =>
-                a._id === assignment._id ? assignment : a )
+                a._id === assignment._id ? assignment : a );
             state.newAssignment = {_id: "new", title: "New Assignment", course: "", description: "New Description", points: "100",
             onlineEntryOption: "File Upload", assignTo: "Everyone" };
         },
