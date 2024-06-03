@@ -59,6 +59,20 @@ export default function QuizEditor() {
                                     </select>
                                 </div>
                             </div>
+                            <div className="form-group mt-4 row">
+                                <div className="col-sm-4"></div>
+                                <div className="col-sm-6 w-25">
+                                    <label htmlFor="wd-quiz-details-options" className="fw-bold col-form-label">
+                                        Options
+                                    </label>
+                                </div>
+                            </div><br />
+                            <div className="form-group row">
+                                <div className="col-sm-4"></div>
+                                <div className="col-sm-6">
+                                    <input id="wd-quiz-shuffle" type="checkbox"></input> <label htmlFor="wd-quiz-shuffle">Shuffle Answers</label>
+                                </div>
+                            </div>
                             <div className="mt-4 row">
                                 <div className="col-sm-4">
                                     <label htmlFor="wd-assign" className="me-4 col-form-label float-end" >
