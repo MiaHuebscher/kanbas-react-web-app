@@ -8,7 +8,7 @@ export default function AssignmentDialog({ dialogTitle, assignmentId, deleteAssi
               <div className="modal-content">
                 <div className="modal-header">
                   <h1 className="modal-title fs-5" id="staticBackdropLabel">
-                    {dialogTitle} {assignmentId} </h1>
+                    {dialogTitle} </h1>
                   <button type="button" className="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div className="modal-footer">

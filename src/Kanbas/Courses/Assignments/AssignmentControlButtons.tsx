@@ -16,7 +16,6 @@ export default function AssignmentControlButtons({ assignmentId } : {assignmentI
       <IoEllipsisVertical className="fs-4 ms-2" />
       <AssignmentDialog dialogTitle="Delete This Assignment?" assignmentId={assignmentId} deleteAssignment={(assignmentId) => {
                                                                                             dispatch(deleteAssignment(assignmentId)) }}/>
-      {assignmentId}
     </div>
 );
 }
