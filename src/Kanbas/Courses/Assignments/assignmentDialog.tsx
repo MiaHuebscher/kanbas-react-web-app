@@ -1,12 +1,9 @@
-import { deleteAssignment } from "./assignmentsReducer";
-import { useDispatch } from "react-redux";
-
-export default function AssignmentDialog({ dialogTitle, assignmentId } : 
-    { dialogTitle: string; assignmentId: string }) {
-      const dispatch = useDispatch();
+export default function AssignmentDialog({ dialogTitle, assignmentId, deleteAssignment } : 
+    { dialogTitle: any; assignmentId: string; deleteAssignment: (assignmentId: string) => void; }) {
+      if (!assignmentId) return null;
       return (
         <div>
-          <div id="wd-delete-assignment-dialog" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false">
+          <div id={`wd-delete-assignment-dialog-${assignmentId}`} className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false">
             <div className="modal-dialog">
               <div className="modal-content">
                 <div className="modal-header">
@@ -17,7 +14,7 @@ export default function AssignmentDialog({ dialogTitle, assignmentId } :
                 <div className="modal-footer">
                   <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">
                     No </button>
-                  <button onClick={() => dispatch(deleteAssignment(assignmentId))} type="button" data-bs-dismiss="modal" className="btn btn-danger">
+                  <button onClick={() => deleteAssignment(assignmentId)} type="button" data-bs-dismiss="modal" className="btn btn-danger">
                     Yes </button>
                 </div>
               </div>
