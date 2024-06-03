@@ -46,8 +46,8 @@ export default function Assignments() {
                                         </Link>
                                         <br/>
                                         <span className="text-danger">Mutliple Modules
-                                        </span> | <strong>Not available until</strong> {assignment.availableFrom} |
-                                        <strong> Due</strong> {assignment.due} | {assignment.points} pts
+                                        </span> | <strong>Not available until</strong> {new Date(assignment.availableFrom).toDateString()} |
+                                        <strong> Due</strong> {new Date(assignment.due).toDateString()} | {assignment.points} pts
                                     </div>
                                     <AssignmentControlButtons assignmentId={assignment._id}/>
                                </div>
