@@ -8,7 +8,7 @@ import { setAssignment, updateAssignment, addAssignment } from "./assignmentsRed
 export default function AssignmentEditor() {
     const { cid } = useParams();
     const { aid } = useParams();
-    const { assignments, newAssignment, updatingAssignment } = useSelector((state: any) => state.assignmentsReducer);
+    const { assignments, updatingAssignment } = useSelector((state: any) => state.assignmentsReducer);
     const dispatch = useDispatch();
     return (
         <div>
@@ -161,8 +161,8 @@ export default function AssignmentEditor() {
                     <div className="float-end">
                         <Link to={`/Kanbas/Courses/${assignment.course}/Assignments`} className="btn btn-light">Cancel</Link> {assignment._id === "new" ? 
                             (<Link to={`/Kanbas/Courses/${assignment.course}/Assignments`} className="btn btn-danger" onClick={() => dispatch(addAssignment(updatingAssignment))}>
-                            Save1</Link>) : (<Link to={`/Kanbas/Courses/${assignment.course}/Assignments`} className="btn btn-danger" 
-                            onClick={() => dispatch(updateAssignment(updatingAssignment))} >Save2</Link>)
+                            Save</Link>) : (<Link to={`/Kanbas/Courses/${assignment.course}/Assignments`} className="btn btn-danger" 
+                            onClick={() => dispatch(updateAssignment(updatingAssignment))} >Save</Link>)
                         }
                     </div>
                     <br /><br />

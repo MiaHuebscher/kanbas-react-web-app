@@ -4,7 +4,6 @@ import GreenCheckmark from "./GreenCheckmark";
 import { FaTrash } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { deleteAssignment } from "./assignmentsReducer";
-import { useState } from "react";
 
 export default function AssignmentControlButtons({ assignmentId } : {assignmentId: string} ) {
   const dispatch = useDispatch();

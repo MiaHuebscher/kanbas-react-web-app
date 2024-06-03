@@ -2,8 +2,6 @@ import { FaPlus } from "react-icons/fa6";
 import { PiMagnifyingGlassThin } from "react-icons/pi";
 import { Link } from "react-router-dom";
 import "./Assignments.css";
-import AssignmentEditor from "./Editor";
-/* If aid === "new", addAssignment else updateAssignment */
 
 export default function AssignmentsControls({ aid, cid, updateAssignment } : { aid: any, cid: any, updateAssignment: () => void }) {
     return (
