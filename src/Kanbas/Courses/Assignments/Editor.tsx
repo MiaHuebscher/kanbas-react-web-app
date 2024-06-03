@@ -3,12 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { setAssignment, updateAssignment, addAssignment } from "./assignmentsReducer";
 
-{/* Only lets you update one at a time - might have to reconfigure setAssignment */}
-
 export default function AssignmentEditor() {
     const { cid } = useParams();
     const { aid } = useParams();
-    const { assignments, updatingAssignment } = useSelector((state: any) => state.assignmentsReducer);
+    const { state, assignments, updatingAssignment } = useSelector((state: any) => state.assignmentsReducer);
     const dispatch = useDispatch();
     return (
         <div>
