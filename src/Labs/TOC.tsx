@@ -1,20 +1,5 @@
 import { useLocation } from "react-router";
 
-{ /* Lab 1 TOC
-export default function TOC() {
-  return (
-    <ul>
-      <li><a id="wd-a"  href="#/Labs">Labs</a></li>
-      <li><a id="wd-a1" href="#/Labs/Lab1">Lab 1</a></li>
-      <li><a id="wd-a2" href="#/Labs/Lab2">Lab 2</a></li>
-      <li><a id="wd-a3" href="#/Labs/Lab3">Lab 3</a></li>
-      <li><a id="wd-k"  href="#/Kanbas">Kanbas</a></li>
-      <li><a id="wd-github" href="https://github.com/MiaHuebscher/kanbas-react-web-app">GitHub</a></li>
-    </ul>
-  );
-}
-*/}
-
 export default function TOC() {
   const { pathname } = useLocation();
   return (
@@ -46,6 +31,12 @@ export default function TOC() {
         <a id="wd-a4" href="#/Labs/Lab4"
           className={`nav-link ${pathname.includes("Lab4") ? "active" : ""}`}>
           Lab 4
+        </a>
+      </li>
+      <li className="nav-item">
+        <a id="wd-a5" href="#/Labs/Lab5"
+          className={`nav-link ${pathname.includes("Lab5") ? "active" : ""}`}>
+          Lab 5
         </a>
       </li>
       <li className="nav-item">
