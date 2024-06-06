@@ -1,3 +1,5 @@
+Visit https://a4--kanbas-web-app-miahuebscher.netlify.app/ for the latest deployed updates to the Web application.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
