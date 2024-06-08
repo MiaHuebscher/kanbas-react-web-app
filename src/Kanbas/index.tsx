@@ -23,7 +23,7 @@ export default function Kanbas() {
     const updateCourse = () => {
         setCourses(
             courses.map((c) => {
-                if (c._id == course._id) {
+                if (c._id === course._id) {
                     return course;
                 }   else {
                         return c;
