@@ -2,12 +2,29 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { setAssignment, updateAssignment, addAssignment } from "./assignmentsReducer";
+import * as client from "./client";
+import { useEffect, useState } from "react";
+
 
 export default function AssignmentEditor() {
     const { cid } = useParams();
     const { aid } = useParams();
-    const { state, assignments, updatingAssignment } = useSelector((state: any) => state.assignmentsReducer);
+    const [stat, setStat] = useState(null);
+    const { assignments, updatingAssignment } = useSelector((state: any) => state.assignmentsReducer);
+    const toEdit = assignments.filter((a: any) => (a.course === cid && a._id === aid));
     const dispatch = useDispatch();
+    const createAssignment = async (assignment: any) => {
+        const newAssignment = await client.createAssignment(cid as string, assignment);
+        dispatch(addAssignment(newAssignment));
+    }; 
+    const saveAssignment = async (assignment: any) => {
+        const status = await client.updateAssignment(assignment);
+        setStat(status);
+        dispatch(updateAssignment(assignment));
+    };
+    useEffect(() => {
+        dispatch(setAssignment(toEdit[0]));
+      }, []);
     return (
         <div>
             {assignments
@@ -17,7 +34,7 @@ export default function AssignmentEditor() {
                     <div className="form-group">
                         <label htmlFor="wd-name" className="col-form-label">Assignment Name</label>
                         <input type="text" className="form-control" id="wd-name" defaultValue={assignment.title} 
-                               onChange={(e) => dispatch(setAssignment({...assignment, title: e.target.value}))} />
+                               onChange={(e) => dispatch(setAssignment({...updatingAssignment, title: e.target.value}))} />
                     </div>
                     <div className="form-group mt-4">
                         <textarea id="wd-description" className="form-control" rows={10} defaultValue={assignment.description} 
@@ -134,12 +151,12 @@ export default function AssignmentEditor() {
                             <div className="form-group m-4">
                                 <label htmlFor="wd-assign-to" className="fw-bold">Assign to</label><br />
                                 <input type="text" id="wd-assign-to" className="form-control mt-2"
-                                    defaultValue={assignment.assignTo} onChange={(e) => dispatch(setAssignment({...updatingAssignment, assignTo: e.target.value}))}/>
+                                    defaultValue={assignment.assignTo} onChange={(e) => dispatch(setAssignment({...updatingAssignment, assignTo: e.target.value}))} />
                             </div>
                             <div className="form-group ms-4 me-4">
                                 <label htmlFor="wd-due-date" className="fw-bold">Due</label><br />
                                 <input type="datetime-local" id="wd-due-date" className="form-control mt-2" 
-                                    defaultValue={assignment.due} onChange={(e) => dispatch(setAssignment({...updatingAssignment, due: e.target.value}))}/>
+                                    defaultValue={assignment.due} onChange={(e) => dispatch(setAssignment({...updatingAssignment, due: e.target.value}))} />
                             </div>
                             <div>
                                 <div className="float-end mt-4 me-4">
@@ -158,9 +175,9 @@ export default function AssignmentEditor() {
                     <hr />
                     <div className="float-end">
                         <Link to={`/Kanbas/Courses/${assignment.course}/Assignments`} className="btn btn-light">Cancel</Link> {assignment._id === "new" ? 
-                            (<Link to={`/Kanbas/Courses/${assignment.course}/Assignments`} className="btn btn-danger" onClick={() => dispatch(addAssignment(updatingAssignment))}>
+                            (<Link to={`/Kanbas/Courses/${assignment.course}/Assignments`} className="btn btn-danger" onClick={() => createAssignment(updatingAssignment)}>
                             Save</Link>) : (<Link to={`/Kanbas/Courses/${assignment.course}/Assignments`} className="btn btn-danger" 
-                            onClick={() => dispatch(updateAssignment(updatingAssignment))} >Save</Link>)
+                            onClick={() => saveAssignment(updatingAssignment)} >Save</Link>)
                         }
                     </div>
                     <br /><br />

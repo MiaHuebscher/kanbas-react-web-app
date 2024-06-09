@@ -6,7 +6,6 @@ import Grades from "./Grades";
 import Home from "./Home";
 import Modules from "./Modules";
 import { Navigate, Route, Routes, useLocation, useParams } from "react-router";
-import { useDispatch } from "react-redux";
 import Quizzes from "./Quizzes";
 import QuizEditor from "./Quizzes/QuizEditor";
 
@@ -14,7 +13,6 @@ export default function Courses({ courses }: {courses: any[]; }) {
     const { cid } = useParams();
     const course = courses.find((course) => course._id === cid);
     const { pathname } = useLocation();
-    const dispatch = useDispatch();
     return (
         <div id="wd-courses">
             <h2 className="text-danger">

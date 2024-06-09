@@ -1,6 +1,4 @@
-import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import * as db from "../Database";
 import "./index.css"
 
 export default function Dashboard(

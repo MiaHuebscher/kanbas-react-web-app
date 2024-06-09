@@ -6,22 +6,44 @@ import AssignmentsControlButtons from "./AssignmentsControlButtons";
 import AssignmentControlButtons from "./AssignmentControlButtons";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch} from "react-redux";
+import { setAssignments, updateAssignment, deleteAssignment } from "./assignmentsReducer";
+import * as client from "./client";
 import "./Assignments.css";
-import { useSelector } from "react-redux";
-import { updateAssignment, deleteAssignment } from "./assignmentsReducer";
-import { useDispatch } from "react-redux";
 
 
 
 export default function Assignments() {
     const { cid } = useParams();
-    const { assignments } = useSelector((state: any) => state.assignmentsReducer);
-    const { newAssignment } = useSelector((state: any) => state.assignmentsReducer);
+    const [stat, setStat] = useState(null);
+    const { assignments, newAssignment } = useSelector((state: any) => state.assignmentsReducer);
     const dispatch = useDispatch();
+
+    const fetchAssignments = async () => {
+        const assignments = await client.findAssignmentsForCourse(cid as string);
+        dispatch(setAssignments(assignments));
+      };
+      const removeAssignment = async (assignmentId: string) => {
+          await client.deleteAssignment(assignmentId);
+          dispatch(deleteAssignment(assignmentId));
+      };
+      const saveAssignment = async (assignment: any) => {
+        const status = await client.updateAssignment(assignment);
+        setStat(status);
+        dispatch(updateAssignment(assignment));
+      };
+      useEffect(() => {
+        fetchAssignments();
+      }, []);
     return (
         <div>
             <AssignmentsControls aid={newAssignment._id} cid={cid} updateAssignment={() => {
-                dispatch(updateAssignment({...newAssignment, course: cid })); }}/><br /><br />
+                saveAssignment({...newAssignment, course: cid }); }}/><br /><br />
+            {stat && (
+                <div id="wd-todo-error-messsage" className="alert alert-danger mb-2 mt-2">
+                  {stat}
+                </div>)}
             <ul id="wd-assignments" className="list-group rounded-0">
                 <li className="wd-assignment list-group-item p-0 mb-5 fs-5 border-gray">
                     <div className="wd-title p-3 ps-2 bg-secondary">
@@ -47,7 +69,8 @@ export default function Assignments() {
                                         </span> | <strong>Not available until</strong> {new Date(assignment.availableFrom).toDateString()} |
                                         <strong> Due</strong> {new Date(assignment.due).toDateString()} | {assignment.points} pts
                                     </div>
-                                    <AssignmentControlButtons assignmentId={assignment._id}/>
+                                    <AssignmentControlButtons assignmentId={assignment._id} 
+                                                              deleteAssignment={(assignmentId) => { removeAssignment(assignmentId); }}/>
                                </div>
                             </li>
                           ))
