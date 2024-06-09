@@ -7,7 +7,6 @@ import Lab2 from "./Lab2";
 import Lab3 from "./Lab3";
 import Lab4 from "./Lab 4";
 import Lab5 from "./Lab 5";
-import Exam from "./Exam";
 
 export default function Labs() {
     return (
@@ -24,7 +23,6 @@ export default function Labs() {
                     <Route path="Lab3/*" element={<Lab3 />} />
                     <Route path="Lab4" element={<Lab4 />} />
                     <Route path="Lab5" element={<Lab5 />} />
-                    <Route path="Exam" element={<Exam />} />
                 </Routes>
             </div>
         </Provider>
