@@ -15,12 +15,12 @@ export default function QuizControlButtons({quiz} : {quiz: any}) {
           <ul className="dropdown-menu">
             <li>
               <Link id="wd-quiz-edit-btn" className="dropdown-item" to={`/Kanbas/Courses/${quiz.course}/Quizzes/${quiz._id}`}>
-                <FaPencil /> Edit
+                <FaPencil className="text-primary"/> Edit
               </Link>
             </li>
             <li>
               <a id="wd-quiz-delete-btn" className="dropdown-item" href="#">
-                <FaTrash /> Delete
+                <FaTrash className="text-danger"/> Delete
               </a>
             </li>
             <li>
@@ -30,7 +30,7 @@ export default function QuizControlButtons({quiz} : {quiz: any}) {
             </li>
             <li>
               <a id="wd-quiz-copy-btn" className="dropdown-item" href="#">
-                <FaCopy /> Copy
+                <FaCopy className="text-secondary"/> Copy
               </a>
             </li>
             <li>

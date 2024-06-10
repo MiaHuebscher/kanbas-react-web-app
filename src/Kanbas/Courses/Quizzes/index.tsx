@@ -1,18 +1,42 @@
-import { Link, useParams } from "react-router-dom";
 import QuizzesControls from "./QuizzesControls";
+import QuizControlButtons from "./QuizControlButtons";
 import { RxRocket } from "react-icons/rx";
 import { TiArrowSortedDown } from "react-icons/ti";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import QuizControlButtons from "./QuizControlButtons";
+import { useState, useEffect } from "react";
+import { setQuizzes, deleteQuiz, updateQuiz } from "./quizzesReducer";
+
+import * as client from "./client";
 
 
 export default function Quizzes() {
     const { cid } = useParams();
-    const { quizzes } = useSelector((state: any) => state.quizzesReducer);
+    const [stat, setStat] = useState(null);
+    const { quizzes, newQuiz } = useSelector((state: any) => state.quizzesReducer);
     const dispatch = useDispatch();
+
+    const fetchQuizzes = async () => {
+        const quizzes = await client.findQuizzesForCourse(cid as string);
+        dispatch(setQuizzes(quizzes));
+      };
+    const removeQuiz = async (quizId: string) => {
+        await client.deleteQuiz(quizId);
+        dispatch(deleteQuiz(quizId));
+    };
+    const saveQuiz = async (quiz: any) => {
+        const status = await client.updateQuiz(quiz);
+        setStat(status);
+        dispatch(updateQuiz(quiz));
+    };
+      useEffect(() => {
+        fetchQuizzes();
+      }, []);
+
     return (
         <div id="wd-quizzes" className="ms-5 me-5">
-            <QuizzesControls />
+            <QuizzesControls qid={newQuiz._id} cid={cid} updateQuiz={() => {
+                saveQuiz({...newQuiz, course: cid}); }}/>
             <ul id="wd-assignments" className="list-group rounded-0 ms-5 me-5">
                 <li className="wd-assignment list-group-item p-0 mb-5 fs-5 border-gray">
                     <div className="wd-title p-3 ps-2 bg-secondary">
