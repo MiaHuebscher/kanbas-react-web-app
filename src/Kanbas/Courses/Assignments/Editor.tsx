@@ -10,7 +10,7 @@ export default function AssignmentEditor() {
     const { cid } = useParams();
     const { aid } = useParams();
     const [stat, setStat] = useState(null);
-    const { assignments, updatingAssignment } = useSelector((state: any) => state.assignmentsReducer);
+    const { assignments, updatingAssignment, newAssignment } = useSelector((state: any) => state.assignmentsReducer);
     const toEdit = assignments.filter((a: any) => (a.course === cid && a._id === aid));
     const dispatch = useDispatch();
     const createAssignment = async (assignment: any) => {
@@ -175,9 +175,9 @@ export default function AssignmentEditor() {
                     <hr />
                     <div className="float-end">
                         <Link to={`/Kanbas/Courses/${assignment.course}/Assignments`} className="btn btn-light">Cancel</Link> {assignment._id === "new" ? 
-                            (<Link to={`/Kanbas/Courses/${assignment.course}/Assignments`} className="btn btn-danger" onClick={() => createAssignment(updatingAssignment)}>
+                            (<Link to={`/Kanbas/Courses/${assignment.course}/Assignments`} className="btn btn-danger" onClick={() => createAssignment({...newAssignment, ...updatingAssignment})}>
                             Save</Link>) : (<Link to={`/Kanbas/Courses/${assignment.course}/Assignments`} className="btn btn-danger" 
-                            onClick={() => saveAssignment(updatingAssignment)} >Save</Link>)
+                            onClick={() => saveAssignment({...newAssignment, ...updatingAssignment})} >Save</Link>)
                         }
                     </div>
                     <br /><br />
