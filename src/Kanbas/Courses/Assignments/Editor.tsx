@@ -40,7 +40,6 @@ export default function AssignmentEditor() {
                         <textarea id="wd-description" className="form-control" rows={10} defaultValue={assignment.description} 
                                   onChange={(e) => dispatch(setAssignment({...updatingAssignment, description: e.target.value}))} />    
                     </div>
-
                     <div className="form-group mt-4 float-end row">
                         <label htmlFor="wd-points" className="col-sm-5 col-form-label">Points</label>
                         <div className="col-sm-7">
