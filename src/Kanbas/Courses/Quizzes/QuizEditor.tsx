@@ -25,7 +25,6 @@ export default function QuizEditor() {
     useEffect(() => {
         dispatch(setQuiz(toEdit[0]));
       }, []);
-
     return (
         <div id="wd-quiz-editor" className="m-5">
             <div className="float-end">
@@ -101,15 +100,16 @@ export default function QuizEditor() {
                                 <div className="form-group row">
                                     <div className="col-sm-4"></div>
                                     <div className="col-sm-6">
-                                        <input id="wd-quiz-shuffle" type="checkbox" /> <label htmlFor="wd-quiz-shuffle">Shuffle Answers</label><br /><br />
-                                        <input id="wd-quiz-time-limit" type="checkbox" /> <label htmlFor="wd-quiz-time-limit" className="me-3">Time Limit</label>
-                                        <input id="wd-quiz-minutes" type="number" className="input-sm" /> <label htmlFor="wd-quiz-minutes">Minutes</label>
+                                        <input id="wd-quiz-shuffle" type="checkbox" defaultChecked={quiz.shuffleAnswers}/> <label htmlFor="wd-quiz-shuffle">Shuffle Answers</label><br /><br />
+                                        <input id="wd-quiz-time-limit" type="checkbox" defaultChecked={quiz.timeLimit} /> <label htmlFor="wd-quiz-time-limit" className="me-3">Time Limit</label>
+                                        <input id="wd-quiz-minutes" type="number" className="input-sm" defaultValue={quiz.minutes} /> <label htmlFor="wd-quiz-minutes">Minutes</label>
                                     </div>
                                 </div><br />
                                 <div className="form-group row">
                                     <div className="col-sm-4"></div>
                                     <div className="col-sm-6 pt-2 pb-2 border border-secondary rounded ">
-                                        <input id="wd-quiz-multiple-attempts" type="checkbox" /> <label htmlFor="wd-multiple-attempts">Allow Multiple Attempts</label>
+                                        <input id="wd-quiz-multiple-attempts" type="checkbox" 
+                                            defaultChecked={quiz.allowMultipleAttempts}/> <label htmlFor="wd-quiz-multiple-attempts">Allow Multiple Attempts</label>
                                     </div>
                                 </div>
                                 <div className="mt-4 row">
@@ -122,20 +122,23 @@ export default function QuizEditor() {
                                         <div className="form-group m-4">
                                             <label htmlFor="wd-assign-to" className="fw-bold">Assign to</label><br />
                                             <input type="text" id="wd-assign-to" className="form-control mt-2"
-                                                defaultValue="Everyone" />
+                                                defaultValue={quiz.assignTo} />
                                         </div>
                                         <div className="form-group ms-4 me-4">
                                             <label htmlFor="wd-due-date" className="fw-bold">Due</label><br />
-                                            <input type="datetime-local" id="wd-due-date" className="form-control mt-2" />
+                                            <input type="datetime-local" id="wd-due-date" className="form-control mt-2" 
+                                                defaultValue={quiz.due}/>
                                         </div>
                                         <div>
                                             <div className="float-end mt-4 me-4">
                                                 <label htmlFor="wd-available-until" className="fw-bold">Until</label><br />
-                                                <input type="datetime-local" id="wd-available-until" className="form-control mt-2 mb-4" />
+                                                <input type="datetime-local" id="wd-available-until" className="form-control mt-2 mb-4" 
+                                                    defaultValue={quiz.availableUntil}/>
                                             </div>
                                             <div className="float-end mt-4">
                                                 <label htmlFor="wd-available-from" className="fw-bold">Available From</label><br />
-                                                <input type="datetime-local" id="wd-available-from" className="form-control mt-2 mb-4" />
+                                                <input type="datetime-local" id="wd-available-from" className="form-control mt-2 mb-4" 
+                                                    defaultValue={quiz.availableFrom}/>
                                             </div>
                                         </div>
                                     </section>
