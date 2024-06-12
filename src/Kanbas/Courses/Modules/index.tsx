@@ -11,7 +11,6 @@ import * as client from "./client";
 export default function Modules() {
     const { cid } = useParams();
     const [moduleName, setModuleName] = useState("");
-    const [stat, setStat] = useState(null);
     const { modules } = useSelector((state: any) => state.modulesReducer);
     const dispatch = useDispatch();
     const fetchModules = async () => {
@@ -28,7 +27,6 @@ export default function Modules() {
     };
     const saveModule = async (module: any) => {
       const status = await client.updateModule(module);
-      setStat(status);
       dispatch(updateModule(module));
     };
     useEffect(() => {
@@ -47,11 +45,6 @@ export default function Modules() {
             .filter((module: any) => module.course === cid)
             .map((module: any) => (
             <li className="wd-module list-group-item p-0 mb-5 fs-5 border-gray">
-              {stat && (
-                <div id="wd-todo-error-messsage" className="alert alert-danger mb-2 mt-2">
-                  {stat}
-                </div>
-              )}
               <div className="wd-title p-3 ps-2 bg-secondary">
                 <BsGripVertical className="me-2 fs-3" />
                 {!module.editing && module.name}
