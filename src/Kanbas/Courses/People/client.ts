@@ -33,6 +33,15 @@ export const updateUser = async (user: any) => {
   return response.data;
 };
 
+export const createUser = async (user: any) => {
+  const response = await axios.post(`${USERS_API}`, user);
+  return response.data;
+};
+
+
+
+
+
 
 
 

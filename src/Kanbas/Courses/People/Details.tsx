@@ -91,6 +91,7 @@ export default function PeopleDetails({ fetchUsers }:
             {user && editing && (
                 <input className="form-control w-50"
                 defaultValue={user.email}
+                type="email"
                 onChange={(e) => setEmail(e.target.value)}
                 onKeyDown={(e) => {
                 if (e.key === "Enter") { saveUser(); }}}/>
