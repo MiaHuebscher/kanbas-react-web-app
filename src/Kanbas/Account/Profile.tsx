@@ -1,9 +1,13 @@
 import * as client from "./client";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { UseDispatch, useDispatch } from "react-redux";
+import { setCurrentUser } from "./accountReducer";
+
 export default function Profile() {
   const [profile, setProfile] = useState<any>({});
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const fetchProfile = async () => {
     try {
       const account = await client.profile();
@@ -14,6 +18,7 @@ export default function Profile() {
   };
   const signout = async () => {
     await client.signout();
+    dispatch(setCurrentUser(null));
     navigate("/Kanbas/Account/Signin");
   };
   useEffect(() => { fetchProfile(); }, []);

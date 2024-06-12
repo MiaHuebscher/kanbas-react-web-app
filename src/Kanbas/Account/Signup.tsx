@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { UseDispatch, useDispatch } from "react-redux";
+import { setCurrentUser } from "./accountReducer";
 import * as client from "./client";
+
 export default function Signup() {
   const [error, setError] = useState("");
   const [user, setUser] = useState<any>({});
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const signup = async () => {
     try {
       user._id = new Date().getTime().toString();
-      await client.signup(user);
+      const currentUser = await client.signup(user);
+      dispatch(setCurrentUser(currentUser));
       navigate("/Kanbas/Account/Profile");
     } catch (err: any) {
       setError(err.response.data.message);
