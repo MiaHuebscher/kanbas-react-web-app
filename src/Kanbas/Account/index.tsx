@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 
 export default function Account() {
   return (
-    <div id="wd-account">
+    <div>
       <div className="d-flex">
         <div className="d-none d-md-block">
           <AccountNavigation />
