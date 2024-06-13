@@ -81,7 +81,7 @@ export default function PeopleDetails({ fetchUsers }:
                 </div>      
             )}
         </div><br />
-        <b>Login ID:</b> {user.loginId} <br />
+        <b>Login ID:</b> {user._id} <br />
         <div className="d-inline">
             <b className="float-start">Email:</b> 
             {!editing && (

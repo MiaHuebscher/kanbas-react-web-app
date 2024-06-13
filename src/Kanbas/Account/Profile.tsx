@@ -27,12 +27,17 @@ export default function Profile() {
       <h1>Profile</h1>
       {profile && (
         <div>
-          <input className="form-control mb-2" value={profile.username}  onChange={(e) => setProfile({ ...profile, username:  e.target.value })}/>
-          <input className="form-control mb-2" value={profile.password}  onChange={(e) => setProfile({ ...profile, password:  e.target.value })}/>
-          <input className="form-control mb-2" value={profile.firstName} onChange={(e) => setProfile({ ...profile, firstName: e.target.value })}/>
-          <input className="form-control mb-2" value={profile.lastName}  onChange={(e) => setProfile({ ...profile, lastName:  e.target.value })}/>
+          <input className="form-control mb-2" value={profile.username}  onChange={(e) => setProfile({ ...profile, username:  e.target.value })}
+                 placeholder="username"/>
+          <input className="form-control mb-2" value={profile.password}  onChange={(e) => setProfile({ ...profile, password:  e.target.value })}
+                 placeholder="password"/>
+          <input className="form-control mb-2" value={profile.firstName} onChange={(e) => setProfile({ ...profile, firstName: e.target.value })}
+                 placeholder="first name"/>
+          <input className="form-control mb-2" value={profile.lastName}  onChange={(e) => setProfile({ ...profile, lastName:  e.target.value })}
+                 placeholder="last name"/>
           <input className="form-control mb-2" value={profile.dob} onChange={(e) => setProfile({ ...profile, dob: e.target.value })} type="date"/>
-          <input className="form-control mb-2" value={profile.email} onChange={(e) => setProfile({ ...profile, email: e.target.value })} type="email"/>
+          <input className="form-control mb-2" value={profile.email} onChange={(e) => setProfile({ ...profile, email: e.target.value })} type="email"
+                 placeholder="email"/>
           <select className="form-control mb-2" onChange={(e) => setProfile({ ...profile, role: e.target.value })}>
             <option value="USER">User</option>            <option value="ADMIN">Admin</option>
             <option value="FACULTY">Faculty</option>      <option value="STUDENT">Student</option>

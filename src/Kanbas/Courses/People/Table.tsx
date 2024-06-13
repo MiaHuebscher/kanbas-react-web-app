@@ -76,7 +76,7 @@ export default function PeopleTable() {
                   {user.firstName} {user.lastName}
                 </Link> 
               </td>
-              <td>{user.loginId}</td><td>{user.section}</td><td>{user.role}</td><td>{user.lastActivity}</td>
+              <td>{user._id}</td><td>{user.section}</td><td>{user.role}</td><td>{user.lastActivity}</td>
               <td>{user.totalActivity}</td>
             </tr>
           ))}

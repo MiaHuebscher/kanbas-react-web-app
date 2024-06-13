@@ -12,6 +12,8 @@ export default function Signup() {
   const signup = async () => {
     try {
       user._id = new Date().getTime().toString();
+      user.firstName = "New";
+      user.lastName = "User";
       const currentUser = await client.signup(user);
       dispatch(setCurrentUser(currentUser));
       navigate("/Kanbas/Account/Profile");
