@@ -35,15 +35,11 @@ export default function Assignments() {
       };
       useEffect(() => {
         fetchAssignments();
+        saveAssignment({...newAssignment, course: cid });
       }, []);
     return (
         <div>
-            <AssignmentsControls aid={newAssignment._id} cid={cid} updateAssignment={() => {
-                saveAssignment({...newAssignment, course: cid }); }}/><br /><br />
-            {stat && (
-                <div id="wd-todo-error-messsage" className="alert alert-danger mb-2 mt-2">
-                  {stat}
-                </div>)}
+            <AssignmentsControls aid={newAssignment._id} cid={cid} /><br /><br />
             <ul id="wd-assignments" className="list-group rounded-0">
                 <li className="wd-assignment list-group-item p-0 mb-5 fs-5 border-gray">
                     <div className="wd-title p-3 ps-2 bg-secondary">
