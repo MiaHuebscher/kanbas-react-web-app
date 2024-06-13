@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
 import { useParams } from "react-router";
 import { useState, useEffect } from "react";
-import { UseSelector, useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { addQuiz, updateQuiz, setQuiz } from "./quizzesReducer";
 import * as client from "./client";
 import "./quizzes.css";
-import { setAssignment } from "../Assignments/assignmentsReducer";
 
 export default function QuizEditor() {
     const { cid, qid } = useParams();
@@ -52,11 +51,12 @@ export default function QuizEditor() {
                         <div className="tab-pane fade show active" id="details" role="tabpanel" aria-labelledby="details-tab">
                             <form className="mt-4">
                                 <input type="text" className="form-control" id="wd-quiz-name" defaultValue={quiz.title} 
-                                       onChange={(e) => dispatch(setQuiz({...updatingQuiz, title: e.target.value}))} />
+                                    onChange={(e) => dispatch(setQuiz({...updatingQuiz, title: e.target.value}))} />
                                 {/*Add quiz instructions here*/ }
                                 <br />
                                 <label htmlFor="wd-quiz-instructions">Quiz Instructions:</label><br />
-                                <textarea id="wd-quiz-instructions" className="form-control" rows={10} defaultValue={quiz.instructions} />
+                                <textarea id="wd-quiz-instructions" className="form-control" rows={10} defaultValue={quiz.instructions} 
+                                    onChange={(e) => dispatch(setQuiz({...updatingQuiz, instructions: e.target.value}))}/>
                                 <div className="form-group mt-4 row">
                                     <div className="col-sm-4">
                                         <label htmlFor="wd-quiz-type" className="me-4 col-form-label float-end">
@@ -100,16 +100,20 @@ export default function QuizEditor() {
                                 <div className="form-group row">
                                     <div className="col-sm-4"></div>
                                     <div className="col-sm-6">
-                                        <input id="wd-quiz-shuffle" type="checkbox" defaultChecked={quiz.shuffleAnswers}/> <label htmlFor="wd-quiz-shuffle">Shuffle Answers</label><br /><br />
-                                        <input id="wd-quiz-time-limit" type="checkbox" defaultChecked={quiz.timeLimit} /> <label htmlFor="wd-quiz-time-limit" className="me-3">Time Limit</label>
-                                        <input id="wd-quiz-minutes" type="number" className="input-sm" defaultValue={quiz.minutes} /> <label htmlFor="wd-quiz-minutes">Minutes</label>
+                                        <input id="wd-quiz-shuffle" type="checkbox" defaultChecked={quiz.shuffleAnswers}
+                                            onChange={(e) => dispatch(setQuiz({...updatingQuiz, shuffleAnswers: e.target.checked}))}/> <label htmlFor="wd-quiz-shuffle">Shuffle Answers</label><br /><br />
+                                        <input id="wd-quiz-time-limit" type="checkbox" defaultChecked={quiz.timeLimit} 
+                                            onChange={(e) => dispatch(setQuiz({...updatingQuiz, timeLimit: e.target.checked}))}/> <label htmlFor="wd-quiz-time-limit" className="me-3">Time Limit</label>
+                                        <input id="wd-quiz-minutes" type="number" className="input-sm" defaultValue={quiz.minutes} 
+                                            onChange={(e) => dispatch(setQuiz({...updatingQuiz, minutes: e.target.value}))}/> <label htmlFor="wd-quiz-minutes">Minutes</label>
                                     </div>
                                 </div><br />
                                 <div className="form-group row">
                                     <div className="col-sm-4"></div>
                                     <div className="col-sm-6 pt-2 pb-2 border border-secondary rounded ">
                                         <input id="wd-quiz-multiple-attempts" type="checkbox" 
-                                            defaultChecked={quiz.allowMultipleAttempts}/> <label htmlFor="wd-quiz-multiple-attempts">Allow Multiple Attempts</label>
+                                            defaultChecked={quiz.allowMultipleAttempts}
+                                            onChange={(e) => dispatch(setQuiz({...updatingQuiz, allowMultipleAttempts: e.target.checked}))} /> <label htmlFor="wd-quiz-multiple-attempts">Allow Multiple Attempts</label>
                                     </div>
                                 </div>
                                 <div className="mt-4 row">
@@ -122,31 +126,34 @@ export default function QuizEditor() {
                                         <div className="form-group m-4">
                                             <label htmlFor="wd-assign-to" className="fw-bold">Assign to</label><br />
                                             <input type="text" id="wd-assign-to" className="form-control mt-2"
-                                                defaultValue={quiz.assignTo} />
+                                                defaultValue={quiz.assignTo} onChange={(e) => dispatch(setQuiz({...updatingQuiz, assignTo: e.target.value}))}/>
                                         </div>
                                         <div className="form-group ms-4 me-4">
                                             <label htmlFor="wd-due-date" className="fw-bold">Due</label><br />
                                             <input type="datetime-local" id="wd-due-date" className="form-control mt-2" 
-                                                defaultValue={quiz.due}/>
+                                                defaultValue={quiz.due} onChange={(e) => dispatch(setQuiz({...updatingQuiz, due: e.target.value}))}/>
                                         </div>
                                         <div>
                                             <div className="float-end mt-4 me-4">
                                                 <label htmlFor="wd-available-until" className="fw-bold">Until</label><br />
                                                 <input type="datetime-local" id="wd-available-until" className="form-control mt-2 mb-4" 
-                                                    defaultValue={quiz.availableUntil}/>
+                                                    defaultValue={quiz.availableUntil} onChange={(e) => dispatch(setQuiz({...updatingQuiz, availableUntil: e.target.value}))}/>
                                             </div>
                                             <div className="float-end mt-4">
                                                 <label htmlFor="wd-available-from" className="fw-bold">Available From</label><br />
                                                 <input type="datetime-local" id="wd-available-from" className="form-control mt-2 mb-4" 
-                                                    defaultValue={quiz.availableFrom}/>
+                                                    defaultValue={quiz.availableFrom} onChange={(e) => dispatch(setQuiz({...updatingQuiz, availableFrom: e.target.value}))}/>
                                             </div>
                                         </div>
                                     </section>
                                 </div>
                                 < hr />
                                 <div className="float-end">
-                                    <Link to={`/Kanbas/Courses/${cid}/Quizzes`} className="btn btn-light">Cancel</Link> <Link 
-                                    to={`/Kanbas/Courses/${cid}/Quizzes`} className="btn btn-danger">Save</Link>
+                                    <Link to={`/Kanbas/Courses/${cid}/Quizzes`} className="btn btn-light">Cancel</Link> {quiz._id === "new" ? 
+                                        (<Link to={`/Kanbas/Courses/${cid}/Quizzes`} className="btn btn-danger" 
+                                            onClick={() => createQuiz({...newQuiz, ...updatingQuiz})}>Save</Link>) : 
+                                        (<Link to={`/Kanbas/Courses/${cid}/Quizzes`} className="btn btn-danger" 
+                                            onClick={() => saveQuiz({...newQuiz, ...updatingQuiz})} >Save</Link>)}
                                 </div>
                                 <br /><br />
                             </form>

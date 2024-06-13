@@ -5,8 +5,8 @@ const initialState = {
     updatingQuiz: {},
     newQuiz: {_id: "new", title: "New Quiz", course: "", due: "", availableFrom: "", 
               availableUntil: "", questions: "", points: "", quizType: "graded quiz",
-              assignmentGroup: "quizzes", instructions: "Don't Fail", shuffleAnswers: "true", 
-              timeLimit: "true", minutes: "30", allowMultipleAttempts: "false", assignTo: "Everyone"}
+              assignmentGroup: "quizzes", instructions: "Don't Fail", shuffleAnswers: true, 
+              timeLimit: true, minutes: "30", allowMultipleAttempts: false, assignTo: "Everyone"}
 };
 
 const quizzesSlice = createSlice({
@@ -25,8 +25,8 @@ const quizzesSlice = createSlice({
             state.quizzes = [...state.quizzes, newQuiz] as any;
             state.newQuiz = {_id: "new", title: "New Quiz", course: "", due: "", availableFrom: "", 
                 availableUntil: "", questions: "", points: "", quizType: "graded quiz",
-                assignmentGroup: "quizzes", instructions: "Don't Fail", shuffleAnswers: "true", 
-                timeLimit: "true", minutes: "30", allowMultipleAttempts: "false", assignTo: "Everyone"};
+                assignmentGroup: "quizzes", instructions: "Don't Fail", shuffleAnswers: true, 
+                timeLimit: true, minutes: "30", allowMultipleAttempts: false, assignTo: "Everyone"};
             state.updatingQuiz = {};
         },
         deleteQuiz: (state, { payload: quizzes }) => {
@@ -37,8 +37,8 @@ const quizzesSlice = createSlice({
                 q._id === quiz._id ? quiz : q) as any;
             state.newQuiz = {_id: "new", title: "New Quiz", course: "", due: "", availableFrom: "", 
                 availableUntil: "", questions: "", points: "", quizType: "graded quiz",
-                assignmentGroup: "quizzes", instructions: "Don't Fail", shuffleAnswers: "true", 
-                timeLimit: "true", minutes: "30", allowMultipleAttempts: "false", assignTo: "Everyone"};
+                assignmentGroup: "quizzes", instructions: "Don't Fail", shuffleAnswers: true, 
+                timeLimit: true, minutes: "30", allowMultipleAttempts: false, assignTo: "Everyone"};
             state.updatingQuiz = {};
         },
         editQuiz: (state, { payload: quizId }) => {

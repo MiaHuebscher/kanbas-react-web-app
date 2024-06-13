@@ -153,19 +153,19 @@ export default function AssignmentEditor() {
                                     defaultValue={assignment.assignTo} onChange={(e) => dispatch(setAssignment({...updatingAssignment, assignTo: e.target.value}))} />
                             </div>
                             <div className="form-group ms-4 me-4">
-                                <label htmlFor="wd-due-date" className="fw-bold">Due</label><br />
-                                <input type="datetime-local" id="wd-due-date" className="form-control mt-2" 
+                                <label htmlFor="wd-due-date-quiz" className="fw-bold">Due</label><br />
+                                <input type="datetime-local" id="wd-due-date-quiz" className="form-control mt-2" 
                                     defaultValue={assignment.due} onChange={(e) => dispatch(setAssignment({...updatingAssignment, due: e.target.value}))} />
                             </div>
                             <div>
                                 <div className="float-end mt-4 me-4">
-                                    <label htmlFor="wd-available-until" className="fw-bold">Until</label><br />
-                                    <input type="datetime-local" id="wd-available-until" className="form-control mt-2 mb-4" 
+                                    <label htmlFor="wd-available-until-quiz" className="fw-bold">Until</label><br />
+                                    <input type="datetime-local" id="wd-available-until-quiz" className="form-control mt-2 mb-4" 
                                     defaultValue={assignment.availableUntil} onChange={(e) => dispatch(setAssignment({...updatingAssignment, availableUntil: e.target.value}))} />
                                 </div>
                                 <div className="float-end mt-4">
-                                    <label htmlFor="wd-available-from" className="fw-bold">Available From</label><br />
-                                    <input type="datetime-local" id="wd-available-from" className="form-control mt-2 mb-4"
+                                    <label htmlFor="wd-available-from-quiz" className="fw-bold">Available From</label><br />
+                                    <input type="datetime-local" id="wd-available-from-quiz" className="form-control mt-2 mb-4"
                                     defaultValue={assignment.availableFrom} onChange={(e) => dispatch(setAssignment({...updatingAssignment, availableFrom: e.target.value}))} />
                                 </div>
                             </div>
