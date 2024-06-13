@@ -31,12 +31,12 @@ export default function Quizzes() {
     };
       useEffect(() => {
         fetchQuizzes();
+        saveQuiz({...newQuiz, course: cid, title: `Quiz ${quizzes.length}`});
       }, []);
 
     return (
         <div id="wd-quizzes" className="ms-5 me-5">
-            <QuizzesControls qid={newQuiz._id} cid={cid} updateQuiz={() => {
-                saveQuiz({...newQuiz, course: cid}); }}/>
+            <QuizzesControls qid={newQuiz._id} cid={cid} />
             <ul id="wd-assignments" className="list-group rounded-0 ms-5 me-5">
                 <li className="wd-assignment list-group-item p-0 mb-5 fs-5 border-gray">
                     <div className="wd-title p-3 ps-2 bg-secondary">
