@@ -6,7 +6,7 @@ import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
 function App() {
   return (
     <HashRouter>
-      <div>
+      <div className="h-100">
         <Routes>
           <Route path="/" element={<Navigate to="Labs" />} />
           <Route path="/Labs/*" element={<Labs />} />

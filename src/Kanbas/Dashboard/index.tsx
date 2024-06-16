@@ -1,140 +1,70 @@
-export default function Dashboard() {
+import { Link } from "react-router-dom";
+import "./index.css"
+
+export default function Dashboard(
+    { courses, course, setCourse, addNewCourse,
+      deleteCourse, updateCourse } : {
+      courses: any[]; course: any; setCourse: (course: any) => void;
+      addNewCourse: () => void; deleteCourse: (course: any) => void;
+      updateCourse: () => void; })
+    { 
     return (
-        <div id="wd-dashboard">
+        <div className="p-4" id="wd-dashboard">
             <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
-            <h2 id="wd-dashboard-published">Published Courses (10)</h2> <hr />
-            <div id="wd-dashboard-courses">
-                <div className="wd-dashboard-course">
-                    <img src="/images/webdev.jpg" alt="web development icon" width={200} />
-                    <div>
-                        <a className="wd-dashboard-course-link"
-                        href="#/Kanbas/Courses/Home">
-                        CS5610 Web Development
-                        </a>
-                        <p className="wd-dashboard-course-title">
-                        Web Development
-                        </p>
-                        <a href="#/Kanbas/Courses/Home"> Go </a>
-                    </div>
-                </div>
-                <div className="wd-dashboard-course">
-                    <img src="/images/cooking.jpg" alt="cookin icon" width={200} />
-                    <div>
-                        <a className="wd-dashboard-course-link"
-                        href="#/Kanbas/Courses/Home">
-                        CK2500 Intermediate Cooking
-                        </a>
-                        <p className="wd-dashboard-course-title">
-                        Intermediate Cooking
-                        </p>
-                        <a href="#/Kanbas/Courses/Home"> Go </a>
-                    </div>
-                </div>
-                <div className="wd-dashboard-course">
-                    <img src="/images/surfing.jpg" alt="surfing icon" width={200} />
-                    <div>
-                        <a className="wd-dashboard-course-link"
-                        href="#/Kanbas/Courses/Home">
-                        SU4500 Advanced Surfing
-                        </a>
-                        <p className="wd-dashboard-course-title">
-                        Advanced Surfing
-                        </p>
-                        <a href="#/Kanbas/Courses/Home"> Go </a>
-                    </div>
-                </div>
-                <div className="wd-dashboard-course">
-                    <img src="/images/photography.jpg" alt="photography icon" width={200} />
-                    <div>
-                        <a className="wd-dashboard-course-link"
-                        href="#/Kanbas/Courses/Home">
-                        ARTD4660 Advanced Photography
-                        </a>
-                        <p className="wd-dashboard-course-title">
-                        Advanced Photography
-                        </p>
-                        <a href="#/Kanbas/Courses/Home"> Go </a>
-                    </div>
-                </div>
-                <div className="wd-dashboard-course">
-                    <img src="/images/biology.jpg" alt="biology icon" width={200} />
-                    <div>
-                        <a className="wd-dashboard-course-link"
-                        href="#/Kanbas/Courses/Home">
-                        BIOL1111 General Biology
-                        </a>
-                        <p className="wd-dashboard-course-title">
-                        General Biology
-                        </p>
-                        <a href="#/Kanbas/Courses/Home"> Go </a>
-                    </div>
-                </div>
-                <div className="wd-dashboard-course">
-                    <img src="/images/ml.jpg" alt="machine learning icon" width={200} />
-                    <div>
-                        <a className="wd-dashboard-course-link"
-                        href="#/Kanbas/Courses/Home">
-                        DS4400 Machine Learning and Data Mining 1
-                        </a>
-                        <p className="wd-dashboard-course-title">
-                        Machine Learning and Data Mining 1
-                        </p>
-                        <a href="#/Kanbas/Courses/Home"> Go </a>
-                    </div>
-                </div>
-                <div className="wd-dashboard-course">
-                    <img src="/images/hiking.jpg" alt="hiking icon" width={200} />
-                    <div>
-                        <a className="wd-dashboard-course-link"
-                        href="#/Kanbas/Courses/Home">
-                        HK7500 Extreme Hiking
-                        </a>
-                        <p className="wd-dashboard-course-title">
-                        Extreme Hiking
-                        </p>
-                        <a href="#/Kanbas/Courses/Home"> Go </a>
-                    </div>
-                </div>
-                <div className="wd-dashboard-course">
-                    <img src="/images/german.jpg" alt="germany icon" width={200} />
-                    <div>
-                        <a className="wd-dashboard-course-link"
-                        href="#/Kanbas/Courses/Home">
-                        GM6000 Advanced German
-                        </a>
-                        <p className="wd-dashboard-course-title">
-                        Advanced German
-                        </p>
-                        <a href="#/Kanbas/Courses/Home"> Go </a>
-                    </div>
-                </div>
-                <div className="wd-dashboard-course">
-                    <img src="/images/pretzel.jpg" alt="pretzel icon" width={200} />
-                    <div>
-                        <a className="wd-dashboard-course-link"
-                        href="#/Kanbas/Courses/Home">
-                        PM1000 The Art of Pretzel Making
-                        </a>
-                        <p className="wd-dashboard-course-title">
-                        The Art of Pretzel Making
-                        </p>
-                        <a href="#/Kanbas/Courses/Home"> Go </a>
-                    </div>
-                </div>
-                <div className="wd-dashboard-course">
-                    <img src="/images/database.jpg" alt="database icon" width={200} />
-                    <div>
-                        <a className="wd-dashboard-course-link"
-                        href="#/Kanbas/Courses/Home">
-                        DS4300 Large-Scale Information Storage and Retrieval
-                        </a>
-                        <p className="wd-dashboard-course-title">
-                        Large-Scale Information Storage and Retrieval
-                        </p>
-                        <a href="#/Kanbas/Courses/Home"> Go </a>
-                    </div>
+            <h5 className="fw-bold fs-2">New Course
+                <button className="btn btn-primary float-end" 
+                        id="wd-add-new-course-click"
+                        onClick={addNewCourse}>Add</button>
+                <button className="btn btn-warning float-end me-2"
+                        id="wd-update-course-click"
+                        onClick={updateCourse}>
+                        Update
+                </button>
+            </h5><br />
+            <input value={course.name} className="form-control mb-2"
+                   onChange={(e) => setCourse({...course, name: e.target.value })} />
+            <textarea value={course.description} className="form-control" 
+                   onChange={(e) => setCourse({...course, description: e.target.value})} />< hr />
+            <h2 id="wd-dashboard-published">Published Courses ({courses.length})</h2> <hr />
+            <div id="wd-dashboard-courses" className="row">
+                <div className="row row-cols-1 row-cols-md-5 g-4">
+                    {courses.map((course) => (
+                        <div key={course._id} className="col" id="wd-dashboard-course " style={{ width: "300px" }}>
+                            <Link to={`/Kanbas/Courses/${course._id}/Home`} className="text-decoration-none">
+                                <div className="card rounded-3 overflow-hidden">
+                                    <img src={`/images/${course.image}`} height="{160}" />
+                                    <div className="card-body">
+                                        <span className="wd-dashboard-course-link"
+                                            style={{ textDecoration: "none", color: "navy", fontWeight: "bold" }} >
+                                            {course.name}
+                                        </span>
+                                        <p className="wd-dashboard-course-title card-text" style={{ maxHeight: 53, overflow: "hidden" }}>
+                                            {course.description}
+                                        </p>
+                                        <Link to={`/Kanbas/Courses/${course._id}/Home`} className="btn btn-primary">Go</Link>
+                                        <button onClick={(event) => {
+                                                    event.preventDefault();
+                                                    deleteCourse(course._id);}}
+                                                className="btn btn-danger float-end"
+                                                id="wd-delete-course-click">
+                                                Delete
+                                        </button>
+                                        <button id="wd-edit-course-click"
+                                            onClick={(event) => {
+                                                event.preventDefault();
+                                                setCourse(course);
+                                            }}
+                                            className="btn btn-warning me-2 float-end">
+                                            Edit
+                                        </button>
+                                    </div>
+                                </div>
+                            </Link>
+                        </div>
+                    ))}
                 </div>
             </div>
+            <br />
         </div>
-    )
+    );
 }

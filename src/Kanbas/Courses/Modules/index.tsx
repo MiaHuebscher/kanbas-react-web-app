@@ -1,105 +1,81 @@
+import { useState, useEffect } from "react";
+import ModulesControls from "./ModulesControls";
+import ModuleControlButtons from "./ModuleControlButtons";
+import LessonControlButtons from "./LessonControlButtons";
+import { BsGripVertical } from "react-icons/bs";
+import { useParams } from "react-router";
+import { setModules, addModule, editModule, updateModule, deleteModule } from "./modulesReducer";
+import { useSelector, useDispatch } from "react-redux";
+import * as client from "./client";
+
 export default function Modules() {
+    const { cid } = useParams();
+    const [moduleName, setModuleName] = useState("");
+    const { modules } = useSelector((state: any) => state.modulesReducer);
+    const dispatch = useDispatch();
+    const fetchModules = async () => {
+      const modules = await client.findModulesForCourse(cid as string);
+      dispatch(setModules(modules));
+    };
+    const createModule = async (module: any) => {
+      const newModule = await client.createModule(cid as string, module);
+      dispatch(addModule(newModule));
+    };  
+    const removeModule = async (moduleId: string) => {
+        await client.deleteModule(moduleId);
+        dispatch(deleteModule(moduleId));
+    };
+    const saveModule = async (module: any) => {
+      const status = await client.updateModule(module);
+      dispatch(updateModule(module));
+    };
+    useEffect(() => {
+      fetchModules();
+    }, []);
     return (
       <div>
-        {/* Collapse All button, View Progress button, etc. */}
-        <button>Collapse All</button> <button>View Progress</button> 
-        &nbsp;
-        <select id="wd-select-one-publish">
-            <option value="publish week 1">Publish Week 1</option>
-            <option value="publish week 2">Publish Week 2</option>
-            <option value="publish week 3">Publish Week 3</option>
-            <option value="publish week 4">Publish Week 4</option>
-            <option value="publish week 5">Publish Week 5</option>
-            <option value="publish week 6">Publish Week 6</option>
-            <option value="publish week 7">Publish Week 7</option>
-            <option value="publish week 8">Publish Week 8</option>
-            <option selected value="publish all">Publish All</option>
-        </select> &nbsp;
-        <button>+ Module</button>
-        {/* Week 1, Lecture 1 Content */}
-        <ul id="wd-modules">
-          <li className="wd-module">
-            <div className="wd-title">Week 1, Lecture 1 - Course Introduction, Syllabus, Agenda</div>
-            <ul className="wd-lessons">
-              <li className="wd-lesson">
-                <span className="wd-title">LEARNING OBJECTIVES</span>
-                <ul className="wd-content">
-                  <li className="wd-content-item">Introduction to the course</li>
-                  <li className="wd-content-item">Learn what is Web Development</li>
-                  <li className="wd-content-item">Creating a development environment</li>
-                  <li className="wd-content-item">Creating a Web Application</li>
-                  <li className="wd-content-item">Getting started with the 1st assignment</li>
+        <ModulesControls setModuleName={setModuleName} moduleName={moduleName}
+                         addModule={() => {
+                          createModule({ name: moduleName, course: cid });
+                          setModuleName("");
+                         }} 
+        /><br /><br /><br /><br />
+        <ul id="wd-modules" className="list-group rounded-0">
+          {modules
+            .filter((module: any) => module.course === cid)
+            .map((module: any) => (
+            <li className="wd-module list-group-item p-0 mb-5 fs-5 border-gray">
+              <div className="wd-title p-3 ps-2 bg-secondary">
+                <BsGripVertical className="me-2 fs-3" />
+                {!module.editing && module.name}
+                { module.editing && (
+                  <input className="form-control w-50 d-inline-block" value={module.name}
+                         onChange={(e) => saveModule({...module, name: e.target.value })}
+                         onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            saveModule({...module, editing: false });
+                          }
+                         }} />
+                )}
+                <ModuleControlButtons moduleId={module._id} 
+                                      deleteModule={(moduleId) => { removeModule(moduleId); }}
+                                      editModule={(moduleId) => dispatch(editModule(moduleId))} />
+              </div>
+              {module.lessons && (
+                <ul className="wd-lessons list-group rounded-0">
+                  {module.lessons.map((lesson: any) => (
+                    <li className="wd-lesson list-group-item p-3 ps-1">
+                      <BsGripVertical className="me-2 fs-3" />
+                      {lesson.name}
+                      <LessonControlButtons />
+                    </li>
+                  ))}
                 </ul>
-              </li>
-              <li className="wd-readings">
-                <span className="wd-title">READING</span>
-                <ul className="wd-content">
-                  <li className="wd-content-item">Full Stack Developer - Chapter 1 - Introduction</li>
-                  <li className="wd-content-item">Full Stack Developer - Chapter 2 - Creating User Interfaces with HTML</li>
-                </ul>
-              </li>
-              <li className="wd-slides">
-                <span className="wd-title">SLIDES</span>
-                <ul className="wd-content">
-                  <li className="wd-content-item">Introduction to Web Development</li>
-                  <li className="wd-content-item">Creating an HTTP server with Node.js</li>
-                  <li className="wd-content-item">Creating a React Application</li>
-                  <li className="wd-content-item">Commit your source to GitHub.com</li>
-                  <li className="wd-content-item">Delopying to Netlify</li>
-                  <li className="wd-content-item">Delopying multiple branches in Netlify</li>
-                </ul>
-              </li>
-              <li className="wd-evaluations">
-                <span className="wd-title">Evaluations</span>
-                <ul className="wd-content">
-                  <li className="wd-content-item">A1</li>
-                  <li className="wd-content-item">P</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <br />
-          {/* Week 1, Lecture 2 Content */}
-          <li className="wd-lecture-two">
-            <div className="wd-title">Week 1, Lecture 2 - Formatting User Interfaces with HTML</div>
-            <ul className="wd-lessons">
-              <li className="wd-lesson">
-                <span className="wd-title">LEARNING OBJECTIVES</span>
-                <ul className="wd-content">
-                  <li className="wd-content-item">Learn how to create user interfaces with HTML</li>
-                  <li className="wd-content-item">Keep wprking on assignment 1</li>
-                  <li className="wd-content-item">Deploy the assignment to Netlify</li>
-                </ul>
-              </li>
-              <li className="wd-readings">
-                <span className="wd-title">READING</span>
-                <ul className="wd-content">
-                  <li className="wd-content-item">Full Stack Developer - Chapter 1 - Introduction</li>
-                  <li className="wd-content-item">Full Stack Developer - Chapter 2 - Creating User Interfaces with HTML</li>
-                </ul>
-              </li>
-              <li className="wd-slides">
-                <span className="wd-title">SLIDES</span>
-                <ul className="wd-content">
-                  <li className="wd-content-item">Introduction to HTML and the DOM</li>
-                  <li className="wd-content-item">Formatting Web content with Headings and Paragraphs</li>
-                  <li className="wd-content-item">Formatting content with Lists and Tables</li>
-                  <li className="wd-content-item">Creating Web Forms</li>
-                  <li className="wd-content-item">Navigating with Anchors</li>
-                  <li className="wd-content-item">Embedding content with Iframes</li>
-                  <li className="wd-content-item">Drawing with Scalable Vector Graphics</li> 
-                </ul>
-              </li>
-              <li className="wd-evaluations">
-                <span className="wd-title">Evaluations</span>
-                <ul className="wd-content">
-                  <li className="wd-content-item">A1</li>
-                  <li className="wd-content-item">P</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-        </ul>
+              )}
+            </li>
+          ))}
+        </ul>  
       </div>
-  );}
+  );
+}
   

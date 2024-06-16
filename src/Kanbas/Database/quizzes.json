@@ -1,0 +1,9 @@
+[
+    {"_id": "Q101", "title": "Quiz 1", "course": "CS101", "due": "2024-06-13T23:59", "availableFrom": "2024-06-06T00:00", 
+    "availableUntil": "2024-06-15T23:59", "questions": "11", "points": "29", "quizType": "graded quiz", "assignmentGroup": "quizzes",
+    "instructions": "Don't Fail", "shuffleAnswers": "true", "timeLimit": "true", "minutes": "30", "allowMultipleAttempts": "false",
+    "assignTo": "Everyone"},
+    {"_id": "new", "title": "New Quiz", "course": "", "due": "", "availableFrom": "", "availableUntil": "", "questions": "", "points": "", 
+    "quizType": "graded quiz", "assignmentGroup": "quizzes", "instructions": "", "shuffleAnswers": "", "timeLimit": "true", "minutes": "",
+    "allowMultipleAttempts": "", "assignTo": "Everyone"}
+]

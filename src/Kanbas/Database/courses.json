@@ -1,0 +1,112 @@
+[
+    {
+        "_id": "CS101", 
+        "name": "Web Development",
+        "number": "CS5610",
+        "startDate": "2023-01-10",
+        "endDate": "2023-05-15",
+        "department": "C123",
+        "credits": 4,
+        "image": "webdev.jpg",
+        "description": "This course explores the fundamentals of web development."
+    },
+    {
+        "_id": "CK101", 
+        "name": "Intermediate Cooking",
+        "number": "CK2500",
+        "startDate": "2023-01-10",
+        "endDate": "2023-05-15",
+        "department": "K123",
+        "credits": 4,
+        "image": "cooking.jpg",
+        "description": "This course perfects cooking techniques through a diverse collection of modules exploring cooking styles from around the world."
+    },
+    {
+        "_id": "SU101", 
+        "name": "Advanced Surfing",
+        "number": "SU4500",
+        "startDate": "2023-01-10",
+        "endDate": "2023-05-15",
+        "department": "S123",
+        "credits": 4,
+        "image": "surfing.jpg",
+        "description": "This course emphasizes the gnarly techniques required to dominate big wave surfing across the globe."
+    },
+    {
+        "_id": "ARTD101", 
+        "name": "Advanced Photography",
+        "number": "ARTD4660",
+        "startDate": "2023-01-10",
+        "endDate": "2023-05-15",
+        "department": "A123",
+        "credits": 4,
+        "image": "photography.jpg",
+        "description": "This course hones photography techniques in students that are required for them to capture miraculous sights."
+    },
+    {
+        "_id": "BIOL101", 
+        "name": "General Biology",
+        "number": "BIOL1111",
+        "startDate": "2023-01-10",
+        "endDate": "2023-05-15",
+        "department": "B123",
+        "credits": 4,
+        "image": "biology.jpg",
+        "description": "This course explores the world around us through the lens of biology so that students may understand more about their origins and their surroundings."
+    },
+    {
+        "_id": "DS101", 
+        "name": "Machine Learning",
+        "number": "DS4400",
+        "startDate": "2023-01-10",
+        "endDate": "2023-05-15",
+        "department": "DS123",
+        "credits": 4,
+        "image": "ml.jpg",
+        "description": "This course explores the mathematics behind machine learning algorithms so students can construct technology to improve the world."
+    },
+    {
+        "_id": "HK101", 
+        "name": "Extreme Hiking",
+        "number": "HK7500",
+        "startDate": "2023-01-10",
+        "endDate": "2023-05-15",
+        "department": "HK123",
+        "credits": 4,
+        "image": "hiking.jpg",
+        "description": "This course will test your body and teach you how to navigate the outdoors."
+    },
+    {
+        "_id": "GM101", 
+        "name": "Advanced German",
+        "number": "GM6000",
+        "startDate": "2023-01-10",
+        "endDate": "2023-05-15",
+        "department": "GM123",
+        "credits": 4,
+        "image": "german.jpg",
+        "description": "Nehmen Sie an diesem Kurs nicht teil, wenn Sie nicht über grundlegende Deutschkenntnisse verfügen."
+    },
+    {
+        "_id": "PM101", 
+        "name": "The Art of Pretzel Making",
+        "number": "PM1000",
+        "startDate": "2023-01-10",
+        "endDate": "2023-05-15",
+        "department": "PM123",
+        "credits": 4,
+        "image": "pretzel.jpg",
+        "description": "This course teaches the art of German pretzel making and eating!"
+    },
+    {
+        "_id": "CS102", 
+        "name": "Database Design",
+        "number": "CS3200",
+        "startDate": "2023-01-10",
+        "endDate": "2023-05-15",
+        "department": "CS123",
+        "credits": 4,
+        "image": "database.jpg",
+        "description": "This course explores the fundamentals of database design, implementation, and management."
+    }
+]
