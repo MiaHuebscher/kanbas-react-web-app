@@ -17,24 +17,28 @@ export default function Dashboard(
                 to={`/Kanbas/Enrollments/${currentUser._id}`}>Enroll in Courses</Link> </h1>
             </div>
             <hr />
-            <h5 className="fw-bold fs-2">New Course
-                <button className="btn btn-success float-end" 
-                        id="wd-add-new-course-click"
-                        onClick={addNewCourse}>Add</button>
-                <button className="btn btn-warning float-end me-2"
-                        id="wd-update-course-click"
-                        onClick={updateCourse}>
-                        Update
-                </button>
-            </h5><br />
-            <input value={course.name} className="form-control mb-2"
-                   onChange={(e) => setCourse({...course, name: e.target.value })} />
-            <textarea value={course.description} className="form-control" 
-                   onChange={(e) => setCourse({...course, description: e.target.value})} />< hr />
-            <h2 id="wd-dashboard-published">Published Courses ({courses.length})</h2> <hr />
+            {currentUser.role === "FACULTY" || currentUser.role === "TA" ? 
+            <div>
+                <h5 className="fw-bold fs-2">New Course
+                    <button className="btn btn-success float-end" 
+                            id="wd-add-new-course-click"
+                            onClick={addNewCourse}>Add</button>
+                    <button className="btn btn-warning float-end me-2"
+                            id="wd-update-course-click"
+                            onClick={updateCourse}>
+                            Update
+                    </button>
+                </h5><br />
+                <input value={course.name} className="form-control mb-2"
+                    onChange={(e) => setCourse({...course, name: e.target.value })} />
+                <textarea value={course.description} className="form-control" 
+                    onChange={(e) => setCourse({...course, description: e.target.value})} />
+            </div> : "" }
+            < hr />
+            <h2 id="wd-dashboard-published">Published Courses ({currentUser.enrollments.length})</h2> <hr />
             <div id="wd-dashboard-courses" className="row">
                 <div className="row row-cols-1 row-cols-md-5 g-4">
-                    {courses.map((course) => (
+                    {courses.filter((course: any) => currentUser.enrollments.includes(course._id)).map((course) => (
                         <div key={course._id} className="col" id="wd-dashboard-course " style={{ width: "300px" }}>
                             <Link to={`/Kanbas/Courses/${course._id}/Home`} className="text-decoration-none">
                                 <div className="card rounded-3 overflow-hidden">
