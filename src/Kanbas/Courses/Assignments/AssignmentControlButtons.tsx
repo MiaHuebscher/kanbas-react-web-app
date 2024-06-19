@@ -2,8 +2,6 @@ import AssignmentDialog from "./AssignmentDialog";
 import { IoEllipsisVertical } from "react-icons/io5";
 import GreenCheckmark from "./GreenCheckmark";
 import { FaTrash } from "react-icons/fa";
-import { useDispatch } from "react-redux";
-import { deleteAssignment } from "./assignmentsReducer";
 
 export default function AssignmentControlButtons({ assignmentId, deleteAssignment } : 
   {assignmentId: string, deleteAssignment: (assignmentId: string) => void;} ) {
