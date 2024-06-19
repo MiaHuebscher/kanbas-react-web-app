@@ -4,9 +4,12 @@ const initialState = {
     quizzes: [],
     updatingQuiz: {},
     newQuiz: {_id: "new", title: "New Quiz", course: "", due: "", availableFrom: "", 
-              availableUntil: "", questions: "", points: "", quizType: "graded quiz",
-              assignmentGroup: "quizzes", instructions: "Don't Fail", shuffleAnswers: true, 
-              timeLimit: true, minutes: "30", allowMultipleAttempts: false, assignTo: "Everyone"}
+              availableUntil: "", questions: [], points: "", quizType: "graded quiz",
+              assignmentGroup: "quizzes", instructions: "", shuffleAnswers: true, 
+              timeLimit: true, minutes: "20", allowMultipleAttempts: false, assignTo: "Everyone", status: "unpublished", 
+              showCorrectAnswers: true, accessCode: "", oneQuestionAtATime: true, webcamRequired: false, lockQuestions: false},
+    updatingQuestion: {},
+    newQuestion: {_id: "new", course: "", quiz: "", title: "", points: "", questionType: "multiple choice"}
 };
 
 const quizzesSlice = createSlice({
@@ -24,9 +27,10 @@ const quizzesSlice = createSlice({
             };
             state.quizzes = [...state.quizzes, newQuiz] as any;
             state.newQuiz = {_id: "new", title: "New Quiz", course: "", due: "", availableFrom: "", 
-                availableUntil: "", questions: "", points: "", quizType: "graded quiz",
-                assignmentGroup: "quizzes", instructions: "Don't Fail", shuffleAnswers: true, 
-                timeLimit: true, minutes: "30", allowMultipleAttempts: false, assignTo: "Everyone"};
+                availableUntil: "", questions: [], points: "", quizType: "graded quiz",
+                assignmentGroup: "quizzes", instructions: "", shuffleAnswers: true, 
+                timeLimit: true, minutes: "20", allowMultipleAttempts: false, assignTo: "Everyone", status: "unpublished",
+                showCorrectAnswers: true, accessCode: "", oneQuestionAtATime: true, webcamRequired: false, lockQuestions: false};
             state.updatingQuiz = {};
         },
         deleteQuiz: (state, { payload: quizzes }) => {
@@ -36,9 +40,10 @@ const quizzesSlice = createSlice({
             state.quizzes = state.quizzes.map((q: any) =>
                 q._id === quiz._id ? quiz : q) as any;
             state.newQuiz = {_id: "new", title: "New Quiz", course: "", due: "", availableFrom: "", 
-                availableUntil: "", questions: "", points: "", quizType: "graded quiz",
-                assignmentGroup: "quizzes", instructions: "Don't Fail", shuffleAnswers: true, 
-                timeLimit: true, minutes: "30", allowMultipleAttempts: false, assignTo: "Everyone"};
+                availableUntil: "", questions: [], points: "", quizType: "graded quiz",
+                assignmentGroup: "quizzes", instructions: "", shuffleAnswers: true, 
+                timeLimit: true, minutes: "20", allowMultipleAttempts: false, assignTo: "Everyone", status: "unpublished",
+                showCorrectAnswers: true, accessCode: "", oneQuestionAtATime: true, webcamRequired: false, lockQuestions: false};
             state.updatingQuiz = {};
         },
         editQuiz: (state, { payload: quizId }) => {
