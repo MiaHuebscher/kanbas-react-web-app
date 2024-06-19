@@ -17,6 +17,7 @@ import "./Assignments.css";
 export default function Assignments() {
     const { cid } = useParams();
     const [stat, setStat] = useState(null);
+    const { currentUser } = useSelector((state: any) => state.accountReducer);
     const { assignments, newAssignment } = useSelector((state: any) => state.assignmentsReducer);
     const dispatch = useDispatch();
 
@@ -65,8 +66,9 @@ export default function Assignments() {
                                         </span> | <strong>Not available until</strong> {new Date(assignment.availableFrom).toDateString()} |
                                         <strong> Due</strong> {new Date(assignment.due).toDateString()} | {assignment.points} pts
                                     </div>
+                                    {currentUser.role === "FACULTY" || currentUser.role === "TA" ?
                                     <AssignmentControlButtons assignmentId={assignment._id} 
-                                                              deleteAssignment={(assignmentId) => { removeAssignment(assignmentId); }}/>
+                                                              deleteAssignment={(assignmentId) => { removeAssignment(assignmentId); }}/> : ""}
                                </div>
                             </li>
                           ))
