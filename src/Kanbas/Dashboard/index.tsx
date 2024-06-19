@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import "./index.css"
+import { useSelector } from "react-redux";
 
 export default function Dashboard(
     { courses, course, setCourse, addNewCourse,
@@ -8,11 +9,16 @@ export default function Dashboard(
       addNewCourse: () => void; deleteCourse: (course: any) => void;
       updateCourse: () => void; })
     { 
+    const { currentUser } = useSelector((state: any) => state.accountReducer);
     return (
         <div className="p-4" id="wd-dashboard">
-            <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
+            <div>
+            <h1 id="wd-dashboard-title">Dashboard <Link className="float-end btn btn-lg btn-primary"
+                to={`/Kanbas/Enrollments/${currentUser._id}`}>Enroll in Courses</Link> </h1>
+            </div>
+            <hr />
             <h5 className="fw-bold fs-2">New Course
-                <button className="btn btn-primary float-end" 
+                <button className="btn btn-success float-end" 
                         id="wd-add-new-course-click"
                         onClick={addNewCourse}>Add</button>
                 <button className="btn btn-warning float-end me-2"
