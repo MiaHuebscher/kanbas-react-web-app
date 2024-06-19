@@ -39,8 +39,10 @@ export default function Profile() {
           <input className="form-control mb-2" value={profile.email} onChange={(e) => setProfile({ ...profile, email: e.target.value })} type="email"
                  placeholder="email"/>
           <select className="form-control mb-2" onChange={(e) => setProfile({ ...profile, role: e.target.value })}>
-            <option value="USER">User</option>            <option value="ADMIN">Admin</option>
-            <option value="FACULTY">Faculty</option>      <option value="STUDENT">Student</option>
+            <option value="STUDENT">Student {profile.role === "STUDENT" ? "(Current)" : "" }</option>        
+            <option value="FACULTY">Faculty {profile.role === "FACULTY" ? "(Current)" : "" }</option>
+            <option value="USER">User {profile.role === "USER" ? "(Current)" : "" }</option> 
+            <option value="ADMIN">Admin {profile.role === "ADMIN" ? "(Current)" : "" }</option>
           </select>
         </div>
       )}

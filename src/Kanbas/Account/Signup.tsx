@@ -29,6 +29,12 @@ export default function Signup() {
              className="form-control mb-2" placeholder="username" />
       <input value={user.password} onChange={(e) => setUser({ ...user, password: e.target.value })} type="password"
              className="form-control mb-2" placeholder="password" />
+      <select value={user.role} onChange={(e) =>setUser({ ...user, role: e.target.value})} className="form-select mb-2" >
+        <option value="STUDENT">Student</option>        
+        <option value="FACULTY">Faculty</option>
+        <option value="USER">User</option> 
+        <option value="ADMIN">Admin</option> 
+      </select>
       <button onClick={signup} className="btn btn-primary mb-2"> Sign up </button><br />
       <Link to="/Kanbas/Account/Signin">Sign in</Link>
     </div>
