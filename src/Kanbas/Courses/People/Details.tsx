@@ -19,6 +19,9 @@ export default function PeopleDetails({ fetchUsers }:
     if (!uid) return;
     const user = await client.findUserById(uid);
     setUser(user);
+    setName(user.firstName + " " + user.lastName);
+    setEmail(user.email);
+    setRole(user.role);
   };
   const deleteUser = async (uid: string) => {
     await client.deleteUser(uid);
