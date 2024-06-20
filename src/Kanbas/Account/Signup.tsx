@@ -13,7 +13,10 @@ export default function Signup() {
     try {
       user._id = new Date().getTime().toString();
       user.firstName = "New";
-      user.lastName = "User";
+      user.lastName = "";
+      user.section = "S101";
+      user.role = "STUDENT";
+      user.enrollments = ["CS101"];
       const currentUser = await client.signup(user);
       dispatch(setCurrentUser(currentUser));
       navigate("/Kanbas/Account/Profile");

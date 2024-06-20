@@ -4,7 +4,6 @@ import { Link, useParams } from "react-router-dom";
 import * as client from "./client";
 import PeopleDetails from "./Details";
 
-
 export default function PeopleTable() {
   const { cid } = useParams();
   const [users, setUsers] = useState<any[]>([]);
@@ -41,6 +40,7 @@ export default function PeopleTable() {
       password: "password123",
       section: "S101",
       role: "STUDENT",
+      enrollments: ["CS101"]
     });
     setUsers([...users, user]);
   };
