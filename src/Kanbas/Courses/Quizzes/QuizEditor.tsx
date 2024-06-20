@@ -8,7 +8,7 @@ import QuizQuestionsEditor from "./QuizQuestionsEditor";
 
 export default function QuizEditor() {
     const { cid, qid } = useParams();
-    const { quizzes, updatingQuiz, newQuiz } = useSelector((state: any) => state.quizzesReducer);
+    const { quizzes } = useSelector((state: any) => state.quizzesReducer);
     const toEdit = quizzes.filter((q: any) => (q.course === cid && q._id === qid));
     const dispatch = useDispatch();
     useEffect(() => {
@@ -39,7 +39,7 @@ export default function QuizEditor() {
                     </ul>
                     <div className="tab-content" id="wd-quiz-editor-tabs-content">
                         <div className="tab-pane fade show active" id="details" role="tabpanel" aria-labelledby="details-tab">
-                            <QuizDetailsEditor cid={cid} updatingQuiz={updatingQuiz} quiz={quiz} newQuiz={newQuiz} />
+                            <QuizDetailsEditor />
                         </div>
                         <div className="tab-pane fade" id="questions" role="tabpanel" aria-labelledby="questions-tab">
                             <QuizQuestionsEditor quiz={quiz} />

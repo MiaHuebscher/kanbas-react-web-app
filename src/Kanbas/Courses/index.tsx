@@ -11,6 +11,7 @@ import PeopleTable from "./People/Table";
 import { useSelector } from "react-redux";
 import Submission from "./Assignments/Submission";
 import QuizDetails from "./Quizzes/QuizDetails";
+import QuizDetailsEditor from "./Quizzes/QuizDetailsEditor";
 
 export default function Courses({ courses }: {courses: any[]; }) {
     const { cid } = useParams();
@@ -40,6 +41,7 @@ export default function Courses({ courses }: {courses: any[]; }) {
                             element={currentUser.role === "FACULTY" || currentUser.role === "TA" ? <AssignmentEditor /> : <Submission />} />
                         <Route path="Quizzes" element={<Quizzes />} />
                         <Route path="Quizzes/:qid" element={<QuizDetails />} />
+                        <Route path="Quizzes/:qid/editor" element={<QuizDetailsEditor />} />
                         <Route path="Grades" element={<Grades />} />
                         <Route path="People" element={<PeopleTable />} />
                         <Route path="People/:uid" element={<PeopleTable />} />

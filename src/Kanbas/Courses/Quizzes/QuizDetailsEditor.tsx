@@ -1,34 +1,46 @@
-import { useDispatch } from "react-redux";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import { addQuiz, updateQuiz, setQuiz } from "./quizzesReducer";
 import * as client from "./client";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
-
-export default function QuizDetailsEditor ({cid, updatingQuiz, quiz, newQuiz}: 
-    {cid: any, updatingQuiz: any, quiz: any, newQuiz: any}) {
+export default function QuizDetailsEditor () {
+    const { cid, qid } = useParams();
+    const [ currentQuiz, setCurrentQuiz ] = useState<any>({});
+    const { updatingQuiz, newQuiz } = useSelector((state: any) => state.quizzesReducer);
+    const [ quizPoints, setQuizPoints ] = useState(0);
+    if (currentQuiz.questions && currentQuiz.questions.length !== 0) {
+        const totalPoints = currentQuiz.questions.reduce((sum: number, q: any) => sum + q.points, 0);
+        setQuizPoints(totalPoints);
+    }
     const dispatch = useDispatch();
-    const [stat, setStat] = useState(null);
-    let quiz_points = 0;
-    quiz.questions.map((q: any) => quiz_points += q.points); //idk
     const createQuiz = async (quiz: any) => {
         const newQuiz = await client.createQuiz(cid as string, quiz);
         dispatch(addQuiz(newQuiz));
     }; 
     const saveQuiz = async (quiz: any) => {
         const status = await client.updateQuiz(quiz);
-        setStat(status);
         dispatch(updateQuiz(quiz));
     };
-
+    const findQuiz = async (cid: string, qid: string) => {
+        const quiz = await client.findQuiz(cid, qid);
+        dispatch(setQuiz(quiz[0]));
+        setCurrentQuiz(quiz[0]);
+    }
+    useEffect(() => {
+        findQuiz(cid as string, qid as string);
+      }, []);
+    console.log("current:", currentQuiz, "updating:", updatingQuiz);
     return (
         <form className="mt-4">
-            <input type="text" className="form-control" id="wd-quiz-name" defaultValue={quiz.title}
+            <input type="text" className="form-control" id="wd-quiz-name" defaultValue={currentQuiz.title}
                 onChange={(e) => dispatch(setQuiz({ ...updatingQuiz, title: e.target.value }))} />
             <br />
             <label htmlFor="wd-quiz-instructions">Quiz Instructions:</label><br />
-            <textarea id="wd-quiz-instructions" className="form-control" rows={10} defaultValue={quiz.instructions}
-                onChange={(e) => dispatch(setQuiz({ ...updatingQuiz, instructions: e.target.value }))} />
+            <ReactQuill theme="snow" id="wd-quiz-instructions" className="form-control" defaultValue={currentQuiz.instructions}
+                onChange={(e) => dispatch(setQuiz({ ...updatingQuiz, instructions: e }))} />
             <div className="form-group mt-4 row">
                 <div className="col-sm-4">
                     <label htmlFor="wd-quiz-type" className="me-4 col-form-label float-end">
@@ -68,7 +80,7 @@ export default function QuizDetailsEditor ({cid, updatingQuiz, quiz, newQuiz}:
                     </label>
                 </div>
                 <div className="col-sm-7">
-                    <input type="number" id="wd-quiz-points" className="form-control w-25" defaultValue={quiz_points} 
+                    <input type="number" id="wd-quiz-points" className="form-control w-25" defaultValue={quizPoints} 
                            onChange={(e) => dispatch(setQuiz({ ...updatingQuiz, points: e.target.value }))}/>
                 </div>
             </div>
@@ -79,7 +91,7 @@ export default function QuizDetailsEditor ({cid, updatingQuiz, quiz, newQuiz}:
                     </label>
                 </div>
                 <div className="col-sm-7">
-                    <input type="text" id="wd-access-code" className="form-control w-25" defaultValue={quiz.accessCode} 
+                    <input type="text" id="wd-access-code" className="form-control w-25" defaultValue={currentQuiz.accessCode} 
                            onChange={(e) => dispatch(setQuiz({ ...updatingQuiz, accessCode: e.target.value }))}/>
                 </div>
             </div>
@@ -94,19 +106,19 @@ export default function QuizDetailsEditor ({cid, updatingQuiz, quiz, newQuiz}:
             <div className="form-group row">
                 <div className="col-sm-4"></div>
                 <div className="col-sm-6">
-                    <input id="wd-quiz-shuffle" type="checkbox" defaultChecked={quiz.shuffleAnswers}
+                    <input id="wd-quiz-shuffle" type="checkbox" defaultChecked={currentQuiz.shuffleAnswers}
                         onChange={(e) => dispatch(setQuiz({ ...updatingQuiz, shuffleAnswers: e.target.checked }))} /> <label htmlFor="wd-quiz-shuffle">Shuffle Answers</label><br /><br />
-                    <input id="wd-quiz-time-limit" type="checkbox" defaultChecked={quiz.timeLimit}
+                    <input id="wd-quiz-time-limit" type="checkbox" defaultChecked={currentQuiz.timeLimit}
                         onChange={(e) => dispatch(setQuiz({ ...updatingQuiz, timeLimit: e.target.checked }))} /> <label htmlFor="wd-quiz-time-limit" className="me-3">Time Limit</label>
-                    <input id="wd-quiz-minutes" type="number" className="input-sm" defaultValue={quiz.minutes}
+                    <input id="wd-quiz-minutes" type="number" className="input-sm" defaultValue={currentQuiz.minutes}
                         onChange={(e) => dispatch(setQuiz({ ...updatingQuiz, minutes: e.target.value }))} /> <label htmlFor="wd-quiz-minutes">Minutes</label><br /><br />
-                    <input id="wd-show-correct-answers" type="checkbox" defaultChecked={quiz.showCorrectAnswers}
+                    <input id="wd-show-correct-answers" type="checkbox" defaultChecked={currentQuiz.showCorrectAnswers}
                         onChange={(e) => dispatch(setQuiz({ ...updatingQuiz, showCorrectAnswers: e.target.checked }))} /> <label htmlFor="wd-show-correct-answers">Show Correct Answers</label><br /><br />
-                    <input id="wd-one-question-at-a-time" type="checkbox" defaultChecked={quiz.oneQuestionAtATime}
+                    <input id="wd-one-question-at-a-time" type="checkbox" defaultChecked={currentQuiz.oneQuestionAtATime}
                         onChange={(e) => dispatch(setQuiz({ ...updatingQuiz, oneQuestionAtATime: e.target.checked }))} /> <label htmlFor="wd-one-question-at-a-time">One Question At A Time</label><br /><br />
-                    <input id="wd-webcam-required" type="checkbox" defaultChecked={quiz.webcamRequired}
+                    <input id="wd-webcam-required" type="checkbox" defaultChecked={currentQuiz.webcamRequired}
                         onChange={(e) => dispatch(setQuiz({ ...updatingQuiz, webcamRequired: e.target.checked }))} /> <label htmlFor="wd-webcam-required">Webcam Required</label><br /><br />
-                    <input id="wd-lock-questions" type="checkbox" defaultChecked={quiz.lockQuestions}
+                    <input id="wd-lock-questions" type="checkbox" defaultChecked={currentQuiz.lockQuestions}
                         onChange={(e) => dispatch(setQuiz({ ...updatingQuiz, lockQuestions: e.target.checked }))} /> <label htmlFor="wd-lock-questions">Lock Questions</label><br /><br />
                 </div>
             </div><br />
@@ -114,7 +126,7 @@ export default function QuizDetailsEditor ({cid, updatingQuiz, quiz, newQuiz}:
                 <div className="col-sm-4"></div>
                 <div className="col-sm-6 pt-2 pb-2 border border-secondary rounded ">
                     <input id="wd-quiz-multiple-attempts" type="checkbox"
-                        defaultChecked={quiz.allowMultipleAttempts}
+                        defaultChecked={currentQuiz.allowMultipleAttempts}
                         onChange={(e) => dispatch(setQuiz({ ...updatingQuiz, allowMultipleAttempts: e.target.checked }))} /> <label htmlFor="wd-quiz-multiple-attempts">Allow Multiple Attempts</label>
                 </div>
             </div>
@@ -128,30 +140,30 @@ export default function QuizDetailsEditor ({cid, updatingQuiz, quiz, newQuiz}:
                     <div className="form-group m-4">
                         <label htmlFor="wd-assign-to" className="fw-bold">Assign to</label><br />
                         <input type="text" id="wd-assign-to" className="form-control mt-2"
-                            defaultValue={quiz.assignTo} onChange={(e) => dispatch(setQuiz({ ...updatingQuiz, assignTo: e.target.value }))} />
+                            defaultValue={currentQuiz.assignTo} onChange={(e) => dispatch(setQuiz({ ...updatingQuiz, assignTo: e.target.value }))} />
                     </div>
                     <div className="form-group ms-4 me-4">
                         <label htmlFor="wd-due-date" className="fw-bold">Due</label><br />
                         <input type="datetime-local" id="wd-due-date" className="form-control mt-2"
-                            defaultValue={quiz.due} onChange={(e) => dispatch(setQuiz({ ...updatingQuiz, due: e.target.value }))} />
+                            defaultValue={currentQuiz.due} onChange={(e) => dispatch(setQuiz({ ...updatingQuiz, due: e.target.value }))} />
                     </div>
                     <div>
                         <div className="float-end mt-4 me-4">
                             <label htmlFor="wd-available-until" className="fw-bold">Until</label><br />
                             <input type="datetime-local" id="wd-available-until" className="form-control mt-2 mb-4"
-                                defaultValue={quiz.availableUntil} onChange={(e) => dispatch(setQuiz({ ...updatingQuiz, availableUntil: e.target.value }))} />
+                                defaultValue={currentQuiz.availableUntil} onChange={(e) => dispatch(setQuiz({ ...updatingQuiz, availableUntil: e.target.value }))} />
                         </div>
                         <div className="float-end mt-4">
                             <label htmlFor="wd-available-from" className="fw-bold">Available From</label><br />
                             <input type="datetime-local" id="wd-available-from" className="form-control mt-2 mb-4"
-                                defaultValue={quiz.availableFrom} onChange={(e) => dispatch(setQuiz({ ...updatingQuiz, availableFrom: e.target.value }))} />
+                                defaultValue={currentQuiz.availableFrom} onChange={(e) => dispatch(setQuiz({ ...updatingQuiz, availableFrom: e.target.value }))} />
                         </div>
                     </div>
                 </section>
             </div>
             < hr />
             <div className="float-end">
-                <Link to={`/Kanbas/Courses/${cid}/Quizzes`} className="btn btn-light">Cancel</Link> {quiz._id === "new" ?
+                <Link to={`/Kanbas/Courses/${cid}/Quizzes`} className="btn btn-light">Cancel</Link> {currentQuiz._id === "new" ?
                     (<Link to={`/Kanbas/Courses/${cid}/Quizzes`} className="btn btn-danger"
                         onClick={() => createQuiz({ ...newQuiz, ...updatingQuiz })}>Save</Link>) :
                     (<Link to={`/Kanbas/Courses/${cid}/Quizzes`} className="btn btn-danger"

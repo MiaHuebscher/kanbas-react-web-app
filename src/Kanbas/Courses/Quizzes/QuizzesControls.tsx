@@ -12,7 +12,7 @@ export default function QuizzesControls({qid, cid} : {qid: any, cid: any}) {
                     <button id="wd-quiz-context" className="btn btn-light btn-lg border border-dark float-end">
                         <IoEllipsisVertical />
                     </button>
-                    <Link id="wd-add-quiz-button" to={`/Kanbas/Courses/${cid}/Quizzes/${qid}`} 
+                    <Link id="wd-add-quiz-button" to={`/Kanbas/Courses/${cid}/Quizzes/${qid}/editor`} 
                         className="btn wd-rounded-corners-all-around btn-lg btn-danger me-1 float-end">
                         <FaPlus className="position-relative me-2" style={{ bottom: "1px" }}/>
                         Quiz

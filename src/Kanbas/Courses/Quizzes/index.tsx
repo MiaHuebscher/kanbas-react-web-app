@@ -59,7 +59,7 @@ export default function Quizzes() {
                                             <strong>{(new Date(quiz.availableUntil) < new Date())  && "Closed"}</strong>
                                             <strong>{(new Date(quiz.availableFrom) <= new Date()) && (new Date() <= new Date(quiz.availableUntil))  && "Available"}</strong> 
                                             <strong>{(new Date(quiz.availableFrom) > new Date()) && "Not Available Until"}</strong> {(new Date(quiz.availableFrom) > new Date()) && 
-                                                new Date(quiz.availableFrom).toDateString()} | <strong> Due</strong> {new Date(quiz.due).toDateString()} | {quiz.points} pts | {quiz.questions.length} Questions
+                                                new Date(quiz.availableFrom).toDateString()} | <strong> Due</strong> {new Date(quiz.due).toDateString()} | {quiz.points ? quiz.points : 0} pts | {quiz.questions ? quiz.questions.length : 0} Questions
                                         </div>
                                         {currentUser.role === "FACULTY" || currentUser.role === "TA" ? 
                                             <QuizControlButtons quiz={quiz}/> : ""}

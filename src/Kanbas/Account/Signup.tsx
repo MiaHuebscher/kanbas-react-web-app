@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { UseDispatch, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setCurrentUser } from "./accountReducer";
 import * as client from "./client";
 
@@ -13,9 +13,8 @@ export default function Signup() {
     try {
       user._id = new Date().getTime().toString();
       user.firstName = "New";
-      user.lastName = "";
+      user.lastName = "User";
       user.section = "S101";
-      user.role = "STUDENT";
       user.enrollments = ["CS101"];
       const currentUser = await client.signup(user);
       dispatch(setCurrentUser(currentUser));

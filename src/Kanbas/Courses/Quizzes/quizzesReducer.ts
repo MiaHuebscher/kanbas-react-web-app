@@ -7,7 +7,8 @@ const initialState = {
               availableUntil: "", questions: [], points: "", quizType: "graded quiz",
               assignmentGroup: "quizzes", instructions: "", shuffleAnswers: true, 
               timeLimit: true, minutes: "20", allowMultipleAttempts: false, assignTo: "Everyone", status: "unpublished", 
-              showCorrectAnswers: true, accessCode: "", oneQuestionAtATime: true, webcamRequired: false, lockQuestions: false},
+              showCorrectAnswers: true, accessCode: "", oneQuestionAtATime: true, webcamRequired: false, lockQuestions: false,
+              requiredToViewResults: false, requireLockdownBrowser: false, viewResponses: true},
     updatingQuestion: {},
     newQuestion: {_id: "new", course: "", quiz: "", title: "", points: "", questionType: "multiple choice"}
 };
@@ -30,7 +31,8 @@ const quizzesSlice = createSlice({
                 availableUntil: "", questions: [], points: "", quizType: "graded quiz",
                 assignmentGroup: "quizzes", instructions: "", shuffleAnswers: true, 
                 timeLimit: true, minutes: "20", allowMultipleAttempts: false, assignTo: "Everyone", status: "unpublished",
-                showCorrectAnswers: true, accessCode: "", oneQuestionAtATime: true, webcamRequired: false, lockQuestions: false};
+                showCorrectAnswers: true, accessCode: "", oneQuestionAtATime: true, webcamRequired: false, lockQuestions: false,
+                requiredToViewResults: false, requireLockdownBrowser: false, viewResponses: true};
             state.updatingQuiz = {};
         },
         deleteQuiz: (state, { payload: quizzes }) => {
@@ -43,7 +45,8 @@ const quizzesSlice = createSlice({
                 availableUntil: "", questions: [], points: "", quizType: "graded quiz",
                 assignmentGroup: "quizzes", instructions: "", shuffleAnswers: true, 
                 timeLimit: true, minutes: "20", allowMultipleAttempts: false, assignTo: "Everyone", status: "unpublished",
-                showCorrectAnswers: true, accessCode: "", oneQuestionAtATime: true, webcamRequired: false, lockQuestions: false};
+                showCorrectAnswers: true, accessCode: "", oneQuestionAtATime: true, webcamRequired: false, lockQuestions: false,
+                requiredToViewResults: false, requireLockdownBrowser: false, viewResponses: true};
             state.updatingQuiz = {};
         },
         editQuiz: (state, { payload: quizId }) => {
