@@ -40,8 +40,10 @@ export default function Quizzes() {
                     <TiArrowSortedDown />
                     Assignment Quizzes
                     </div>
-                    {quizzes.length === 0 ? 
-                        <h3 className="ps-3 text-danger">No quizzes have been created for this course. Click the "+ Quiz" button to add a quiz.</h3> :
+                    {quizzes.filter((q: any) => q._id !== "new").length === 0 ? 
+                        <h3 className="ps-3 text-danger">No quizzes have been created for this course. 
+                            {currentUser.role === "Faculty" || currentUser.role === "TA" ? "Click the '+ Quiz' button to add a quiz." : ""} </h3>
+                        :
                         <ul className="wd-lessons list-group rounded-0">
                             {quizzes
                             .filter((quiz: any) => (quiz.course === cid && quiz._id !== "new"))

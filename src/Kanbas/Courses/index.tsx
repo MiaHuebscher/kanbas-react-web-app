@@ -7,10 +7,10 @@ import Home from "./Home";
 import Modules from "./Modules";
 import { Navigate, Route, Routes, useLocation, useParams } from "react-router";
 import Quizzes from "./Quizzes";
-import QuizEditor from "./Quizzes/QuizEditor";
 import PeopleTable from "./People/Table";
 import { useSelector } from "react-redux";
 import Submission from "./Assignments/Submission";
+import QuizDetails from "./Quizzes/QuizDetails";
 
 export default function Courses({ courses }: {courses: any[]; }) {
     const { cid } = useParams();
@@ -39,7 +39,7 @@ export default function Courses({ courses }: {courses: any[]; }) {
                         <Route path="Assignments/:aid" 
                             element={currentUser.role === "FACULTY" || currentUser.role === "TA" ? <AssignmentEditor /> : <Submission />} />
                         <Route path="Quizzes" element={<Quizzes />} />
-                        <Route path="Quizzes/:qid" element={<QuizEditor />} />
+                        <Route path="Quizzes/:qid" element={<QuizDetails />} />
                         <Route path="Grades" element={<Grades />} />
                         <Route path="People" element={<PeopleTable />} />
                         <Route path="People/:uid" element={<PeopleTable />} />

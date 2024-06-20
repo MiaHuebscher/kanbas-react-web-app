@@ -63,8 +63,10 @@ export default function Assignments() {
                                         </Link>
                                         <br/>
                                         <span className="text-danger">Mutliple Modules
-                                        </span> | <strong>Not available until</strong> {new Date(assignment.availableFrom).toDateString()} |
-                                        <strong> Due</strong> {new Date(assignment.due).toDateString()} | {assignment.points} pts
+                                        </span> | <strong>{(new Date(assignment.availableUntil) < new Date())  && "Closed"}</strong>
+                                        <strong>{(new Date(assignment.availableFrom) <= new Date()) && (new Date() <= new Date(assignment.availableUntil))  && "Available"}</strong> 
+                                        <strong>{(new Date(assignment.availableFrom) > new Date()) && "Not Available Until"}</strong> {(new Date(assignment.availableFrom) > new Date()) && 
+                                            new Date(assignment.availableFrom).toDateString()} | <strong> Due</strong> {new Date(assignment.due).toDateString()} | {assignment.points} pts
                                     </div>
                                     {currentUser.role === "FACULTY" || currentUser.role === "TA" ?
                                     <AssignmentControlButtons assignmentId={assignment._id} 
