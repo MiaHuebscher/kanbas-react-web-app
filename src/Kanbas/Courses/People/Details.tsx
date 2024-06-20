@@ -27,7 +27,7 @@ export default function PeopleDetails({ fetchUsers }:
   };
   const saveUser = async () => {
     const [firstName, lastName] = name.split(" ");
-    const updatedUser = { ...user, firstName, lastName, email, role };
+    const updatedUser = { ...user, firstName: firstName, lastName: lastName, email: email, role: role };
     await client.updateUser(updatedUser);
     setUser(updatedUser);
     setEditing(false);
