@@ -16,14 +16,15 @@ export default function QuizDetails () {
     }
     useEffect(() => {
         findQuiz(cid as string, qid as string);
-      }, []);
+      }, [cid, qid]);
     return (
       <div>
         {currentUser.role === "FACULTY" || currentUser.role === "TA" ? 
             <div>
                 <div className="row">
                     <div className="col text-center">
-                        <button className="btn btn-light btn-lg border border-dark me-2">Preview</button>
+                        <Link className="btn btn-light btn-lg border border-dark me-2"
+                              to={`/Kanbas/Courses/${cid}/Quizzes/${qid}/start`}>Preview</Link>
                         <Link className="btn btn-light btn-lg border border-dark"
                             to={`/Kanbas/Courses/${cid}/Quizzes/${qid}/editor`}><FaPencil className="mb-2"/> Edit</Link>
                     </div>
@@ -34,7 +35,6 @@ export default function QuizDetails () {
         <h1>{quiz.title}</h1>
         {currentUser.role === "FACULTY" || currentUser.role === "TA" ? 
             <div>
-                <br />
                 <div className="row">
                     <div className="col-5 text-end fw-bold">Quiz Type</div>
                     <div className="col-5 text-start">{quiz.quizType}</div>
@@ -104,7 +104,7 @@ export default function QuizDetails () {
         </table>
         <div className="row">
             <div className="col text-center">
-                <button className="btn btn-large btn-danger">Start Quiz</button>
+                <Link className="btn btn-large btn-danger" to={`/Kanbas/Courses/${cid}/Quizzes/${qid}/start`}>Start Quiz</Link>
             </div>
         </div>
       </div>

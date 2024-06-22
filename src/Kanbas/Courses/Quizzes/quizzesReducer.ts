@@ -8,9 +8,11 @@ const initialState = {
               assignmentGroup: "quizzes", instructions: "", shuffleAnswers: true, 
               timeLimit: true, minutes: "20", allowMultipleAttempts: false, assignTo: "Everyone", status: "unpublished", 
               showCorrectAnswers: true, accessCode: "", oneQuestionAtATime: true, webcamRequired: false, lockQuestions: false,
-              requiredToViewResults: false, requireLockdownBrowser: false, viewResponses: true},
+              requiredToViewResults: false, requireLockdownBrowser: false, viewResponses: true, attemptNumber: 0},
+    questions: [],
     updatingQuestion: {},
-    newQuestion: {_id: "new", course: "", quiz: "", title: "", points: "", questionType: "multiple choice"}
+    newQuestion: {_id: "new", course: "", quiz: "", title: "new question", points: 0, questionType: "multiple choice", content: "",
+                  correctAnswer: "", userAnswer: "", pointsRecieved: 0, possibleAnswers: ["Possible Answer"], editing: false}
 };
 
 const quizzesSlice = createSlice({
@@ -32,7 +34,7 @@ const quizzesSlice = createSlice({
                 assignmentGroup: "quizzes", instructions: "", shuffleAnswers: true, 
                 timeLimit: true, minutes: "20", allowMultipleAttempts: false, assignTo: "Everyone", status: "unpublished",
                 showCorrectAnswers: true, accessCode: "", oneQuestionAtATime: true, webcamRequired: false, lockQuestions: false,
-                requiredToViewResults: false, requireLockdownBrowser: false, viewResponses: true};
+                requiredToViewResults: false, requireLockdownBrowser: false, viewResponses: true, attemptNumber: 0};
             state.updatingQuiz = {};
         },
         deleteQuiz: (state, { payload: quizzes }) => {
@@ -46,7 +48,7 @@ const quizzesSlice = createSlice({
                 assignmentGroup: "quizzes", instructions: "", shuffleAnswers: true, 
                 timeLimit: true, minutes: "20", allowMultipleAttempts: false, assignTo: "Everyone", status: "unpublished",
                 showCorrectAnswers: true, accessCode: "", oneQuestionAtATime: true, webcamRequired: false, lockQuestions: false,
-                requiredToViewResults: false, requireLockdownBrowser: false, viewResponses: true};
+                requiredToViewResults: false, requireLockdownBrowser: false, viewResponses: true, attemptNumber: 0};
             state.updatingQuiz = {};
         },
         editQuiz: (state, { payload: quizId }) => {
@@ -56,8 +58,16 @@ const quizzesSlice = createSlice({
         setQuiz: (state, { payload: quiz }) => {
             state.updatingQuiz = quiz;
         },
+        
+        setQuestions: (state, action) => {
+            state.questions = action.payload;
+        },
+
+        setQuestion: (state, { payload: question }) => {
+            state.updatingQuestion = question;
+        },
     },
 });
 
-export const {setQuizzes, addQuiz, deleteQuiz, updateQuiz, editQuiz, setQuiz} = quizzesSlice.actions;
+export const {setQuizzes, addQuiz, deleteQuiz, updateQuiz, editQuiz, setQuiz, setQuestions} = quizzesSlice.actions;
 export default quizzesSlice.reducer;

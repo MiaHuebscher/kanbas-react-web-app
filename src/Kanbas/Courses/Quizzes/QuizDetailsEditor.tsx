@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import { addQuiz, updateQuiz, setQuiz } from "./quizzesReducer";
 import * as client from "./client";
@@ -10,11 +10,10 @@ export default function QuizDetailsEditor () {
     const { cid, qid } = useParams();
     const [ currentQuiz, setCurrentQuiz ] = useState<any>({});
     const { updatingQuiz, newQuiz } = useSelector((state: any) => state.quizzesReducer);
+    const [instructions, setInstructions] = useState('');
     const [ quizPoints, setQuizPoints ] = useState(0);
-    if (currentQuiz.questions && currentQuiz.questions.length !== 0) {
-        const totalPoints = currentQuiz.questions.reduce((sum: number, q: any) => sum + q.points, 0);
-        setQuizPoints(totalPoints);
-    }
+    const quillRef = useRef(null);
+
     const dispatch = useDispatch();
     const createQuiz = async (quiz: any) => {
         const newQuiz = await client.createQuiz(cid as string, quiz);
@@ -24,23 +23,27 @@ export default function QuizDetailsEditor () {
         const status = await client.updateQuiz(quiz);
         dispatch(updateQuiz(quiz));
     };
+    const handleInstructionsChange = (content: string) => {
+        setInstructions(content);
+        dispatch(setQuiz({ ...updatingQuiz, instructions: content }));
+    };
     const findQuiz = async (cid: string, qid: string) => {
         const quiz = await client.findQuiz(cid, qid);
         dispatch(setQuiz(quiz[0]));
         setCurrentQuiz(quiz[0]);
+        setInstructions(quiz[0].instructions || '');
     }
     useEffect(() => {
         findQuiz(cid as string, qid as string);
-      }, []);
-    console.log("current:", currentQuiz, "updating:", updatingQuiz);
+      }, [cid, qid]);
     return (
         <form className="mt-4">
             <input type="text" className="form-control" id="wd-quiz-name" defaultValue={currentQuiz.title}
                 onChange={(e) => dispatch(setQuiz({ ...updatingQuiz, title: e.target.value }))} />
             <br />
             <label htmlFor="wd-quiz-instructions">Quiz Instructions:</label><br />
-            <ReactQuill theme="snow" id="wd-quiz-instructions" className="form-control" defaultValue={currentQuiz.instructions}
-                onChange={(e) => dispatch(setQuiz({ ...updatingQuiz, instructions: e }))} />
+            <ReactQuill theme="snow" id="wd-quiz-instructions" className="form-control" value={instructions}
+                onChange={handleInstructionsChange} ref={quillRef}/>
             <div className="form-group mt-4 row">
                 <div className="col-sm-4">
                     <label htmlFor="wd-quiz-type" className="me-4 col-form-label float-end">
@@ -107,19 +110,19 @@ export default function QuizDetailsEditor () {
                 <div className="col-sm-4"></div>
                 <div className="col-sm-6">
                     <input id="wd-quiz-shuffle" type="checkbox" defaultChecked={currentQuiz.shuffleAnswers}
-                        onChange={(e) => dispatch(setQuiz({ ...updatingQuiz, shuffleAnswers: e.target.checked }))} /> <label htmlFor="wd-quiz-shuffle">Shuffle Answers</label><br /><br />
+                        onClick={() => dispatch(setQuiz({ ...updatingQuiz, shuffleAnswers: !currentQuiz.shuffleAnswers }))} /> <label htmlFor="wd-quiz-shuffle">Shuffle Answers</label><br /><br />
                     <input id="wd-quiz-time-limit" type="checkbox" defaultChecked={currentQuiz.timeLimit}
-                        onChange={(e) => dispatch(setQuiz({ ...updatingQuiz, timeLimit: e.target.checked }))} /> <label htmlFor="wd-quiz-time-limit" className="me-3">Time Limit</label>
+                        onClick={() => dispatch(setQuiz({ ...updatingQuiz, timeLimit: !currentQuiz.timeLimit }))} /> <label htmlFor="wd-quiz-time-limit" className="me-3">Time Limit</label>
                     <input id="wd-quiz-minutes" type="number" className="input-sm" defaultValue={currentQuiz.minutes}
                         onChange={(e) => dispatch(setQuiz({ ...updatingQuiz, minutes: e.target.value }))} /> <label htmlFor="wd-quiz-minutes">Minutes</label><br /><br />
                     <input id="wd-show-correct-answers" type="checkbox" defaultChecked={currentQuiz.showCorrectAnswers}
-                        onChange={(e) => dispatch(setQuiz({ ...updatingQuiz, showCorrectAnswers: e.target.checked }))} /> <label htmlFor="wd-show-correct-answers">Show Correct Answers</label><br /><br />
+                        onClick={() => dispatch(setQuiz({ ...updatingQuiz, showCorrectAnswers: !currentQuiz.showCorrectAnswers }))} /> <label htmlFor="wd-show-correct-answers">Show Correct Answers</label><br /><br />
                     <input id="wd-one-question-at-a-time" type="checkbox" defaultChecked={currentQuiz.oneQuestionAtATime}
-                        onChange={(e) => dispatch(setQuiz({ ...updatingQuiz, oneQuestionAtATime: e.target.checked }))} /> <label htmlFor="wd-one-question-at-a-time">One Question At A Time</label><br /><br />
+                        onClick={() => dispatch(setQuiz({ ...updatingQuiz, oneQuestionAtATime: !currentQuiz.oneQuestionAtATime }))} /> <label htmlFor="wd-one-question-at-a-time">One Question At A Time</label><br /><br />
                     <input id="wd-webcam-required" type="checkbox" defaultChecked={currentQuiz.webcamRequired}
-                        onChange={(e) => dispatch(setQuiz({ ...updatingQuiz, webcamRequired: e.target.checked }))} /> <label htmlFor="wd-webcam-required">Webcam Required</label><br /><br />
+                        onClick={() => dispatch(setQuiz({ ...updatingQuiz, webcamRequired: !currentQuiz.webcamRequired }))} /> <label htmlFor="wd-webcam-required">Webcam Required</label><br /><br />
                     <input id="wd-lock-questions" type="checkbox" defaultChecked={currentQuiz.lockQuestions}
-                        onChange={(e) => dispatch(setQuiz({ ...updatingQuiz, lockQuestions: e.target.checked }))} /> <label htmlFor="wd-lock-questions">Lock Questions</label><br /><br />
+                        onClick={() => dispatch(setQuiz({ ...updatingQuiz, lockQuestions: !currentQuiz.lockQuestions }))} /> <label htmlFor="wd-lock-questions">Lock Questions</label><br /><br />
                 </div>
             </div><br />
             <div className="form-group row">
@@ -127,7 +130,7 @@ export default function QuizDetailsEditor () {
                 <div className="col-sm-6 pt-2 pb-2 border border-secondary rounded ">
                     <input id="wd-quiz-multiple-attempts" type="checkbox"
                         defaultChecked={currentQuiz.allowMultipleAttempts}
-                        onChange={(e) => dispatch(setQuiz({ ...updatingQuiz, allowMultipleAttempts: e.target.checked }))} /> <label htmlFor="wd-quiz-multiple-attempts">Allow Multiple Attempts</label>
+                        onClick={() => dispatch(setQuiz({ ...updatingQuiz, allowMultipleAttempts: !currentQuiz.allowMultipleAttempts }))} /> <label htmlFor="wd-quiz-multiple-attempts">Allow Multiple Attempts</label>
                 </div>
             </div>
             <div className="mt-4 row">
@@ -171,6 +174,5 @@ export default function QuizDetailsEditor () {
             </div>
             <br /><br />
         </form>
-
     );
 }
