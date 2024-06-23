@@ -47,6 +47,9 @@ const assignmentsSlice = createSlice({
             onlineEntryOption: "File Upload", assignTo: "Everyone", due: "", availableFrom: "", availableUntil: "" };
             state.updatingAssignment = {};
         },
+        updateNewAssignment: (state, {payload: assignment}) => {
+            state.newAssignment = assignment;
+        },
         editAssignment: (state, { payload: assignmentId }) => {
             state.assignments = state.assignments.map((a: any) =>
                 a._id === assignmentId ? {...a, editing: true } : a) as any;
@@ -57,6 +60,6 @@ const assignmentsSlice = createSlice({
     },
 });
 
-export const { addAssignment, deleteAssignment, updateAssignment, editAssignment, setAssignment, setAssignments } =
+export const { addAssignment, deleteAssignment, updateAssignment, editAssignment, setAssignment, setAssignments, updateNewAssignment } =
     assignmentsSlice.actions;
 export default assignmentsSlice.reducer;

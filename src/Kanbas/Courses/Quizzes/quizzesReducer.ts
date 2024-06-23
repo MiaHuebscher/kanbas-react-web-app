@@ -51,6 +51,9 @@ const quizzesSlice = createSlice({
                 requiredToViewResults: false, requireLockdownBrowser: false, viewResponses: true, attemptNumber: 0};
             state.updatingQuiz = {};
         },
+        updateNewQuiz: (state, {payload: quiz}) => {
+            state.newQuiz = quiz;
+        },
         editQuiz: (state, { payload: quizId }) => {
             state.quizzes = state.quizzes.map((q: any) =>
                 q._id === quizId ? { ...q, editing: true } : q) as any;
@@ -69,5 +72,5 @@ const quizzesSlice = createSlice({
     },
 });
 
-export const {setQuizzes, addQuiz, deleteQuiz, updateQuiz, editQuiz, setQuiz, setQuestions} = quizzesSlice.actions;
+export const {setQuizzes, addQuiz, deleteQuiz, updateQuiz, editQuiz, setQuiz, setQuestions, updateNewQuiz} = quizzesSlice.actions;
 export default quizzesSlice.reducer;

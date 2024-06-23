@@ -6,9 +6,9 @@ import AssignmentsControlButtons from "./AssignmentsControlButtons";
 import AssignmentControlButtons from "./AssignmentControlButtons";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch} from "react-redux";
-import { setAssignments, updateAssignment, deleteAssignment } from "./assignmentsReducer";
+import { setAssignments, updateAssignment, deleteAssignment, updateNewAssignment } from "./assignmentsReducer";
 import * as client from "./client";
 import "./Assignments.css";
 
@@ -16,7 +16,6 @@ import "./Assignments.css";
 
 export default function Assignments() {
     const { cid } = useParams();
-    const [stat, setStat] = useState(null);
     const { currentUser } = useSelector((state: any) => state.accountReducer);
     const { assignments, newAssignment } = useSelector((state: any) => state.assignmentsReducer);
     const dispatch = useDispatch();
@@ -31,13 +30,13 @@ export default function Assignments() {
       };
       const saveAssignment = async (assignment: any) => {
         const status = await client.updateAssignment(assignment);
-        setStat(status);
         dispatch(updateAssignment(assignment));
       };
       useEffect(() => {
         fetchAssignments();
         saveAssignment({...newAssignment, course: cid, title: `Assignment ${assignments.length}` });
-      }, []);
+        updateNewAssignment({...newAssignment, course: cid, title: `Assignment ${assignments.length}` });
+      }, [cid]);
     return (
         <div>
             <AssignmentsControls aid={newAssignment._id} cid={cid} /><br /><br />

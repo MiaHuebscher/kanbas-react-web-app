@@ -4,14 +4,13 @@ import { RxRocket } from "react-icons/rx";
 import { TiArrowSortedDown } from "react-icons/ti";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect } from "react";
-import { setQuizzes, updateQuiz } from "./quizzesReducer";
+import { useEffect } from "react";
+import { setQuizzes, updateQuiz, updateNewQuiz } from "./quizzesReducer";
 import * as client from "./client";
 
 
 export default function Quizzes() {
     const { cid } = useParams();
-    const [stat, setStat] = useState(null);
     const { quizzes, newQuiz } = useSelector((state: any) => state.quizzesReducer);
     const { currentUser } = useSelector((state: any) => state.accountReducer);
     const dispatch = useDispatch();
@@ -22,15 +21,15 @@ export default function Quizzes() {
       };
     const saveQuiz = async (quiz: any) => {
         const status = await client.updateQuiz(quiz);
-        setStat(status);
         dispatch(updateQuiz(quiz));
     };
     useEffect(() => {
         fetchQuizzes();
-      }, []);
+      }, [cid]);
       useEffect(() => {
         saveQuiz({...newQuiz, course: cid, title: `Quiz ${quizzes.length}`});
-      }, []);
+        updateNewQuiz({...newQuiz, course: cid, title: `Quiz ${quizzes.length}`});
+      }, [cid]);
     return (
         <div id="wd-quizzes" className="ms-5 me-5">
             <QuizzesControls qid={newQuiz._id} cid={cid} />
