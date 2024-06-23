@@ -26,10 +26,10 @@ export default function Quizzes() {
     useEffect(() => {
         fetchQuizzes();
       }, [cid]);
-      useEffect(() => {
+    useEffect(() => {
         saveQuiz({...newQuiz, course: cid, title: `Quiz ${quizzes.length}`});
         updateNewQuiz({...newQuiz, course: cid, title: `Quiz ${quizzes.length}`});
-      }, [cid]);
+    }, [cid]);
     return (
         <div id="wd-quizzes" className="ms-5 me-5">
             <QuizzesControls qid={newQuiz._id} cid={cid} />
