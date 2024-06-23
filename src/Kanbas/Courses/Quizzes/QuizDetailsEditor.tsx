@@ -11,7 +11,6 @@ export default function QuizDetailsEditor () {
     const [ currentQuiz, setCurrentQuiz ] = useState<any>({});
     const { updatingQuiz, newQuiz } = useSelector((state: any) => state.quizzesReducer);
     const [instructions, setInstructions] = useState('');
-    const [ quizPoints, setQuizPoints ] = useState(0);
     const quillRef = useRef(null);
 
     const dispatch = useDispatch();
@@ -83,7 +82,7 @@ export default function QuizDetailsEditor () {
                     </label>
                 </div>
                 <div className="col-sm-7">
-                    <input type="number" id="wd-quiz-points" className="form-control w-25" defaultValue={quizPoints} 
+                    <input type="number" id="wd-quiz-points" className="form-control w-25" defaultValue={currentQuiz.points} 
                            onChange={(e) => dispatch(setQuiz({ ...updatingQuiz, points: e.target.value }))}/>
                 </div>
             </div>

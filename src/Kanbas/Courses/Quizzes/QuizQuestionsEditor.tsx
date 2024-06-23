@@ -17,6 +17,7 @@ export default function QuizQuestionsEditor () {
     const [title, setTitle] = useState("");
     const [points, setPoints] = useState<any>();
     const [correctAnswer, setCorrectAnswer] = useState("");
+    const [correctAnswerStatus, setCorrectAnswerStatus] = useState(false);
     const [possibleAnswers, setPossibleAnswers] = useState<any>(["Possible Answer"]);
     const [content, setContent] = useState("");
     const dispatch = useDispatch();
@@ -55,13 +56,14 @@ export default function QuizQuestionsEditor () {
         setCurrentQuestions((prevQuestions: any) => prevQuestions.map((cq: any) => cq._id === questionId ? updatedQuestion : cq));
     };
     const saveAllQuestions = async () => {
+        let totalPoints;
         if (currentQuestions.length !== 0) {
-            const totalPoints = currentQuestions.reduce((sum: number, q: any) => sum + q.points, 0);
-        } const totalPoints = 0;
+            totalPoints = currentQuestions.reduce((sum: number, q: any) => sum + q.points, 0);
+        } else {
+            totalPoints = 0;
+        }
         dispatch(setQuiz({...updatingQuiz, questions: currentQuestions, points: totalPoints}));
         setStatus(true);
-        //const status = await client.updateQuiz({...updatingQuiz, questions: currentQuestions});
-        // dispatch(updateQuiz({...updatingQuiz, questions: currentQuestions}));
     }
     const findQuiz = async (cid: string, qid: string) => {
         const quiz = await client.findQuiz(cid, qid);
@@ -124,6 +126,10 @@ export default function QuizQuestionsEditor () {
                                 <h1>Answers:</h1>
                                 {questionType === "true false" ? 
                                 <div>
+                                    {correctAnswerStatus && 
+                                        <div className="alert alert-success" role="alert">
+                                            Successfully Saved Correct Answer!
+                                        </div>}
                                     <span>
                                         <input type="radio" name="true-false" id="true" className="me-2" onClick={() => setCorrectAnswer("true")}/>
                                         <label htmlFor="true">True</label>
@@ -132,7 +138,9 @@ export default function QuizQuestionsEditor () {
                                         <input type="radio" name="true-false" id="false" className="me-2" onClick={() => setCorrectAnswer("false")}/>
                                         <label htmlFor="false">False</label>
                                     </span><br />
-                                    <button className="btn btn-success" onClick={() => setCorrectAnswer(correctAnswer)}>Set Correct Answer</button>
+                                    <button className="btn btn-success" onClick={() => {
+                                                                    setCorrectAnswer(correctAnswer);
+                                                                    setCorrectAnswerStatus(true);}}>Set Correct Answer</button>
                                 </div>
                                 :
                                 possibleAnswers.map((possAns: any, index: number) => (
@@ -163,7 +171,7 @@ export default function QuizQuestionsEditor () {
                                                                             }}>
                                     Cancel </button>
                                 <button className="btn btn-danger" onClick={saveQuestion}>
-                                    Update Question </button>
+                                    Save Question </button>
                             </div>
                             <br />
                         </div>

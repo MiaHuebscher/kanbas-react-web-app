@@ -4,7 +4,7 @@ const initialState = {
     quizzes: [],
     updatingQuiz: {},
     newQuiz: {_id: "new", title: "New Quiz", course: "", due: "", availableFrom: "", 
-              availableUntil: "", questions: [], points: "", quizType: "graded quiz",
+              availableUntil: "", questions: [], points: 0, quizType: "graded quiz",
               assignmentGroup: "quizzes", instructions: "", shuffleAnswers: true, 
               timeLimit: true, minutes: "20", allowMultipleAttempts: false, assignTo: "Everyone", status: "unpublished", 
               showCorrectAnswers: true, accessCode: "", oneQuestionAtATime: true, webcamRequired: false, lockQuestions: false,
@@ -30,7 +30,7 @@ const quizzesSlice = createSlice({
             };
             state.quizzes = [...state.quizzes, newQuiz] as any;
             state.newQuiz = {_id: "new", title: "New Quiz", course: "", due: "", availableFrom: "", 
-                availableUntil: "", questions: [], points: "", quizType: "graded quiz",
+                availableUntil: "", questions: [], points: 0, quizType: "graded quiz",
                 assignmentGroup: "quizzes", instructions: "", shuffleAnswers: true, 
                 timeLimit: true, minutes: "20", allowMultipleAttempts: false, assignTo: "Everyone", status: "unpublished",
                 showCorrectAnswers: true, accessCode: "", oneQuestionAtATime: true, webcamRequired: false, lockQuestions: false,
@@ -44,7 +44,7 @@ const quizzesSlice = createSlice({
             state.quizzes = state.quizzes.map((q: any) =>
                 q._id === quiz._id ? quiz : q) as any;
             state.newQuiz = {_id: "new", title: "New Quiz", course: "", due: "", availableFrom: "", 
-                availableUntil: "", questions: [], points: "", quizType: "graded quiz",
+                availableUntil: "", questions: [], points: 0, quizType: "graded quiz",
                 assignmentGroup: "quizzes", instructions: "", shuffleAnswers: true, 
                 timeLimit: true, minutes: "20", allowMultipleAttempts: false, assignTo: "Everyone", status: "unpublished",
                 showCorrectAnswers: true, accessCode: "", oneQuestionAtATime: true, webcamRequired: false, lockQuestions: false,
