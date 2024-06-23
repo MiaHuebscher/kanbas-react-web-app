@@ -13,8 +13,7 @@ export default function QuizDetails () {
     const findQuiz = async (cid: string, qid: string) => {
         const quiz = await client.findQuiz(cid, qid);
         setQuiz(quiz[0]);
-        console.log(quiz);
-    }
+    };    
     useEffect(() => {
         findQuiz(cid as string, qid as string);
       }, [cid, qid]);

@@ -69,7 +69,6 @@ export default function QuizQuestionsEditor () {
         const quiz = await client.findQuiz(cid, qid);
         console.log(quiz[0].questions);
         dispatch(setQuiz(quiz[0]));
-        // dispatch(setQuestions(quiz[0].questions || []));
         setCurrentQuestions(quiz[0].questions || []);
     }
     useEffect(() => {
