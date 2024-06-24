@@ -35,7 +35,7 @@ export default function Assignments() {
       useEffect(() => {
         fetchAssignments();
         saveAssignment({...newAssignment, course: cid, title: `Assignment ${assignments.length}` });
-        updateNewAssignment({...newAssignment, course: cid, title: `Assignment ${assignments.length}` });
+        dispatch(updateNewAssignment({...newAssignment, course: cid, title: `Assignment ${assignments.length}` }));
       }, [cid]);
     return (
         <div>

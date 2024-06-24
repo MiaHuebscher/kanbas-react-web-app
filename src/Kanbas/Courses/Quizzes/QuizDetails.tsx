@@ -7,16 +7,23 @@ import * as client from "./client";
 
 export default function QuizDetails () {
     const { currentUser } = useSelector((state: any) => state.accountReducer);
+    const [userAttempts, setUserAttempts] = useState<any>([]);
     const { cid, qid } = useParams();
     const [quiz, setQuiz] = useState<any>({});
-
+    
+    const getUserQuizAttempts = async () => {
+        const attempts = currentUser.quizAttempts.filter((attemptObj: any) => 
+            attemptObj.course === cid && attemptObj.quiz === qid);
+        setUserAttempts(attempts);
+    };
     const findQuiz = async (cid: string, qid: string) => {
         const quiz = await client.findQuiz(cid, qid);
         setQuiz(quiz[0]);
     };    
     useEffect(() => {
         findQuiz(cid as string, qid as string);
-      }, [cid, qid]);
+        getUserQuizAttempts();
+      }, [cid, qid, currentUser]);
     return (
       <div>
         {currentUser.role === "FACULTY" || currentUser.role === "TA" ? 
@@ -60,6 +67,10 @@ export default function QuizDetails () {
                     <div className="col-5 text-start">{quiz.allowMultipleAttempts ? "yes" : "no"}</div>
                 </div>
                 <div className="row">
+                    <div className="col-5 text-end fw-bold">Number of Allowed Attempts</div>
+                    <div className="col-5 text-start">{quiz.attemptsAllowed}</div>
+                </div>
+                <div className="row">
                     <div className="col-5 text-end fw-bold">View Responses</div>
                     <div className="col-5 text-start">{quiz.viewResponses ? "yes" : "no"}</div>
                 </div>
@@ -93,20 +104,38 @@ export default function QuizDetails () {
         <table className="table">
             <thead>
                 <tr>
-                    <th>Due</th><th>For</th><th>Available From</th><th>Available Until</th>
+                    <th>Due</th><th>For</th><th>Available From</th><th>Available Until</th><th>Allowed Attempts</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>{quiz.due}</td><td>{quiz.assignTo}</td><td>{quiz.availableFrom}</td><td>{quiz.availableUntil}</td>
+                    <td>{quiz.due}</td><td>{quiz.assignTo}</td><td>{quiz.availableFrom}</td><td>{quiz.availableUntil}</td><td>{quiz.attemptsAllowed}</td>
                 </tr>
             </tbody>
-        </table>
+        </table><br />
+        {userAttempts.length > 0 && (
+        <table className="table">
+            <thead>
+                <tr>
+                    <th>Attempt Number</th><th>Grade</th>
+                </tr>
+            </thead>
+            <tbody>
+                {userAttempts.map((attempt: any, index: number) => (
+                <tr>
+                    <td>{index + 1}</td><td>{attempt.grade}</td>
+                </tr>
+                ))}
+            </tbody>
+        </table>)}
+        {(currentUser.role === "FACULTY" || currentUser.role === "TA") || ((currentUser.role === "STUDENT" && userAttempts) && userAttempts.length < quiz.attemptsAllowed)
+        &&
         <div className="row">
             <div className="col text-center">
-                <Link className="btn btn-large btn-danger" to={`/Kanbas/Courses/${cid}/Quizzes/${qid}/start`}>Start Quiz</Link>
+                <Link className="btn btn-large btn-danger mb-3" to={`/Kanbas/Courses/${cid}/Quizzes/${qid}/start`}>Start Quiz</Link>
             </div>
         </div>
+        }
       </div>
     );
 }

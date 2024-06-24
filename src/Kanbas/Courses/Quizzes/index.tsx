@@ -28,7 +28,7 @@ export default function Quizzes() {
       }, [cid]);
     useEffect(() => {
         saveQuiz({...newQuiz, course: cid, title: `Quiz ${quizzes.length}`});
-        updateNewQuiz({...newQuiz, course: cid, title: `Quiz ${quizzes.length}`});
+        dispatch(updateNewQuiz({...newQuiz, course: cid, title: `Quiz ${quizzes.length}`}));
     }, [cid]);
     return (
         <div id="wd-quizzes" className="ms-5 me-5">

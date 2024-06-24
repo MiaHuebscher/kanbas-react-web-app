@@ -9,10 +9,11 @@ import 'react-quill/dist/quill.snow.css';
 export default function QuizDetailsEditor () {
     const { cid, qid } = useParams();
     const [ currentQuiz, setCurrentQuiz ] = useState<any>({});
+    const [allowMultipleAttempts, setAllowMultipleAttempts] = useState(false);
+    const [timeLimit, setTimeLimit] = useState(false);
     const { updatingQuiz, newQuiz } = useSelector((state: any) => state.quizzesReducer);
     const [instructions, setInstructions] = useState('');
     const quillRef = useRef(null);
-
     const dispatch = useDispatch();
     const createQuiz = async (quiz: any) => {
         const newQuiz = await client.createQuiz(cid as string, quiz);
@@ -31,6 +32,8 @@ export default function QuizDetailsEditor () {
         dispatch(setQuiz(quiz[0]));
         setCurrentQuiz(quiz[0]);
         setInstructions(quiz[0].instructions || '');
+        setAllowMultipleAttempts(quiz[0].allowMultipleAttempts);
+        setTimeLimit(quiz[0].timeLimit);
     }
     useEffect(() => {
         findQuiz(cid as string, qid as string);
@@ -111,8 +114,9 @@ export default function QuizDetailsEditor () {
                     <input id="wd-quiz-shuffle" type="checkbox" defaultChecked={currentQuiz.shuffleAnswers}
                         onClick={() => dispatch(setQuiz({ ...updatingQuiz, shuffleAnswers: !currentQuiz.shuffleAnswers }))} /> <label htmlFor="wd-quiz-shuffle">Shuffle Answers</label><br /><br />
                     <input id="wd-quiz-time-limit" type="checkbox" defaultChecked={currentQuiz.timeLimit}
-                        onClick={() => dispatch(setQuiz({ ...updatingQuiz, timeLimit: !currentQuiz.timeLimit }))} /> <label htmlFor="wd-quiz-time-limit" className="me-3">Time Limit</label>
-                    <input id="wd-quiz-minutes" type="number" className="input-sm" defaultValue={currentQuiz.minutes}
+                        onClick={() => {dispatch(setQuiz({ ...updatingQuiz, timeLimit: !currentQuiz.timeLimit }));
+                                        setTimeLimit(!timeLimit);}} /> <label htmlFor="wd-quiz-time-limit" className="me-3">Time Limit</label>
+                    <input id="wd-quiz-minutes" type="number" className="input-sm" defaultValue={currentQuiz.minutes} disabled={!timeLimit}
                         onChange={(e) => dispatch(setQuiz({ ...updatingQuiz, minutes: e.target.value }))} /> <label htmlFor="wd-quiz-minutes">Minutes</label><br /><br />
                     <input id="wd-show-correct-answers" type="checkbox" defaultChecked={currentQuiz.showCorrectAnswers}
                         onClick={() => dispatch(setQuiz({ ...updatingQuiz, showCorrectAnswers: !currentQuiz.showCorrectAnswers }))} /> <label htmlFor="wd-show-correct-answers">Show Correct Answers</label><br /><br />
@@ -129,7 +133,12 @@ export default function QuizDetailsEditor () {
                 <div className="col-sm-6 pt-2 pb-2 border border-secondary rounded ">
                     <input id="wd-quiz-multiple-attempts" type="checkbox"
                         defaultChecked={currentQuiz.allowMultipleAttempts}
-                        onClick={() => dispatch(setQuiz({ ...updatingQuiz, allowMultipleAttempts: !currentQuiz.allowMultipleAttempts }))} /> <label htmlFor="wd-quiz-multiple-attempts">Allow Multiple Attempts</label>
+                        onClick={() => {
+                            dispatch(setQuiz({ ...updatingQuiz, allowMultipleAttempts: !currentQuiz.allowMultipleAttempts }));
+                            setAllowMultipleAttempts(!allowMultipleAttempts); } }/> <label htmlFor="wd-quiz-multiple-attempts" className="me-3">Allow Multiple Attempts</label>
+                    <input id="wd-quiz-allowed-attempts" type="number" className="input-sm" defaultValue={currentQuiz.attemptsAllowed}
+                        onChange={(e) => dispatch(setQuiz({...updatingQuiz, attemptsAllowed: e.target.value}))} 
+                        disabled={!allowMultipleAttempts}/> <label htmlFor="wd-quiz-allowed-attempts">Allowed Attempts</label>
                 </div>
             </div>
             <div className="mt-4 row">

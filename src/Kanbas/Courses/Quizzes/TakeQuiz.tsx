@@ -1,18 +1,20 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addQuiz, updateQuiz, setQuiz } from "./quizzesReducer";
-import * as client from "./client";
+import { setQuiz } from "./quizzesReducer";
+import * as quizzesClient from "./client";
+import * as usersClient from "../People/client"
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import DOMPurify from 'dompurify';
+import { setCurrentUser } from "../../Account/accountReducer";
 
 export default function TakeQuiz () {
+    const { currentUser } = useSelector((state: any) => state.accountReducer);
     const {cid, qid} = useParams();
     const dispatch = useDispatch();
-    const { updatingQuiz, newQuiz } = useSelector((state: any) => state.quizzesReducer);
+    const { updatingQuiz } = useSelector((state: any) => state.quizzesReducer);
     const [grade, setGrade] = useState(0);
     const [graded, setGraded] = useState(false);
-    // const [currentQuiz, setCurrentQuiz] = useState<any>({});
     const [userAnswers, setUserAnswers] = useState<any>([]);
     function createMarkup(html: any) {
         return { __html: DOMPurify.sanitize(html) };
@@ -29,9 +31,14 @@ export default function TakeQuiz () {
         }
         return latestAnswers;
     };
-    const gradeQuiz = async() => {
+    const updateUser = (quizGrade: any) => {
+        usersClient.updateUser({...currentUser, quizAttempts: [...currentUser.quizAttempts, {course: cid, user: currentUser._id, grade: quizGrade,
+                                                              quiz: qid}]})
+        dispatch(setCurrentUser({...currentUser, quizAttempts: [...currentUser.quizAttempts, {course: cid, user: currentUser._id, grade: quizGrade,
+                                                      quiz: qid}]}));
+    };
+    const gradeQuiz = () => {
         const answers = filterUserAnswers(userAnswers) as any;
-        console.log(answers);
         let userPoints = 0;
         answers.forEach((answer: any) => {
             if (answer.type === "fill in blank") {
@@ -46,20 +53,21 @@ export default function TakeQuiz () {
         });
         setGrade(userPoints);
         setGraded(true);
+        updateUser(userPoints);
     };
     const findQuiz = async (cid: string, qid: string) => {
-        const quiz = await client.findQuiz(cid, qid);
+        const quiz = await quizzesClient.findQuiz(cid, qid);
         dispatch(setQuiz(quiz[0]));
-        // setCurrentQuiz(quiz[0]);
-    }
+    };
     useEffect(() => {
         findQuiz(cid as string, qid as string);
       }, []);
     return (
         <div className="mb-2">
             <div>
-                <h1>{updatingQuiz.title} <Link className="btn btn-lg btn-danger float-end" 
-                                                to={`/Kanbas/Courses/${cid}/Quizzes/${qid}/editor`}>Edit Quiz</Link></h1>
+                <h1>{updatingQuiz.title} {(currentUser.role === "FACULTY" || currentUser.role === "TA") ?
+                    <Link className="btn btn-lg btn-danger float-end" 
+                                                to={`/Kanbas/Courses/${cid}/Quizzes/${qid}/editor`}>Edit Quiz</Link> : ""}</h1>
                 <div><strong>Started:</strong> {new Date().toLocaleDateString()} at {new Date().toLocaleTimeString()}</div><br />
                 <h4>Quiz Instructions:</h4>
                 <div dangerouslySetInnerHTML={createMarkup(updatingQuiz.instructions)} />
@@ -134,10 +142,12 @@ export default function TakeQuiz () {
                 {updatingQuiz.questions ?
                 <span className="mb-2">
                     {!graded && <span><button className="btn btn-danger float-end" onClick={gradeQuiz}>Submit Quiz</button><br /><br /></span>}
-                    {graded && <span><Link to={`/Kanbas/Courses/${cid}/Quizzes/${qid}`} className="btn btn-danger float-end">Exit Quiz</Link><br /><br /></span>}
+                    {graded && <span><Link to={`/Kanbas/Courses/${cid}/Quizzes/${qid}`} className="btn btn-danger float-end"
+                                onClick={() => {}}>Exit Quiz</Link><br /><br /></span>}
                 </span>
                 :
-                <span><Link to={`/Kanbas/Courses/${cid}/Quizzes/${qid}`} className="btn btn-danger float-end">Exit Quiz</Link><br /><br /></span>
+                <span><Link to={`/Kanbas/Courses/${cid}/Quizzes/${qid}`} className="btn btn-danger float-end"
+                                onClick={() => {}}>Exit Quiz</Link><br /><br /></span>
                 }
             </div> 
         </div>
