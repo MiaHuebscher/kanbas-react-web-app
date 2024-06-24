@@ -2,13 +2,13 @@ import * as accountClient from "./client";
 import * as peopleClient from "./../Courses/People/client";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCurrentUser } from "./accountReducer";
 
 export default function Profile() {
   const [profile, setProfile] = useState<any>({});
   const [status, setStatus] = useState(false);
-  const [user, setUser] = useState<any>({});
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -16,9 +16,9 @@ export default function Profile() {
   const [dob, setDob] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const fetchProfile = async () => {
     try {
       const account = await accountClient.profile();
@@ -41,6 +41,7 @@ export default function Profile() {
     setProfile(updatedUser);
     navigate("/Kanbas/Account/Profile");
     setStatus(true);
+    dispatch(setCurrentUser(updatedUser));
   };
   const signout = async () => {
     await accountClient.signout();
@@ -57,22 +58,22 @@ export default function Profile() {
       </div>}
       {profile && (
         <div>
-          <input className="form-control mb-2" defaultValue={profile.username}  onChange={(e) => setUsername(e.target.value)}
+          <input className="form-control mb-2" defaultValue={currentUser ? currentUser.username : profile.username}  onChange={(e) => setUsername(e.target.value)}
                  placeholder="username"/>
-          <input className="form-control mb-2" defaultValue={profile.password}  onChange={(e) => setPassword(e.target.value)}
+          <input className="form-control mb-2" defaultValue={currentUser ? currentUser.password : profile.password}  onChange={(e) => setPassword(e.target.value)}
                  placeholder="password"/>
-          <input className="form-control mb-2" defaultValue={profile.firstName} onChange={(e) => setFirstName(e.target.value)}
+          <input className="form-control mb-2" defaultValue={currentUser ? currentUser.firstName : profile.firstName} onChange={(e) => setFirstName(e.target.value)}
                  placeholder="first name"/>
-          <input className="form-control mb-2" defaultValue={profile.lastName}  onChange={(e) => setLastName(e.target.value)}
+          <input className="form-control mb-2" defaultValue={currentUser ? currentUser.lastName : profile.lastName}  onChange={(e) => setLastName(e.target.value)}
                  placeholder="last name"/>
-          <input className="form-control mb-2" defaultValue={profile.dob} onChange={(e) => setDob(e.target.value)} type="date"/>
-          <input className="form-control mb-2" defaultValue={profile.email} onChange={(e) => setEmail(e.target.value)} type="email"
+          <input className="form-control mb-2" defaultValue={currentUser ? currentUser.dob : profile.dob} onChange={(e) => setDob(e.target.value)} type="date"/>
+          <input className="form-control mb-2" defaultValue={currentUser ? currentUser.email : profile.email} onChange={(e) => setEmail(e.target.value)} type="email"
                  placeholder="email"/>
           <select className="form-control mb-2" onChange={(e) => setRole(e.target.value)} defaultValue={profile.role}>
-            <option selected={profile.role === "STUDENT"} value="STUDENT">Student {profile.role === "STUDENT" ? "(Current)" : "" }</option>        
-            <option selected={profile.role === "FACULTY"} value="FACULTY">Faculty {profile.role === "FACULTY" ? "(Current)" : "" }</option>
-            <option selected={profile.role === "USER"} value="USER">User {profile.role === "USER" ? "(Current)" : "" }</option> 
-            <option selected={profile.role === "ADMIN"} value="ADMIN">Admin {profile.role === "ADMIN" ? "(Current)" : "" }</option>
+            <option selected={currentUser ? currentUser.role === "STUDENT" : profile.role === "STUDENT"} value="STUDENT">Student</option>        
+            <option selected={currentUser ? currentUser.role === "FACULTY" : profile.role === "FACULTY"} value="FACULTY">Faculty</option>
+            <option selected={currentUser ? currentUser.role === "USER" : profile.role === "USER"} value="USER">User</option> 
+            <option selected={currentUser ? currentUser.role === "ADMIN" : profile.role === "ADMIN"} value="ADMIN">Admin</option>
           </select>
         </div>
       )}
