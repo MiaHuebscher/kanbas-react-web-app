@@ -72,8 +72,7 @@ export default function Profile() {
           <select className="form-control mb-2" onChange={(e) => setRole(e.target.value)} defaultValue={profile.role}>
             <option selected={currentUser ? currentUser.role === "STUDENT" : profile.role === "STUDENT"} value="STUDENT">Student</option>        
             <option selected={currentUser ? currentUser.role === "FACULTY" : profile.role === "FACULTY"} value="FACULTY">Faculty</option>
-            <option selected={currentUser ? currentUser.role === "USER" : profile.role === "USER"} value="USER">User</option> 
-            <option selected={currentUser ? currentUser.role === "ADMIN" : profile.role === "ADMIN"} value="ADMIN">Admin</option>
+            <option selected={currentUser ? currentUser.role === "TA" : profile.role === "TA"} value="TA">TA</option> 
           </select>
         </div>
       )}

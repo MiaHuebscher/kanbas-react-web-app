@@ -34,8 +34,7 @@ export default function Signup() {
       <select value={user.role} onChange={(e) =>setUser({ ...user, role: e.target.value})} className="form-select mb-2" >
         <option value="STUDENT">Student</option>        
         <option value="FACULTY">Faculty</option>
-        <option value="USER">User</option> 
-        <option value="ADMIN">Admin</option> 
+        <option value="TA">TA</option> 
       </select>
       <button onClick={signup} className="btn btn-primary mb-2"> Sign up </button><br />
       <Link to="/Kanbas/Account/Signin">Sign in</Link>
