@@ -32,10 +32,11 @@ export default function TakeQuiz () {
         return latestAnswers;
     };
     const updateUser = (quizGrade: any) => {
+        const answers = filterUserAnswers(userAnswers) as any;
         usersClient.updateUser({...currentUser, quizAttempts: [...currentUser.quizAttempts, {course: cid, user: currentUser._id, grade: quizGrade,
-                                                              quiz: qid}]})
+                                                              quiz: qid, answers: answers, time: new Date().toLocaleString()}]})
         dispatch(setCurrentUser({...currentUser, quizAttempts: [...currentUser.quizAttempts, {course: cid, user: currentUser._id, grade: quizGrade,
-                                                      quiz: qid}]}));
+                                                      quiz: qid, answers: answers, time: new Date().toLocaleString()}]}));
     };
     const gradeQuiz = () => {
         const answers = filterUserAnswers(userAnswers) as any;
@@ -143,11 +144,11 @@ export default function TakeQuiz () {
                 <span className="mb-2">
                     {!graded && <span><button className="btn btn-danger float-end" onClick={gradeQuiz}>Submit Quiz</button><br /><br /></span>}
                     {graded && <span><Link to={`/Kanbas/Courses/${cid}/Quizzes/${qid}`} className="btn btn-danger float-end"
-                                onClick={() => {}}>Exit Quiz</Link><br /><br /></span>}
+                                >Exit Quiz</Link><br /><br /></span>}
                 </span>
                 :
                 <span><Link to={`/Kanbas/Courses/${cid}/Quizzes/${qid}`} className="btn btn-danger float-end"
-                                onClick={() => {}}>Exit Quiz</Link><br /><br /></span>
+                                >Exit Quiz</Link><br /><br /></span>
                 }
             </div> 
         </div>

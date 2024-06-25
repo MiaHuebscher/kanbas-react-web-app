@@ -39,12 +39,18 @@ export default function Quizzes() {
                     <TiArrowSortedDown />
                     Assignment Quizzes
                     </div>
+                    {(currentUser.role === "STUDENT") && (quizzes.filter((q: any) => q._id !== "new" && q.status === "published").length === 0)
+                            && <h3>No quizzes have been published for this course.</h3>}
                     {quizzes.filter((q: any) => q._id !== "new").length === 0 ? 
-                        <h3 className="ps-3 text-danger">No quizzes have been created for this course. 
-                            {currentUser.role === "Faculty" || currentUser.role === "TA" ? "Click the '+ Quiz' button to add a quiz." : ""} </h3>
+                        <h3 className="ps-3 text-danger">
+                            No quizzes have been created for this course. 
+                            {(currentUser.role === "FACULTY" || currentUser.role === "TA") && "Click the '+ Quiz' button to add a quiz."} 
+                        </h3>
                         :
                         <ul className="wd-lessons list-group rounded-0">
-                            {quizzes
+                            {(currentUser.role === "STUDENT") && (quizzes.filter((q: any) => q._id !== "new" && q.status === "published").length === 0)
+                            ? "" :
+                            (quizzes
                             .filter((quiz: any) => (quiz.course === cid && quiz._id !== "new"))
                             .map((quiz: any) => (
                                 <li className="wd-lesson list-group-item p-3 ps-1 border-left-success">
@@ -65,7 +71,7 @@ export default function Quizzes() {
                                 </div>
                                 </li>
                             ))
-                            }
+                            )}
                         </ul>
                     }
                 </li>

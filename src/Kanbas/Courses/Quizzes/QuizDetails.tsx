@@ -123,12 +123,17 @@ export default function QuizDetails () {
             <tbody>
                 {userAttempts.map((attempt: any, index: number) => (
                 <tr>
-                    <td>{index + 1}</td><td>{attempt.grade}</td>
+                    <td>
+                        <Link to={`/Kanbas/Courses/${cid}/Quizzes/${qid}/attempt/${index+1}`} className="text-danger">
+                            Attempt {index + 1}
+                        </Link>
+                    </td>
+                    <td>{attempt.grade}</td>
                 </tr>
                 ))}
             </tbody>
         </table>)}
-        {(currentUser.role === "FACULTY" || currentUser.role === "TA") || ((currentUser.role === "STUDENT" && userAttempts) && userAttempts.length < quiz.attemptsAllowed)
+        {((currentUser.role === "STUDENT" && userAttempts) && userAttempts.length < quiz.attemptsAllowed)
         &&
         <div className="row">
             <div className="col text-center">
