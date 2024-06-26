@@ -8,7 +8,6 @@ import { useEffect } from "react";
 import { setQuizzes, updateQuiz, updateNewQuiz } from "./quizzesReducer";
 import * as client from "./client";
 
-
 export default function Quizzes() {
     const { cid } = useParams();
     const { quizzes, newQuiz } = useSelector((state: any) => state.quizzesReducer);
@@ -25,7 +24,7 @@ export default function Quizzes() {
     };
     useEffect(() => {
         fetchQuizzes();
-      }, [cid]);
+      }, [quizzes]);
     useEffect(() => {
         saveQuiz({...newQuiz, course: cid, title: `Quiz ${quizzes.length}`});
         dispatch(updateNewQuiz({...newQuiz, course: cid, title: `Quiz ${quizzes.length}`}));
@@ -39,8 +38,9 @@ export default function Quizzes() {
                     <TiArrowSortedDown />
                     Assignment Quizzes
                     </div>
-                    {(currentUser.role === "STUDENT") && (quizzes.filter((q: any) => q._id !== "new" && q.status === "published").length === 0)
-                            && <h3>No quizzes have been published for this course.</h3>}
+                    {(currentUser.role === "STUDENT") && (quizzes.filter((q: any) => q._id !== "new").length !== 0) &&
+                        (quizzes.filter((q: any) => q._id !== "new" && q.status === "published").length === 0)
+                            && <h3 className="ps-3 text-danger">No quizzes have been published for this course.</h3>}
                     {quizzes.filter((q: any) => q._id !== "new").length === 0 ? 
                         <h3 className="ps-3 text-danger">
                             No quizzes have been created for this course. 
@@ -64,7 +64,9 @@ export default function Quizzes() {
                                             <strong>{(new Date(quiz.availableUntil) < new Date())  && "Closed"}</strong>
                                             <strong>{(new Date(quiz.availableFrom) <= new Date()) && (new Date() <= new Date(quiz.availableUntil))  && "Available"}</strong> 
                                             <strong>{(new Date(quiz.availableFrom) > new Date()) && "Not Available Until"}</strong> {(new Date(quiz.availableFrom) > new Date()) && 
-                                                new Date(quiz.availableFrom).toDateString()} | <strong> Due</strong> {new Date(quiz.due).toDateString()} | {quiz.points ? quiz.points : 0} pts | {quiz.questions ? quiz.questions.length : 0} Questions
+                                                new Date(quiz.availableFrom).toDateString()} | <strong> Due</strong> {new Date(quiz.due).toDateString()} | {quiz.points ? 
+                                                quiz.points : 0} pts | {quiz.questions ? quiz.questions.length : 0} Questions | <strong>Last Score</strong> {currentUser.quizAttempts.filter((qa: any) =>
+                                                qa.course === quiz.course && qa.quiz === quiz._id).at(-1).grade} / {quiz.points}
                                         </div>
                                         {currentUser.role === "FACULTY" || currentUser.role === "TA" ? 
                                             <QuizControlButtons quiz={quiz}/> : ""}

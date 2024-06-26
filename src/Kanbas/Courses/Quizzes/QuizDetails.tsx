@@ -117,7 +117,7 @@ export default function QuizDetails () {
         <table className="table">
             <thead>
                 <tr>
-                    <th>Attempt Number</th><th>Grade</th>
+                    <th>Attempt Number</th><th>Time Taken</th><th>Grade</th>
                 </tr>
             </thead>
             <tbody>
@@ -128,12 +128,13 @@ export default function QuizDetails () {
                             Attempt {index + 1}
                         </Link>
                     </td>
+                    <td>{attempt.time}</td>
                     <td>{attempt.grade}</td>
                 </tr>
                 ))}
             </tbody>
         </table>)}
-        {((currentUser.role === "STUDENT" && userAttempts) && userAttempts.length < quiz.attemptsAllowed)
+        {((currentUser.role === "STUDENT" && userAttempts) && userAttempts.length < quiz.attemptsAllowed && (new Date(quiz.availableFrom) <= new Date()) && (new Date() <= new Date(quiz.availableUntil)))
         &&
         <div className="row">
             <div className="col text-center">

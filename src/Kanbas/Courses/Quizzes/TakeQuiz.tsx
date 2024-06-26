@@ -7,6 +7,8 @@ import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import DOMPurify from 'dompurify';
 import { setCurrentUser } from "../../Account/accountReducer";
+import { GiCheckMark } from "react-icons/gi";
+import { RxCross2 } from "react-icons/rx";
 
 export default function TakeQuiz () {
     const { currentUser } = useSelector((state: any) => state.accountReducer);
@@ -16,6 +18,7 @@ export default function TakeQuiz () {
     const [grade, setGrade] = useState(0);
     const [graded, setGraded] = useState(false);
     const [userAnswers, setUserAnswers] = useState<any>([]);
+    const [userAnswersClean, setUserAnswersClean] = useState<any>([]);
     function createMarkup(html: any) {
         return { __html: DOMPurify.sanitize(html) };
     }
@@ -40,6 +43,8 @@ export default function TakeQuiz () {
     };
     const gradeQuiz = () => {
         const answers = filterUserAnswers(userAnswers) as any;
+        let reversedAnswers = answers.slice().reverse();
+        setUserAnswersClean(reversedAnswers);
         let userPoints = 0;
         answers.forEach((answer: any) => {
             if (answer.type === "fill in blank") {
@@ -79,10 +84,12 @@ export default function TakeQuiz () {
             </div>}
             <ul id="wd-questions-take-quiz" className="list-group rounded-0">
               {updatingQuiz.questions ? updatingQuiz.questions
-                .map((question: any) => (
+                .map((question: any, qindex: number) => (
                     <li className="wd-module list-group-item p-0 mb-5 fs-5 border-gray">
                         <div className="wd-title p-3 ps-2 bg-secondary">
                             <span className="ms-2">{question.title}</span><span className="float-end text-secondary">{question.points} pts</span>
+                            <span className= {`float-end ${graded && userAnswersClean[qindex].userAnswer === userAnswersClean[qindex].correctAnswer ? "text-green" : "text-danger"}`}>
+                                {graded && userAnswersClean[qindex].userAnswer === userAnswersClean[qindex].correctAnswer ? <GiCheckMark /> : <RxCross2 />}</span>
                         </div>
                         <div>
                             <div className="ms-3 mt-3" dangerouslySetInnerHTML={createMarkup(question.content)} />
@@ -91,7 +98,19 @@ export default function TakeQuiz () {
                                     <input className="form-control ms-4 mb-2 w-50" onChange={(e) => setUserAnswers([...userAnswers, {qid: question._id, userAnswer: e.target.value, 
                                                                                                             points: question.points, type: question.questionType, 
                                                                                                             possibleAnswers: question.possibleAnswers}])}/>
-                                    {graded && (
+                                    {graded && updatingQuiz.showCorrectAnswers && currentUser.attempts.length === updatingQuiz.attemptsAllowed && currentUser.role === "STUDENT" &&
+                                    (
+                                        <span className="text-success fw-bold ms-4">
+                                            Correct Answer(s):
+                                            <ul>
+                                                {question.possibleAnswers.map((element: any, index: number) => (
+                                                    <li key={index}>{element}</li>
+                                                ))}
+                                            </ul>
+                                        </span>
+                                    )}
+                                    {graded && (currentUser.role === "FACULTY" || currentUser.role === "TA") &&
+                                    (
                                         <span className="text-success fw-bold ms-4">
                                             Correct Answer(s):
                                             <ul>

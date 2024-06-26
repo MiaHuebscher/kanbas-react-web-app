@@ -30,7 +30,7 @@ export default function QuizControlButtons({quiz} : {quiz: any}) {
           <IoEllipsisVertical id="wd-quiz-context-btn" className="fs-4 ms-2" data-bs-toggle="dropdown" />
           <ul className="dropdown-menu">
             <li>
-              <Link id="wd-quiz-edit-btn" className="dropdown-item" to={`/Kanbas/Courses/${quiz.course}/Quizzes/${quiz._id}`}>
+              <Link id="wd-quiz-edit-btn" className="dropdown-item" to={`/Kanbas/Courses/${quiz.course}/Quizzes/${quiz._id}/editor`}>
                 <FaPencil className="text-primary"/> Edit
               </Link>
             </li>

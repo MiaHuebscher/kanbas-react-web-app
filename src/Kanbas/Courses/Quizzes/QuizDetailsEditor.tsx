@@ -174,11 +174,25 @@ export default function QuizDetailsEditor () {
             </div>
             < hr />
             <div className="float-end">
-                <Link to={`/Kanbas/Courses/${cid}/Quizzes`} className="btn btn-light">Cancel</Link> {currentQuiz._id === "new" ?
-                    (<Link to={`/Kanbas/Courses/${cid}/Quizzes`} className="btn btn-danger"
-                        onClick={() => createQuiz({ ...newQuiz, ...updatingQuiz })}>Save</Link>) :
-                    (<Link to={`/Kanbas/Courses/${cid}/Quizzes`} className="btn btn-danger"
-                        onClick={() => saveQuiz({ ...newQuiz, ...updatingQuiz })} >Save</Link>)}
+                <Link to={`/Kanbas/Courses/${cid}/Quizzes`} className="btn btn-light me-2">Cancel</Link> 
+                <button className="btn btn-danger" data-bs-toggle="dropdown">Save</button>
+                <ul className="dropdown-menu">
+                    <li>
+                        {currentQuiz._id === "new" ?
+                            (<Link to={`/Kanbas/Courses/${cid}/Quizzes`} className="dropdown-item"
+                                onClick={() => createQuiz({ ...newQuiz, ...updatingQuiz })}>Save</Link>) :
+                            (<Link to={`/Kanbas/Courses/${cid}/Quizzes`} className="dropdown-item"
+                                onClick={() => saveQuiz({ ...newQuiz, ...updatingQuiz })} >Save</Link>)}
+                    </li>
+                    <li>
+                        {currentQuiz._id === "new" ?
+                            (<Link to={`/Kanbas/Courses/${cid}/Quizzes`} className="dropdown-item"
+                                onClick={() => createQuiz({ ...newQuiz, ...updatingQuiz, status: "published" })}>Save and Publish</Link>) :
+                            (<Link to={`/Kanbas/Courses/${cid}/Quizzes`} className="dropdown-item"
+                                onClick={() => saveQuiz({ ...newQuiz, ...updatingQuiz, status: "published" })} >Save and Publish</Link>)}
+
+                    </li>
+                </ul>
             </div>
             <br /><br />
         </form>

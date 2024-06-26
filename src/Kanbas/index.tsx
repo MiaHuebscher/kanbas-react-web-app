@@ -4,14 +4,18 @@ import { Route, Routes, Navigate } from "react-router";
 import Courses from "./Courses";
 import { useEffect, useState } from "react";
 import "./styles.css";
-import { Provider } from "react-redux";
+import { Provider, useDispatch, useSelector } from "react-redux";
 import store from "./store";
 import * as client from "./Courses/client";
+import * as usersClient from "./Courses/People/client";
 import Account from "./Account";
 import ProtectedRoute from "./ProtectedRoute";
 import Enrollments from "./Account/Enrollments";
+import { setCurrentUser } from "./Account/accountReducer";
 
 export default function Kanbas() {
+    const dispatch = useDispatch();
+    const { currentUser } = useSelector((state: any) => state.accountReducer);
     const [courses, setCourses] = useState<any[]>([]);
     const [course, setCourse] = useState<any>({
         _id: "1234", name: "New Course", number: "New Number",
@@ -20,10 +24,18 @@ export default function Kanbas() {
     const addNewCourse = async () => {
         const newCourse = await client.createCourse(course);
         setCourses([...courses, newCourse]);
+        usersClient.updateUser({...currentUser, enrollments: [...currentUser.enrollments, newCourse._id]});
+        dispatch(setCurrentUser({...currentUser, enrollments: [...currentUser.enrollments, newCourse._id]}));
+        setCourse({
+            _id: "1234", name: "New Course", number: "New Number",
+            startDate: "2023-09-10", endDate: "2023-12-15",
+            image: "beach.jpg", description: "New Description"});
     };
     const deleteCourse = async (courseId: any) => {
         await client.deleteCourse(courseId);
         setCourses(courses.filter((course) => course._id !== courseId));
+        usersClient.updateUser({...currentUser, enrollments: currentUser.enrollments.filter((e: any) => e !== courseId)});
+        dispatch(setCurrentUser({...currentUser, enrollments: currentUser.enrollments.filter((e: any) => e !== courseId)}));
     };
     const updateCourse = async () => {
         await client.updateCourse(course);
@@ -36,6 +48,10 @@ export default function Kanbas() {
                     }
             })
         );
+        setCourse({
+            _id: "1234", name: "New Course", number: "New Number",
+            startDate: "2023-09-10", endDate: "2023-12-15",
+            image: "beach.jpg", description: "New Description"});
     };
     const fetchCourses = async () => {
         const courses = await client.fetchAllCourses();
