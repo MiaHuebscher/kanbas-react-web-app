@@ -36,7 +36,7 @@ export default function Assignments() {
         fetchAssignments();
         saveAssignment({...newAssignment, course: cid, title: `Assignment ${assignments.length}` });
         dispatch(updateNewAssignment({...newAssignment, course: cid, title: `Assignment ${assignments.length}` }));
-      }, [cid]);
+      }, []);
     return (
         <div>
             <AssignmentsControls aid={newAssignment._id} cid={cid} /><br /><br />

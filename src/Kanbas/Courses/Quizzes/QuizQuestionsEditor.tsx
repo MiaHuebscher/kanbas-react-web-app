@@ -102,7 +102,7 @@ export default function QuizQuestionsEditor () {
                             <div className="form-group row">
                                 <div className="col-sm-3">
                                     <input id="question-title" className="form-control w-100" defaultValue={q.title} onChange={(e) => setTitle(e.target.value)}
-                                        placeholder="quiz title" />
+                                        placeholder="question title" />
                                 </div>
                                 <div className="col-sm-3">
                                     <select className="form-control w-100" onChange={(e) => setQuestionType(e.target.value)} defaultValue={questionType}>
