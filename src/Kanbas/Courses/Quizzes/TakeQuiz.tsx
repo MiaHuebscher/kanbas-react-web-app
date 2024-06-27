@@ -87,9 +87,15 @@ export default function TakeQuiz () {
                 .map((question: any, qindex: number) => (
                     <li className="wd-module list-group-item p-0 mb-5 fs-5 border-gray">
                         <div className="wd-title p-3 ps-2 bg-secondary">
-                            <span className="ms-2">{question.title}</span><span className="float-end text-secondary">{question.points} pts</span>
-                            <span className= {`float-end ${graded && userAnswersClean[qindex].userAnswer === userAnswersClean[qindex].correctAnswer ? "text-green" : "text-danger"}`}>
-                                {graded && userAnswersClean[qindex].userAnswer === userAnswersClean[qindex].correctAnswer ? <GiCheckMark /> : <RxCross2 />}</span>
+                            {question.questionType !== "fill in blank" ?
+                            <span className= {`float-end ${graded && userAnswersClean[qindex].userAnswer === userAnswersClean[qindex].correctAnswer ? "text-success" : "text-danger"}`}>
+                                {graded && (userAnswersClean[qindex].userAnswer === userAnswersClean[qindex].correctAnswer ? <GiCheckMark className="ms-2"/> : <RxCross2 className="ms-2"/>)}
+                            </span> :
+                            <span className= {`float-end ${graded && userAnswersClean[qindex].possibleAnswers.includes(userAnswersClean[qindex].userAnswer) ? "text-success" : "text-danger"}`}>
+                                {graded && (userAnswersClean[qindex].possibleAnswers.includes(userAnswersClean[qindex].userAnswer) ? <GiCheckMark className="ms-2"/> : <RxCross2 className="ms-2"/>)}
+                            </span>         
+                            }
+                            <span>{question.title}</span><span className="float-end text-secondary">{question.points} pts</span>
                         </div>
                         <div>
                             <div className="ms-3 mt-3" dangerouslySetInnerHTML={createMarkup(question.content)} />
@@ -98,17 +104,6 @@ export default function TakeQuiz () {
                                     <input className="form-control ms-4 mb-2 w-50" onChange={(e) => setUserAnswers([...userAnswers, {qid: question._id, userAnswer: e.target.value, 
                                                                                                             points: question.points, type: question.questionType, 
                                                                                                             possibleAnswers: question.possibleAnswers}])}/>
-                                    {graded && updatingQuiz.showCorrectAnswers && currentUser.attempts.length === updatingQuiz.attemptsAllowed && currentUser.role === "STUDENT" &&
-                                    (
-                                        <span className="text-success fw-bold ms-4">
-                                            Correct Answer(s):
-                                            <ul>
-                                                {question.possibleAnswers.map((element: any, index: number) => (
-                                                    <li key={index}>{element}</li>
-                                                ))}
-                                            </ul>
-                                        </span>
-                                    )}
                                     {graded && (currentUser.role === "FACULTY" || currentUser.role === "TA") &&
                                     (
                                         <span className="text-success fw-bold ms-4">
@@ -133,7 +128,7 @@ export default function TakeQuiz () {
                                             <br />
                                         </div>
                                     ))}
-                                    {graded && <span className="text-success fw-bold ms-4">Correct Answer: {question.correctAnswer}</span>}
+                                    {graded && (currentUser.role === "FACULTY" || currentUser.role === "TA") && <span className="text-success fw-bold ms-4">Correct Answer: {question.correctAnswer}</span>}
                                 </div>
                             }
                             {question.questionType === "true false" &&
@@ -148,7 +143,7 @@ export default function TakeQuiz () {
                                                                                                         correctAnswer: question.correctAnswer, points: question.points, type: question.questionType}])} />
                                         <label htmlFor="false">False</label>
                                     </span><br />
-                                    {graded && <span className="text-success fw-bold">Correct Answer: {question.correctAnswer}</span>}
+                                    {graded && (currentUser.role === "FACULTY" || currentUser.role === "TA") && <span className="text-success fw-bold">Correct Answer: {question.correctAnswer}</span>}
                                 </div>}
                         </div>
                     </li>

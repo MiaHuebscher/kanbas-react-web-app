@@ -179,9 +179,9 @@ export default function QuizDetailsEditor () {
                 <ul className="dropdown-menu">
                     <li>
                         {currentQuiz._id === "new" ?
-                            (<Link to={`/Kanbas/Courses/${cid}/Quizzes`} className="dropdown-item"
+                            (<Link to={`/Kanbas/Courses/${cid}/Quizzes/${qid}`} className="dropdown-item"
                                 onClick={() => createQuiz({ ...newQuiz, ...updatingQuiz })}>Save</Link>) :
-                            (<Link to={`/Kanbas/Courses/${cid}/Quizzes`} className="dropdown-item"
+                            (<Link to={`/Kanbas/Courses/${cid}/Quizzes/${qid}`} className="dropdown-item"
                                 onClick={() => saveQuiz({ ...newQuiz, ...updatingQuiz })} >Save</Link>)}
                     </li>
                     <li>

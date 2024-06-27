@@ -20,7 +20,7 @@ export default function Attempt() {
     };
     const findAttempt = async (attemptNo: string) => {
         const number = Number(attemptNo) - 1;
-        const userAttempt = currentUser.quizAttempts[number];
+        const userAttempt = currentUser.quizAttempts.filter((qa: any) => qa.course === cid && qa.quiz === qid)[number];
         let reversedAnswers = userAttempt.answers.slice().reverse();
         setAnswers(reversedAnswers);
     };
@@ -42,7 +42,19 @@ export default function Attempt() {
                             <div>
                                 <div className="ms-3 mt-3" dangerouslySetInnerHTML={createMarkup(question.content)} />
                                 {question.questionType === "fill in blank" &&
-                                    <input className="form-control ms-4 mb-2 w-50" value={answers[qindex].userAnswer} readOnly />
+                                    <input className="form-control ms-4 mb-2 w-50" value={answers[qindex].userAnswer} readOnly />}
+                                {question.questionType === "fill in blank" &&
+                                    (quiz.showCorrectAnswers && quiz.attemptsAllowed === Number(attemptNumber) &&
+                                        (
+                                            <span className="text-success fw-bold ms-4">
+                                                Correct Answer(s):
+                                                <ul>
+                                                    {question.possibleAnswers.map((element: any, index: number) => (
+                                                        <li key={index}>{element}</li>
+                                                    ))}
+                                                </ul>
+                                            </span>
+                                        ))
                                 }
                                 {question.questionType === "multiple choice" &&
                                     <div>
@@ -54,6 +66,7 @@ export default function Attempt() {
                                                 <br />
                                             </div>
                                         ))}
+                                        {quiz.showCorrectAnswers && Number(attemptNumber) === quiz.attemptsAllowed && <span className="text-success fw-bold ms-4">Correct Answer: {question.correctAnswer}</span>}
                                     </div>
                                 }
                                 {question.questionType === "true false" &&
@@ -66,6 +79,7 @@ export default function Attempt() {
                                             <input type="radio" name="true-false" id="false" className="me-2" checked={answers[qindex].userAnswer === "false"} readOnly />
                                             <label htmlFor="false">False</label>
                                         </span><br />
+                                        {quiz.showCorrectAnswers && Number(attemptNumber) === quiz.attemptsAllowed && <span className="text-success fw-bold">Correct Answer: {question.correctAnswer}</span>}
                                     </div>}
                             </div>
                         </li>

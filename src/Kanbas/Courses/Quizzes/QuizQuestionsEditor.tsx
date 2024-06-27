@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
-import { setQuiz, setQuestions } from "./quizzesReducer";
+import { setQuiz } from "./quizzesReducer";
 import * as client from "./client";
+import { FaTrash } from "react-icons/fa";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import DOMPurify from 'dompurify';
@@ -11,7 +12,7 @@ export default function QuizQuestionsEditor () {
     const { cid, qid } = useParams();
     const [status, setStatus] = useState(false);
     const [questionId, setQuestionId] = useState("");
-    const { updatingQuiz, updatingQuestion, newQuestion } = useSelector((state: any) => state.quizzesReducer);
+    const { updatingQuiz, newQuestion } = useSelector((state: any) => state.quizzesReducer);
     const [currentQuestions, setCurrentQuestions] = useState<any>([]);
     const [questionType, setQuestionType] = useState("");
     const [title, setTitle] = useState("");
@@ -38,6 +39,9 @@ export default function QuizQuestionsEditor () {
         setPossibleAnswers(question.possibleAnswers);
         setContent(question.content);
         setCurrentQuestions((prevQuestions: any) => prevQuestions.map((cq: any) => cq._id === question._id ? {...cq, editing: true} : cq));
+    };
+    const deletePossibleAnswer = async(index: number) => {
+        setPossibleAnswers(possibleAnswers.filter((pa: any, i: number) => i !== index))
     };
     const saveQuestion = async () => {
         const updatedQuestion = {...currentQuestions.find((q: any) => q._id === questionId),
@@ -143,11 +147,12 @@ export default function QuizQuestionsEditor () {
                                 </div>
                                 :
                                 possibleAnswers.map((possAns: any, index: number) => (
-                                    <div className="row d-flex justify-content-center" key={index}>
-                                        <input type="text" id="possible-answer" className={`form-control w-25 mb-2 ${
-                                                correctAnswer === possAns ? "text-success fw-bold" : ""}`} defaultValue={possAns} 
-                                               onChange={(e) => setPossibleAnswers(possibleAnswers.map((pa: any, i:number) => i === index ? e.target.value : pa))}/>
-                                        <br />
+                                    <div className="d-flex flex-row justify-content-center align-items-center mb-2" key={index}>
+                                        <input type="text" id="possible-answer" 
+                                        className={`form-control w-25 mb-2 ${correctAnswer === possAns ? "text-success fw-bold" : ""}`} 
+                                        value={possAns} 
+                                        onChange={(e) => setPossibleAnswers(possibleAnswers.map((pa: any, i:number) => i === index ? e.target.value : pa))}/>                                 
+                                        <FaTrash className="text-danger ms-2" onClick={() => deletePossibleAnswer(index)} />
                                     </div>
                                 ))}<br />
                                 {questionType === "multiple choice" &&
@@ -155,7 +160,7 @@ export default function QuizQuestionsEditor () {
                                         <div>
                                             <div className="row d-flex justify-content-center">
                                                 <label className="fw-bold" htmlFor="correct-ans">Correct Answer:</label><br />
-                                                <input id="correct-ans" className="form-control w-25 me-2" onChange={(e) => setCorrectAnswer(e.target.value)}/>
+                                                <input id="correct-ans" className="form-control w-25 me-2" defaultValue={q.correctAnswer ? q.correctAnswer : ""} onChange={(e) => setCorrectAnswer(e.target.value)}/>
                                             </div>
                                         </div>
                                     </div>

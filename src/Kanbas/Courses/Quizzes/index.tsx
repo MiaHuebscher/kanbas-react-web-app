@@ -65,8 +65,11 @@ export default function Quizzes() {
                                             <strong>{(new Date(quiz.availableFrom) <= new Date()) && (new Date() <= new Date(quiz.availableUntil))  && "Available"}</strong> 
                                             <strong>{(new Date(quiz.availableFrom) > new Date()) && "Not Available Until"}</strong> {(new Date(quiz.availableFrom) > new Date()) && 
                                                 new Date(quiz.availableFrom).toDateString()} | <strong> Due</strong> {new Date(quiz.due).toDateString()} | {quiz.points ? 
-                                                quiz.points : 0} pts | {quiz.questions ? quiz.questions.length : 0} Questions | <strong>Last Score</strong> {currentUser.quizAttempts.filter((qa: any) =>
-                                                qa.course === quiz.course && qa.quiz === quiz._id).at(-1).grade} / {quiz.points}
+                                                quiz.points : 0} pts | {quiz.questions ? quiz.questions.length : 0} Questions {currentUser.role === "STUDENT" && " |" && <strong>Last Score</strong>} {(currentUser.quizAttempts.filter((qa: any) =>
+                                                qa.course === quiz.course && qa.quiz === quiz._id).length !== 0 && currentUser.role === "STUDENT") ? 
+                                                (currentUser.quizAttempts.filter((qa: any) =>
+                                                    qa.course === quiz.course && qa.quiz === quiz._id).at(-1).grade + "/" + quiz.points) :
+                                                currentUser.role === "STUDENT" && "NA"}
                                         </div>
                                         {currentUser.role === "FACULTY" || currentUser.role === "TA" ? 
                                             <QuizControlButtons quiz={quiz}/> : ""}

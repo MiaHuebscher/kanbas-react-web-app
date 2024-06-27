@@ -129,7 +129,7 @@ export default function QuizDetails () {
                         </Link>
                     </td>
                     <td>{attempt.time}</td>
-                    <td>{attempt.grade}</td>
+                    <td>{attempt.grade} / {quiz.points}</td>
                 </tr>
                 ))}
             </tbody>
@@ -142,6 +142,14 @@ export default function QuizDetails () {
             </div>
         </div>
         }
+        {(currentUser.role === "FACULTY" || currentUser.role === "TA") && 
+            <div className="row">
+                <div className="col text-center">
+                    <Link className="btn btn-light border-dark mb-3" to={`/Kanbas/Courses/${cid}/Quizzes`}>
+                        Quizzes List
+                    </Link>
+                </div>
+            </div>}
       </div>
     );
 }
