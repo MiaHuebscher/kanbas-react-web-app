@@ -23,7 +23,7 @@ export default function QuizDetails () {
     useEffect(() => {
         findQuiz(cid as string, qid as string);
         getUserQuizAttempts();
-      }, [cid, qid, currentUser]);
+      }, []);
     return (
       <div>
         {currentUser.role === "FACULTY" || currentUser.role === "TA" ? 

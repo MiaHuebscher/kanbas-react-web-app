@@ -51,7 +51,7 @@ export default function Quizzes() {
                             {(currentUser.role === "STUDENT") && (quizzes.filter((q: any) => q._id !== "new" && q.status === "published").length === 0)
                             ? "" :
                             (quizzes
-                            .filter((quiz: any) => (quiz.course === cid && quiz._id !== "new"))
+                            .filter((quiz: any) => (quiz.course === cid && quiz._id !== "new" && quiz.status === "published"))
                             .map((quiz: any) => (
                                 <li className="wd-lesson list-group-item p-3 ps-1 border-left-success">
                                     <div className="wd-flex-row-container">

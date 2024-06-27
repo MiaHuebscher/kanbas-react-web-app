@@ -33,8 +33,8 @@ export default function Dashboard(
                     onChange={(e) => setCourse({...course, name: e.target.value })} />
                 <textarea value={course.description} className="form-control" 
                     onChange={(e) => setCourse({...course, description: e.target.value})} />
+                < hr />
             </div> : "" }
-            < hr />
             <h2 id="wd-dashboard-published">Published Courses ({currentUser.enrollments.length})</h2> <hr />
             <div id="wd-dashboard-courses" className="row">
                 <div className="row row-cols-1 row-cols-md-5 g-4">

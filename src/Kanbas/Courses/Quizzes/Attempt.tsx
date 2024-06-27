@@ -30,7 +30,7 @@ export default function Attempt() {
       }, []);
       return (
         <div>
-            <h1>Attempt</h1>
+            <h1>Attempt {attemptNumber}</h1>
             {quiz.questions && (
                 <ul id="wd-questions-quiz-attempt" className="list-group rounded-0">
                     {quiz.questions.map((question: any, qindex: number) => (
